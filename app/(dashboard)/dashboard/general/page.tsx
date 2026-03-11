@@ -10,6 +10,8 @@ import { updateAccount } from '@/app/(login)/actions';
 import { User } from '@/lib/db/schema';
 import useSWR from 'swr';
 import { Suspense } from 'react';
+import { defaultLocale, type Locale } from '@/lib/i18n/config';
+import { getMessages } from '@/lib/i18n/messages';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -23,23 +25,27 @@ type AccountFormProps = {
   state: ActionState;
   nameValue?: string;
   emailValue?: string;
+  locale: Locale;
 };
 
 function AccountForm({
   state,
   nameValue = '',
-  emailValue = ''
+  emailValue = '',
+  locale
 }: AccountFormProps) {
+  const t = getMessages(locale).dashboard;
+
   return (
     <>
       <div>
         <Label htmlFor="name" className="mb-2">
-          Name
+          {t.name}
         </Label>
         <Input
           id="name"
           name="name"
-          placeholder="Enter your name"
+          placeholder={t.namePlaceholder}
           defaultValue={state.name || nameValue}
           required
         />
@@ -61,18 +67,30 @@ function AccountForm({
   );
 }
 
-function AccountFormWithData({ state }: { state: ActionState }) {
+function AccountFormWithData({
+  state,
+  locale
+}: {
+  state: ActionState;
+  locale: Locale;
+}) {
   const { data: user } = useSWR<User>('/api/user', fetcher);
   return (
     <AccountForm
       state={state}
       nameValue={user?.name ?? ''}
       emailValue={user?.email ?? ''}
+      locale={locale}
     />
   );
 }
 
-export default function GeneralPage() {
+export default function GeneralPage({
+  locale = defaultLocale
+}: {
+  locale?: Locale;
+}) {
+  const t = getMessages(locale).dashboard;
   const [state, formAction, isPending] = useActionState<ActionState, FormData>(
     updateAccount,
     {}
@@ -81,17 +99,18 @@ export default function GeneralPage() {
   return (
     <section className="flex-1 p-4 lg:p-8">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        General Settings
+        {t.generalSettings}
       </h1>
 
       <Card>
         <CardHeader>
-          <CardTitle>Account Information</CardTitle>
+          <CardTitle>{t.accountInformation}</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="space-y-4" action={formAction}>
-            <Suspense fallback={<AccountForm state={state} />}>
-              <AccountFormWithData state={state} />
+            <input type="hidden" name="locale" value={locale} />
+            <Suspense fallback={<AccountForm state={state} locale={locale} />}>
+              <AccountFormWithData state={state} locale={locale} />
             </Suspense>
             {state.error && (
               <p className="text-red-500 text-sm">{state.error}</p>
@@ -107,10 +126,10 @@ export default function GeneralPage() {
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Saving...
+                  {t.saving}
                 </>
               ) : (
-                'Save Changes'
+                t.saveChanges
               )}
             </Button>
           </form>

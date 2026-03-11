@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getTeamForUser } from '@/lib/db/queries';
 import { isMockStripeEnabled } from '@/lib/payments/stripe';
 import { updateMockSubscriptionAction } from '@/lib/payments/actions';
+import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
+import { getMessages } from '@/lib/i18n/messages';
 
 const mockStates = [
   {
@@ -50,45 +52,50 @@ const mockStates = [
   }
 ] as const;
 
-export default async function BillingMockPage() {
+export default async function BillingMockPage({
+  locale = defaultLocale
+}: {
+  locale?: Locale;
+}) {
+  const t = getMessages(locale).dashboard;
+
   if (!isMockStripeEnabled()) {
-    redirect('/dashboard');
+    redirect(localizePath(locale, '/dashboard'));
   }
 
   const team = await getTeamForUser();
 
   if (!team) {
-    redirect('/sign-in');
+    redirect(localizePath(locale, '/sign-in'));
   }
 
   return (
     <section className="flex-1 p-4 lg:p-8 space-y-6">
       <div>
-        <h1 className="text-lg lg:text-2xl font-medium">Billing Mock Control</h1>
+        <h1 className="text-lg lg:text-2xl font-medium">{t.billingMockControl}</h1>
         <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
-          Diese Seite ersetzt das Stripe Customer Portal im Dev-Modus. Du
-          steuerst hier direkt, welchen Plan und Status dein Team gerade sieht.
+          {t.billingMockDescription}
         </p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Current Team State</CardTitle>
+          <CardTitle>{t.currentTeamState}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm">
           <p>
-            <span className="font-medium">Plan:</span> {team.planName || 'Free'}
+            <span className="font-medium">{t.plan}:</span> {team.planName || 'Free'}
           </p>
           <p>
-            <span className="font-medium">Status:</span>{' '}
+            <span className="font-medium">{t.status}:</span>{' '}
             {team.subscriptionStatus || 'inactive'}
           </p>
           <p>
-            <span className="font-medium">Product ID:</span>{' '}
+            <span className="font-medium">{t.productId}:</span>{' '}
             {team.stripeProductId || '-'}
           </p>
           <p>
-            <span className="font-medium">Subscription ID:</span>{' '}
+            <span className="font-medium">{t.subscriptionId}:</span>{' '}
             {team.stripeSubscriptionId || '-'}
           </p>
         </CardContent>
@@ -105,6 +112,7 @@ export default async function BillingMockPage() {
                 {state.description}
               </p>
               <form action={updateMockSubscriptionAction}>
+                <input type="hidden" name="locale" value={locale} />
                 <input
                   type="hidden"
                   name="planName"
@@ -121,7 +129,7 @@ export default async function BillingMockPage() {
                   value={state.subscriptionStatus}
                 />
                 <Button type="submit" className="w-full">
-                  Apply State
+                  {t.applyState}
                 </Button>
               </form>
             </CardContent>

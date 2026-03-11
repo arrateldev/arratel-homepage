@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { redirect } from 'next/navigation';
 import type { Team } from '@/lib/db/schema';
+import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
@@ -94,21 +95,28 @@ export function getMockCheckoutSession(sessionId: string) {
 
 export async function createCheckoutSession({
   team,
-  priceId
+  priceId,
+  locale = defaultLocale
 }: {
   team: Team | null;
   priceId: string;
+  locale?: Locale;
 }) {
   const { getUser } = await import('@/lib/db/queries');
   const user = await getUser();
 
   if (!team || !user) {
-    redirect(`/sign-up?redirect=checkout&priceId=${priceId}`);
+    redirect(
+      `${localizePath(
+        locale,
+        '/sign-up'
+      )}?redirect=checkout&priceId=${priceId}`
+    );
   }
 
   if (MOCK_STRIPE) {
     redirect(
-      `${BASE_URL}/api/stripe/checkout?session_id=mock_checkout::${user.id}::${priceId}`
+      `${BASE_URL}/api/stripe/checkout?session_id=mock_checkout::${user.id}::${priceId}&locale=${locale}`
     );
   }
 
@@ -122,8 +130,8 @@ export async function createCheckoutSession({
       }
     ],
     mode: 'subscription',
-    success_url: `${BASE_URL}/api/stripe/checkout?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${BASE_URL}/pricing`,
+    success_url: `${BASE_URL}/api/stripe/checkout?session_id={CHECKOUT_SESSION_ID}&locale=${locale}`,
+    cancel_url: `${BASE_URL}${localizePath(locale, '/pricing')}`,
     customer: team.stripeCustomerId || undefined,
     client_reference_id: user.id.toString(),
     allow_promotion_codes: true,
@@ -135,15 +143,18 @@ export async function createCheckoutSession({
   redirect(session.url!);
 }
 
-export async function createCustomerPortalSession(team: Team) {
+export async function createCustomerPortalSession(
+  team: Team,
+  locale: Locale = defaultLocale
+) {
   if (MOCK_STRIPE) {
     return {
-      url: `${BASE_URL}/dashboard/billing`
+      url: `${BASE_URL}${localizePath(locale, '/dashboard/billing')}`
     };
   }
 
   if (!team.stripeCustomerId || !team.stripeProductId) {
-    redirect('/pricing');
+    redirect(localizePath(locale, '/pricing'));
   }
 
   const stripe = getStripeClient();
@@ -205,7 +216,7 @@ export async function createCustomerPortalSession(team: Team) {
 
   return stripe.billingPortal.sessions.create({
     customer: team.stripeCustomerId,
-    return_url: `${BASE_URL}/dashboard`,
+    return_url: `${BASE_URL}${localizePath(locale, '/dashboard')}`,
     configuration: configuration.id
   });
 }

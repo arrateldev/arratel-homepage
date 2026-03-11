@@ -25,6 +25,7 @@ import {
   validatedAction,
   validatedActionWithUser
 } from '@/lib/auth/middleware';
+import { getLocaleFromFormData, localizePath } from '@/lib/i18n/config';
 
 async function logActivity(
   teamId: number | null | undefined,
@@ -51,6 +52,7 @@ const signInSchema = z.object({
 
 export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const { email, password } = data;
+  const locale = getLocaleFromFormData(formData);
 
   const userWithTeam = await db
     .select({
@@ -94,10 +96,10 @@ export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const redirectTo = formData.get('redirect') as string | null;
   if (redirectTo === 'checkout') {
     const priceId = formData.get('priceId') as string;
-    return createCheckoutSession({ team: foundTeam, priceId });
+    return createCheckoutSession({ team: foundTeam, priceId, locale });
   }
 
-  redirect('/dashboard');
+  redirect(localizePath(locale, '/dashboard'));
 });
 
 const signUpSchema = z.object({
@@ -108,6 +110,7 @@ const signUpSchema = z.object({
 
 export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { email, password, inviteId } = data;
+  const locale = getLocaleFromFormData(formData);
 
   const existingUser = await db
     .select()
@@ -215,10 +218,10 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const redirectTo = formData.get('redirect') as string | null;
   if (redirectTo === 'checkout') {
     const priceId = formData.get('priceId') as string;
-    return createCheckoutSession({ team: createdTeam, priceId });
+    return createCheckoutSession({ team: createdTeam, priceId, locale });
   }
 
-  redirect('/dashboard');
+  redirect(localizePath(locale, '/dashboard'));
 });
 
 export async function signOut() {
@@ -294,8 +297,9 @@ const deleteAccountSchema = z.object({
 
 export const deleteAccount = validatedActionWithUser(
   deleteAccountSchema,
-  async (data, _, user) => {
+  async (data, formData, user) => {
     const { password } = data;
+    const locale = getLocaleFromFormData(formData);
 
     const isPasswordValid = await comparePasswords(password, user.passwordHash);
     if (!isPasswordValid) {
@@ -334,7 +338,7 @@ export const deleteAccount = validatedActionWithUser(
     }
 
     (await cookies()).delete('session');
-    redirect('/sign-in');
+    redirect(localizePath(locale, '/sign-in'));
   }
 );
 

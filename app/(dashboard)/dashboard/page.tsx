@@ -19,6 +19,8 @@ import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Loader2, PlusCircle } from 'lucide-react';
+import { defaultLocale, type Locale } from '@/lib/i18n/config';
+import { getMessages } from '@/lib/i18n/messages';
 
 type ActionState = {
   error?: string;
@@ -37,32 +39,34 @@ function SubscriptionSkeleton() {
   );
 }
 
-function ManageSubscription() {
+function ManageSubscription({ locale }: { locale: Locale }) {
   const { data: teamData } = useSWR<TeamDataWithMembers>('/api/team', fetcher);
+  const t = getMessages(locale).dashboard;
 
   return (
     <Card className="mb-8">
       <CardHeader>
-        <CardTitle>Team Subscription</CardTitle>
+        <CardTitle>{t.teamSubscription}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
             <div className="mb-4 sm:mb-0">
               <p className="font-medium">
-                Current Plan: {teamData?.planName || 'Free'}
+                {t.currentPlan}: {teamData?.planName || 'Free'}
               </p>
               <p className="text-sm text-muted-foreground">
                 {teamData?.subscriptionStatus === 'active'
-                  ? 'Billed monthly'
+                  ? t.billedMonthly
                   : teamData?.subscriptionStatus === 'trialing'
-                  ? 'Trial period'
-                  : 'No active subscription'}
+                  ? t.trialPeriod
+                  : t.noActiveSubscription}
               </p>
             </div>
             <form action={customerPortalAction}>
+              <input type="hidden" name="locale" value={locale} />
               <Button type="submit" variant="outline">
-                Manage Subscription
+                {t.manageSubscription}
               </Button>
             </form>
           </div>
@@ -93,8 +97,9 @@ function TeamMembersSkeleton() {
   );
 }
 
-function TeamMembers() {
+function TeamMembers({ locale }: { locale: Locale }) {
   const { data: teamData } = useSWR<TeamDataWithMembers>('/api/team', fetcher);
+  const t = getMessages(locale).dashboard;
   const [removeState, removeAction, isRemovePending] = useActionState<
     ActionState,
     FormData
@@ -108,10 +113,10 @@ function TeamMembers() {
     return (
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Team Members</CardTitle>
+          <CardTitle>{t.teamMembers}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">No team members yet.</p>
+          <p className="text-muted-foreground">{t.noTeamMembers}</p>
         </CardContent>
       </Card>
     );
@@ -120,7 +125,7 @@ function TeamMembers() {
   return (
     <Card className="mb-8">
       <CardHeader>
-        <CardTitle>Team Members</CardTitle>
+        <CardTitle>{t.teamMembers}</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="space-y-4">
@@ -156,13 +161,14 @@ function TeamMembers() {
               {index > 1 ? (
                 <form action={removeAction}>
                   <input type="hidden" name="memberId" value={member.id} />
+                  <input type="hidden" name="locale" value={locale} />
                   <Button
                     type="submit"
                     variant="outline"
                     size="sm"
                     disabled={isRemovePending}
                   >
-                    {isRemovePending ? 'Removing...' : 'Remove'}
+                    {isRemovePending ? t.removing : t.remove}
                   </Button>
                 </form>
               ) : null}
@@ -187,9 +193,10 @@ function InviteTeamMemberSkeleton() {
   );
 }
 
-function InviteTeamMember() {
+function InviteTeamMember({ locale }: { locale: Locale }) {
   const { data: user } = useSWR<User>('/api/user', fetcher);
   const isOwner = user?.role === 'owner';
+  const t = getMessages(locale).dashboard;
   const [inviteState, inviteAction, isInvitePending] = useActionState<
     ActionState,
     FormData
@@ -198,10 +205,11 @@ function InviteTeamMember() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Invite Team Member</CardTitle>
+        <CardTitle>{t.inviteTeamMember}</CardTitle>
       </CardHeader>
       <CardContent>
         <form action={inviteAction} className="space-y-4">
+          <input type="hidden" name="locale" value={locale} />
           <div>
             <Label htmlFor="email" className="mb-2">
               Email
@@ -216,7 +224,7 @@ function InviteTeamMember() {
             />
           </div>
           <div>
-            <Label>Role</Label>
+            <Label>{t.role}</Label>
             <RadioGroup
               defaultValue="member"
               name="role"
@@ -225,11 +233,11 @@ function InviteTeamMember() {
             >
               <div className="flex items-center space-x-2 mt-2">
                 <RadioGroupItem value="member" id="member" />
-                <Label htmlFor="member">Member</Label>
+                <Label htmlFor="member">{t.member}</Label>
               </div>
               <div className="flex items-center space-x-2 mt-2">
                 <RadioGroupItem value="owner" id="owner" />
-                <Label htmlFor="owner">Owner</Label>
+                <Label htmlFor="owner">{t.owner}</Label>
               </div>
             </RadioGroup>
           </div>
@@ -247,12 +255,12 @@ function InviteTeamMember() {
             {isInvitePending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Inviting...
+                {t.inviting}
               </>
             ) : (
               <>
                 <PlusCircle className="mr-2 h-4 w-4" />
-                Invite Member
+                {t.inviteMember}
               </>
             )}
           </Button>
@@ -260,27 +268,31 @@ function InviteTeamMember() {
       </CardContent>
       {!isOwner && (
         <CardFooter>
-          <p className="text-sm text-muted-foreground">
-            You must be a team owner to invite new members.
-          </p>
+          <p className="text-sm text-muted-foreground">{t.ownerOnly}</p>
         </CardFooter>
       )}
     </Card>
   );
 }
 
-export default function SettingsPage() {
+export default function SettingsPage({
+  locale = defaultLocale
+}: {
+  locale?: Locale;
+}) {
+  const t = getMessages(locale).dashboard;
+
   return (
     <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium mb-6">Team Settings</h1>
+      <h1 className="text-lg lg:text-2xl font-medium mb-6">{t.teamSettings}</h1>
       <Suspense fallback={<SubscriptionSkeleton />}>
-        <ManageSubscription />
+        <ManageSubscription locale={locale} />
       </Suspense>
       <Suspense fallback={<TeamMembersSkeleton />}>
-        <TeamMembers />
+        <TeamMembers locale={locale} />
       </Suspense>
       <Suspense fallback={<InviteTeamMemberSkeleton />}>
-        <InviteTeamMember />
+        <InviteTeamMember locale={locale} />
       </Suspense>
     </section>
   );

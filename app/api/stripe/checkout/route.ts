@@ -9,13 +9,19 @@ import {
   isMockStripeEnabled
 } from '@/lib/payments/stripe';
 import Stripe from 'stripe';
+import { defaultLocale, isLocale, localizePath } from '@/lib/i18n/config';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const sessionId = searchParams.get('session_id');
+  const localeValue = searchParams.get('locale');
+  const locale =
+    localeValue && isLocale(localeValue) ? localeValue : defaultLocale;
 
   if (!sessionId) {
-    return NextResponse.redirect(new URL('/pricing', request.url));
+    return NextResponse.redirect(
+      new URL(localizePath(locale, '/pricing'), request.url)
+    );
   }
 
   try {
@@ -124,9 +130,13 @@ export async function GET(request: NextRequest) {
       .where(eq(teams.id, userTeam[0].teamId));
 
     await setSession(user[0]);
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(
+      new URL(localizePath(locale, '/dashboard'), request.url)
+    );
   } catch (error) {
     console.error('Error handling successful checkout:', error);
-    return NextResponse.redirect(new URL('/error', request.url));
+    return NextResponse.redirect(
+      new URL(localizePath(locale, '/pricing'), request.url)
+    );
   }
 }

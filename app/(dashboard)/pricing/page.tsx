@@ -5,12 +5,19 @@ import {
   isMockStripeEnabled
 } from '@/lib/payments/stripe';
 import { SubmitButton } from './submit-button';
+import { defaultLocale, type Locale } from '@/lib/i18n/config';
+import { getMessages } from '@/lib/i18n/messages';
 
 // Prices are fresh for one hour max
 export const revalidate = 3600;
 
-export default async function PricingPage() {
+export default async function PricingPage({
+  locale = defaultLocale
+}: {
+  locale?: Locale;
+}) {
   const mockStripeEnabled = isMockStripeEnabled();
+  const t = getMessages(locale).pricing;
   const [prices, products] = await Promise.all([
     getStripePrices(),
     getStripeProducts(),
@@ -26,8 +33,7 @@ export default async function PricingPage() {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {mockStripeEnabled ? (
         <div className="max-w-xl mx-auto mb-8 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-900">
-          Mock billing ist aktiv. Checkout und Subscription-Status laufen lokal
-          ohne Stripe-Account.
+          {t.mockBillingActive}
         </div>
       ) : null}
       <div className="grid md:grid-cols-2 gap-8 max-w-xl mx-auto">
@@ -36,24 +42,18 @@ export default async function PricingPage() {
           price={basePrice?.unitAmount || 800}
           interval={basePrice?.interval || 'month'}
           trialDays={basePrice?.trialPeriodDays || 7}
-          features={[
-            'Unlimited Usage',
-            'Unlimited Workspace Members',
-            'Email Support',
-          ]}
+          features={t.featuresBase}
           priceId={basePrice?.id}
+          locale={locale}
         />
         <PricingCard
           name={plusPlan?.name || 'Plus'}
           price={plusPrice?.unitAmount || 1200}
           interval={plusPrice?.interval || 'month'}
           trialDays={plusPrice?.trialPeriodDays || 7}
-          features={[
-            'Everything in Base, and:',
-            'Early Access to New Features',
-            '24/7 Support + Slack Access',
-          ]}
+          features={t.featuresPlus}
           priceId={plusPrice?.id}
+          locale={locale}
         />
       </div>
     </main>
@@ -67,24 +67,28 @@ function PricingCard({
   trialDays,
   features,
   priceId,
+  locale
 }: {
   name: string;
   price: number;
   interval: string;
   trialDays: number;
-  features: string[];
+  features: readonly string[];
   priceId?: string;
+  locale: Locale;
 }) {
+  const t = getMessages(locale).pricing;
+
   return (
     <div className="pt-6">
       <h2 className="text-2xl font-medium text-gray-900 mb-2">{name}</h2>
       <p className="text-sm text-gray-600 mb-4">
-        with {trialDays} day free trial
+        {t.withTrial.replace('{days}', String(trialDays))}
       </p>
       <p className="text-4xl font-medium text-gray-900 mb-6">
         ${price / 100}{' '}
         <span className="text-xl font-normal text-gray-600">
-          per user / {interval}
+          {t.perUser.replace('{interval}', interval)}
         </span>
       </p>
       <ul className="space-y-4 mb-8">
@@ -97,7 +101,8 @@ function PricingCard({
       </ul>
       <form action="/api/stripe/start-checkout" method="POST">
         <input type="hidden" name="priceId" value={priceId} />
-        <SubmitButton />
+        <input type="hidden" name="locale" value={locale} />
+        <SubmitButton locale={locale} />
       </form>
     </div>
   );

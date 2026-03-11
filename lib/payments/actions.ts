@@ -8,20 +8,30 @@ import {
 } from './stripe';
 import { withTeam } from '@/lib/auth/middleware';
 import { updateTeamSubscription } from '@/lib/db/queries';
+import { getLocaleFromFormData, localizePath } from '@/lib/i18n/config';
 
 export const checkoutAction = withTeam(async (formData, team) => {
   const priceId = formData.get('priceId') as string;
-  await createCheckoutSession({ team: team, priceId });
+  await createCheckoutSession({
+    team,
+    priceId,
+    locale: getLocaleFromFormData(formData)
+  });
 });
 
-export const customerPortalAction = withTeam(async (_, team) => {
-  const portalSession = await createCustomerPortalSession(team);
+export const customerPortalAction = withTeam(async (formData, team) => {
+  const portalSession = await createCustomerPortalSession(
+    team,
+    getLocaleFromFormData(formData)
+  );
   redirect(portalSession.url);
 });
 
 export const updateMockSubscriptionAction = withTeam(async (formData, team) => {
+  const locale = getLocaleFromFormData(formData);
+
   if (!isMockStripeEnabled()) {
-    redirect('/dashboard');
+    redirect(localizePath(locale, '/dashboard'));
   }
 
   const planName = formData.get('planName');
@@ -43,5 +53,5 @@ export const updateMockSubscriptionAction = withTeam(async (formData, team) => {
     subscriptionStatus: nextStatus
   });
 
-  redirect('/dashboard/billing');
+  redirect(localizePath(locale, '/dashboard/billing'));
 });

@@ -5,20 +5,41 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Users, Settings, Shield, Activity, Menu } from 'lucide-react';
+import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
+import { getMessages } from '@/lib/i18n/messages';
 
 export default function DashboardLayout({
-  children
+  children,
+  locale = defaultLocale
 }: {
   children: React.ReactNode;
+  locale?: Locale;
 }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const t = getMessages(locale).dashboard;
 
   const navItems = [
-    { href: '/dashboard', icon: Users, label: 'Team' },
-    { href: '/dashboard/general', icon: Settings, label: 'General' },
-    { href: '/dashboard/activity', icon: Activity, label: 'Activity' },
-    { href: '/dashboard/security', icon: Shield, label: 'Security' }
+    {
+      href: localizePath(locale, '/dashboard'),
+      icon: Users,
+      label: t.nav.team
+    },
+    {
+      href: localizePath(locale, '/dashboard/general'),
+      icon: Settings,
+      label: t.nav.general
+    },
+    {
+      href: localizePath(locale, '/dashboard/activity'),
+      icon: Activity,
+      label: t.nav.activity
+    },
+    {
+      href: localizePath(locale, '/dashboard/security'),
+      icon: Shield,
+      label: t.nav.security
+    }
   ];
 
   return (
@@ -26,7 +47,7 @@ export default function DashboardLayout({
       {/* Mobile header */}
       <div className="lg:hidden flex items-center justify-between bg-white border-b border-gray-200 p-4">
         <div className="flex items-center">
-          <span className="font-medium">Settings</span>
+          <span className="font-medium">{t.settings}</span>
         </div>
         <Button
           className="-mr-3"

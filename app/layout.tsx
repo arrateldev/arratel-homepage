@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Manrope } from 'next/font/google';
 import { SWRConfig } from 'swr';
+import { headers } from 'next/headers';
+import { defaultLocale, isLocale } from '@/lib/i18n/config';
 
 export const metadata: Metadata = {
   title: 'Next.js SaaS Starter',
@@ -14,14 +16,21 @@ export const viewport: Viewport = {
 
 const manrope = Manrope({ subsets: ['latin'] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: {
   children: React.ReactNode;
 }) {
+  const requestHeaders = await headers();
+  const requestedLocale = requestHeaders.get('x-locale');
+  const locale =
+    requestedLocale && isLocale(requestedLocale)
+      ? requestedLocale
+      : defaultLocale;
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
     >
       <body className="min-h-[100dvh] bg-gray-50">
