@@ -87,7 +87,12 @@ const messages = {
       signInExisting: 'Mit bestehendem Konto anmelden'
     },
     header: {
-      localeLabel: 'Sprache'
+      localeLabel: 'Sprache',
+      navigation: 'Navigation',
+      signIn: 'Anmelden',
+      signUp: 'Registrieren',
+      openMenu: 'Menue oeffnen',
+      closeMenu: 'Menue schliessen'
     },
     pricing: {
       mockBillingActive:
@@ -276,7 +281,12 @@ const messages = {
       signInExisting: 'Sign in to existing account'
     },
     header: {
-      localeLabel: 'Language'
+      localeLabel: 'Language',
+      navigation: 'Navigation',
+      signIn: 'Sign in',
+      signUp: 'Sign up',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu'
     },
     pricing: {
       mockBillingActive:

@@ -16,5 +16,5 @@ export default async function LocalizedMarketingLayout({
     notFound();
   }
 
-  return <Layout locale={locale}>{children}</Layout>;
+  return <Layout>{children}</Layout>;
 }

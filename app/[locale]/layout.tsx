@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { isLocale, locales } from '@/lib/i18n/config';
+import { SiteChrome } from '@/components/site-chrome';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -19,5 +20,5 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return children;
+  return <SiteChrome locale={locale}>{children}</SiteChrome>;
 }
