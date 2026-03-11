@@ -40,6 +40,7 @@ const messages = {
       freeLabel: 'Free',
       freeTitle: 'Direkt loslegen',
       freeTag: 'Kein Risiko',
+      freePrice: 'EUR 0',
       month: '/ Monat',
       freeDescription:
         'Ideal zum Testen, fuer kleine Workloads und fuer den ersten produktiven Eindruck ohne Zahlung.',
@@ -53,6 +54,7 @@ const messages = {
       proLabel: 'Pro',
       proTitle: 'Fuer regelmaessige Nutzung',
       proTag: 'Beliebteste Wahl',
+      proPrice: 'EUR 9',
       proDescription:
         'Fuer Nutzer, die weniger Limits, schnellere Workflows und einen verlaesslichen Daily-Use-Pfad wollen.',
       proFeatures: [
@@ -100,6 +102,7 @@ const messages = {
       withTrial: 'mit {days} Tagen kostenloser Testphase',
       perUser: 'pro Nutzer / {interval}',
       cta: 'Jetzt starten',
+      currentPlan: 'Aktueller Plan',
       featuresBase: [
         'Unbegrenzte Nutzung',
         'Unbegrenzte Workspace-Mitglieder',
@@ -234,6 +237,7 @@ const messages = {
       freeLabel: 'Free',
       freeTitle: 'Get started',
       freeTag: 'No risk',
+      freePrice: 'EUR 0',
       month: '/ month',
       freeDescription:
         'Perfect for testing the product, small workloads, and getting comfortable before paying anything.',
@@ -247,6 +251,7 @@ const messages = {
       proLabel: 'Pro',
       proTitle: 'Built for regular use',
       proTag: 'Most popular',
+      proPrice: 'EUR 9',
       proDescription:
         'For users who want fewer limits, faster workflows, and a smoother path for daily use.',
       proFeatures: [
@@ -294,6 +299,7 @@ const messages = {
       withTrial: 'with {days} day free trial',
       perUser: 'per user / {interval}',
       cta: 'Get started',
+      currentPlan: 'Current plan',
       featuresBase: [
         'Unlimited usage',
         'Unlimited workspace members',

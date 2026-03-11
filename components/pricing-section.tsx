@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
@@ -24,6 +24,10 @@ type PricingCardConfig = {
     | {
         type: 'checkout';
         priceId?: string;
+      }
+    | {
+        type: 'current';
+        label: string;
       }
     | {
         type: 'split';
@@ -159,6 +163,20 @@ function renderCta(cta: PricingCardConfig['cta'], locale: Locale) {
     );
   }
 
+  if (cta.type === 'current') {
+    return (
+      <Button
+        type="button"
+        variant="secondary"
+        size="lg"
+        className="w-full rounded-full text-base"
+        disabled
+      >
+        {cta.label}
+      </Button>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
       <Button
@@ -184,7 +202,7 @@ function FeatureList({ items }: { items: readonly string[] }) {
       {items.map((item) => (
         <li key={item} className="flex items-center gap-3 text-sm text-foreground">
           <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-            ✓
+            <Check className="h-3.5 w-3.5" />
           </span>
           <span>{item}</span>
         </li>

@@ -16,7 +16,8 @@ export default async function PricingPage({
   locale?: Locale;
 }) {
   const mockStripeEnabled = isMockStripeEnabled();
-  const t = getMessages(locale).pricing;
+  const messages = getMessages(locale);
+  const t = messages.pricing;
   const [prices, products] = await Promise.all([
     getStripePrices(),
     getStripeProducts(),
@@ -40,36 +41,26 @@ export default async function PricingPage({
         className="bg-muted/40 py-20"
         cards={[
           {
-            label: basePlan?.name || 'Base',
-            title: t.featuresBase[0] ? getMessages(locale).home.freeTitle : 'Base',
-            tag: getMessages(locale).home.freeTag,
-            price: `$${
-              (basePrice?.unitAmount || 800) / 100
-            }`,
-            monthLabel: getMessages(locale).home.month,
-            description: t.withTrial.replace(
-              '{days}',
-              String(basePrice?.trialPeriodDays || 7)
-            ),
-            features: t.featuresBase,
+            label: messages.home.freeLabel,
+            title: messages.home.freeTitle,
+            tag: messages.home.freeTag,
+            price: messages.home.freePrice,
+            monthLabel: messages.home.month,
+            description: messages.home.freeDescription,
+            features: messages.home.freeFeatures,
             cta: {
-              type: 'checkout',
-              priceId: basePrice?.id
+              type: 'current',
+              label: t.currentPlan
             }
           },
           {
-            label: plusPlan?.name || 'Plus',
-            title: getMessages(locale).home.proTitle,
-            tag: getMessages(locale).home.proTag,
-            price: `$${
-              (plusPrice?.unitAmount || 1200) / 100
-            }`,
-            monthLabel: getMessages(locale).home.month,
-            description: t.withTrial.replace(
-              '{days}',
-              String(plusPrice?.trialPeriodDays || 7)
-            ),
-            features: t.featuresPlus,
+            label: messages.home.proLabel,
+            title: messages.home.proTitle,
+            tag: messages.home.proTag,
+            price: messages.home.proPrice,
+            monthLabel: messages.home.month,
+            description: messages.home.proDescription,
+            features: messages.home.proFeatures,
             emphasized: true,
             cta: {
               type: 'checkout',
