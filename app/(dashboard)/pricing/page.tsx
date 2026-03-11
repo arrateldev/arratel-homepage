@@ -1,12 +1,16 @@
-import { checkoutAction } from '@/lib/payments/actions';
 import { Check } from 'lucide-react';
-import { getStripePrices, getStripeProducts } from '@/lib/payments/stripe';
+import {
+  getStripePrices,
+  getStripeProducts,
+  isMockStripeEnabled
+} from '@/lib/payments/stripe';
 import { SubmitButton } from './submit-button';
 
 // Prices are fresh for one hour max
 export const revalidate = 3600;
 
 export default async function PricingPage() {
+  const mockStripeEnabled = isMockStripeEnabled();
   const [prices, products] = await Promise.all([
     getStripePrices(),
     getStripeProducts(),
@@ -20,6 +24,12 @@ export default async function PricingPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {mockStripeEnabled ? (
+        <div className="max-w-xl mx-auto mb-8 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-900">
+          Mock billing ist aktiv. Checkout und Subscription-Status laufen lokal
+          ohne Stripe-Account.
+        </div>
+      ) : null}
       <div className="grid md:grid-cols-2 gap-8 max-w-xl mx-auto">
         <PricingCard
           name={basePlan?.name || 'Base'}
@@ -85,7 +95,7 @@ function PricingCard({
           </li>
         ))}
       </ul>
-      <form action={checkoutAction}>
+      <form action="/api/stripe/start-checkout" method="POST">
         <input type="hidden" name="priceId" value={priceId} />
         <SubmitButton />
       </form>

@@ -1,15 +1,96 @@
 import Stripe from 'stripe';
 import { redirect } from 'next/navigation';
-import { Team } from '@/lib/db/schema';
-import {
-  getTeamByStripeCustomerId,
-  getUser,
-  updateTeamSubscription
-} from '@/lib/db/queries';
+import type { Team } from '@/lib/db/schema';
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-04-30.basil'
-});
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+
+export const MOCK_STRIPE = process.env.MOCK_STRIPE === 'true';
+
+const mockProducts = [
+  {
+    id: 'mock_prod_base',
+    name: 'Base',
+    description: 'Local mock plan for development.',
+    defaultPriceId: 'mock_price_base'
+  },
+  {
+    id: 'mock_prod_plus',
+    name: 'Plus',
+    description: 'Local mock plan for development.',
+    defaultPriceId: 'mock_price_plus'
+  }
+] as const;
+
+const mockPrices = [
+  {
+    id: 'mock_price_base',
+    productId: 'mock_prod_base',
+    unitAmount: 800,
+    currency: 'usd',
+    interval: 'month',
+    trialPeriodDays: 14
+  },
+  {
+    id: 'mock_price_plus',
+    productId: 'mock_prod_plus',
+    unitAmount: 1200,
+    currency: 'usd',
+    interval: 'month',
+    trialPeriodDays: 14
+  }
+] as const;
+
+let stripeClient: Stripe | null = null;
+
+export function isMockStripeEnabled() {
+  return MOCK_STRIPE;
+}
+
+export function getStripeClient() {
+  if (MOCK_STRIPE) {
+    throw new Error('Stripe client requested while MOCK_STRIPE is enabled.');
+  }
+
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error(
+      'Missing STRIPE_SECRET_KEY. Set MOCK_STRIPE=true for local payment simulation.'
+    );
+  }
+
+  stripeClient ??= new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-08-27.basil'
+  });
+
+  return stripeClient;
+}
+
+export function getMockCheckoutSession(sessionId: string) {
+  if (!sessionId.startsWith('mock_checkout::')) {
+    return null;
+  }
+
+  const [, userId, priceId] = sessionId.split('::');
+
+  if (!userId || !priceId) {
+    return null;
+  }
+
+  const price = mockPrices.find((entry) => entry.id === priceId);
+  const product = mockProducts.find((entry) => entry.id === price?.productId);
+
+  if (!price || !product) {
+    return null;
+  }
+
+  return {
+    userId: Number(userId),
+    customerId: `mock_cus_${userId}`,
+    subscriptionId: `mock_sub_${price.productId}`,
+    productId: product.id,
+    planName: product.name,
+    subscriptionStatus: 'trialing' as const
+  };
+}
 
 export async function createCheckoutSession({
   team,
@@ -18,12 +99,20 @@ export async function createCheckoutSession({
   team: Team | null;
   priceId: string;
 }) {
+  const { getUser } = await import('@/lib/db/queries');
   const user = await getUser();
 
   if (!team || !user) {
     redirect(`/sign-up?redirect=checkout&priceId=${priceId}`);
   }
 
+  if (MOCK_STRIPE) {
+    redirect(
+      `${BASE_URL}/api/stripe/checkout?session_id=mock_checkout::${user.id}::${priceId}`
+    );
+  }
+
+  const stripe = getStripeClient();
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [
@@ -33,8 +122,8 @@ export async function createCheckoutSession({
       }
     ],
     mode: 'subscription',
-    success_url: `${process.env.BASE_URL}/api/stripe/checkout?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.BASE_URL}/pricing`,
+    success_url: `${BASE_URL}/api/stripe/checkout?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${BASE_URL}/pricing`,
     customer: team.stripeCustomerId || undefined,
     client_reference_id: user.id.toString(),
     allow_promotion_codes: true,
@@ -47,10 +136,17 @@ export async function createCheckoutSession({
 }
 
 export async function createCustomerPortalSession(team: Team) {
+  if (MOCK_STRIPE) {
+    return {
+      url: `${BASE_URL}/dashboard/billing`
+    };
+  }
+
   if (!team.stripeCustomerId || !team.stripeProductId) {
     redirect('/pricing');
   }
 
+  const stripe = getStripeClient();
   let configuration: Stripe.BillingPortal.Configuration;
   const configurations = await stripe.billingPortal.configurations.list();
 
@@ -109,7 +205,7 @@ export async function createCustomerPortalSession(team: Team) {
 
   return stripe.billingPortal.sessions.create({
     customer: team.stripeCustomerId,
-    return_url: `${process.env.BASE_URL}/dashboard`,
+    return_url: `${BASE_URL}/dashboard`,
     configuration: configuration.id
   });
 }
@@ -117,6 +213,9 @@ export async function createCustomerPortalSession(team: Team) {
 export async function handleSubscriptionChange(
   subscription: Stripe.Subscription
 ) {
+  const { getTeamByStripeCustomerId, updateTeamSubscription } = await import(
+    '@/lib/db/queries'
+  );
   const customerId = subscription.customer as string;
   const subscriptionId = subscription.id;
   const status = subscription.status;
@@ -147,6 +246,11 @@ export async function handleSubscriptionChange(
 }
 
 export async function getStripePrices() {
+  if (MOCK_STRIPE) {
+    return [...mockPrices];
+  }
+
+  const stripe = getStripeClient();
   const prices = await stripe.prices.list({
     expand: ['data.product'],
     active: true,
@@ -165,6 +269,11 @@ export async function getStripePrices() {
 }
 
 export async function getStripeProducts() {
+  if (MOCK_STRIPE) {
+    return [...mockProducts];
+  }
+
+  const stripe = getStripeClient();
   const products = await stripe.products.list({
     active: true,
     expand: ['data.default_price']

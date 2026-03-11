@@ -68,6 +68,25 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the app in action.
 
+### Developing without a Stripe account
+
+If you only want to build the pricing and billing UI locally, set this in your
+`.env`:
+
+```bash
+MOCK_STRIPE=true
+```
+
+In mock mode:
+
+- `/pricing` uses local mock products instead of Stripe API data
+- checkout redirects back into the app and marks the team as `trialing`
+- `Manage Subscription` opens `/dashboard/billing`, where you can switch plans
+  and statuses manually
+
+This lets you work on gated pages and billing states without creating a Stripe
+account first.
+
 You can listen for Stripe webhooks locally through their CLI to handle subscription change events:
 
 ```bash

@@ -3,7 +3,11 @@ import { db } from '@/lib/db/drizzle';
 import { users, teams, teamMembers } from '@/lib/db/schema';
 import { setSession } from '@/lib/auth/session';
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from '@/lib/payments/stripe';
+import {
+  getMockCheckoutSession,
+  getStripeClient,
+  isMockStripeEnabled
+} from '@/lib/payments/stripe';
 import Stripe from 'stripe';
 
 export async function GET(request: NextRequest) {
@@ -15,43 +19,74 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['customer', 'subscription'],
-    });
+    let customerId: string;
+    let subscriptionId: string;
+    let productId: string;
+    let planName: string;
+    let subscriptionStatus: string;
+    let userId: string;
 
-    if (!session.customer || typeof session.customer === 'string') {
-      throw new Error('Invalid customer data from Stripe.');
-    }
+    if (isMockStripeEnabled()) {
+      const mockSession = getMockCheckoutSession(sessionId);
 
-    const customerId = session.customer.id;
-    const subscriptionId =
-      typeof session.subscription === 'string'
-        ? session.subscription
-        : session.subscription?.id;
+      if (!mockSession) {
+        throw new Error('Invalid mock checkout session.');
+      }
 
-    if (!subscriptionId) {
-      throw new Error('No subscription found for this session.');
-    }
+      customerId = mockSession.customerId;
+      subscriptionId = mockSession.subscriptionId;
+      productId = mockSession.productId;
+      planName = mockSession.planName;
+      subscriptionStatus = mockSession.subscriptionStatus;
+      userId = mockSession.userId.toString();
+    } else {
+      const stripe = getStripeClient();
+      const session = await stripe.checkout.sessions.retrieve(sessionId, {
+        expand: ['customer', 'subscription']
+      });
 
-    const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
-      expand: ['items.data.price.product'],
-    });
+      if (!session.customer || typeof session.customer === 'string') {
+        throw new Error('Invalid customer data from Stripe.');
+      }
 
-    const plan = subscription.items.data[0]?.price;
+      customerId = session.customer.id;
+      const nextSubscriptionId =
+        typeof session.subscription === 'string'
+          ? session.subscription
+          : session.subscription?.id;
 
-    if (!plan) {
-      throw new Error('No plan found for this subscription.');
-    }
+      if (!nextSubscriptionId) {
+        throw new Error('No subscription found for this session.');
+      }
 
-    const productId = (plan.product as Stripe.Product).id;
+      const subscription = await stripe.subscriptions.retrieve(
+        nextSubscriptionId,
+        {
+          expand: ['items.data.price.product']
+        }
+      );
 
-    if (!productId) {
-      throw new Error('No product ID found for this subscription.');
-    }
+      const plan = subscription.items.data[0]?.price;
 
-    const userId = session.client_reference_id;
-    if (!userId) {
-      throw new Error("No user ID found in session's client_reference_id.");
+      if (!plan) {
+        throw new Error('No plan found for this subscription.');
+      }
+
+      productId = (plan.product as Stripe.Product).id;
+
+      if (!productId) {
+        throw new Error('No product ID found for this subscription.');
+      }
+
+      subscriptionId = nextSubscriptionId;
+      planName = (plan.product as Stripe.Product).name;
+      subscriptionStatus = subscription.status;
+
+      if (!session.client_reference_id) {
+        throw new Error("No user ID found in session's client_reference_id.");
+      }
+
+      userId = session.client_reference_id;
     }
 
     const user = await db
@@ -82,9 +117,9 @@ export async function GET(request: NextRequest) {
         stripeCustomerId: customerId,
         stripeSubscriptionId: subscriptionId,
         stripeProductId: productId,
-        planName: (plan.product as Stripe.Product).name,
-        subscriptionStatus: subscription.status,
-        updatedAt: new Date(),
+        planName,
+        subscriptionStatus,
+        updatedAt: new Date()
       })
       .where(eq(teams.id, userTeam[0].teamId));
 
