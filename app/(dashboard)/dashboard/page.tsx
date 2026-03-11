@@ -28,6 +28,10 @@ type ActionState = {
 };
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const swrOptions = {
+  revalidateOnMount: false,
+  revalidateIfStale: false
+};
 
 function SubscriptionSkeleton() {
   return (
@@ -40,7 +44,11 @@ function SubscriptionSkeleton() {
 }
 
 function ManageSubscription({ locale }: { locale: Locale }) {
-  const { data: teamData } = useSWR<TeamDataWithMembers>('/api/team', fetcher);
+  const { data: teamData } = useSWR<TeamDataWithMembers>(
+    '/api/team',
+    fetcher,
+    swrOptions
+  );
   const t = getMessages(locale).dashboard;
 
   return (
@@ -98,7 +106,11 @@ function TeamMembersSkeleton() {
 }
 
 function TeamMembers({ locale }: { locale: Locale }) {
-  const { data: teamData } = useSWR<TeamDataWithMembers>('/api/team', fetcher);
+  const { data: teamData } = useSWR<TeamDataWithMembers>(
+    '/api/team',
+    fetcher,
+    swrOptions
+  );
   const t = getMessages(locale).dashboard;
   const [removeState, removeAction, isRemovePending] = useActionState<
     ActionState,
@@ -194,7 +206,7 @@ function InviteTeamMemberSkeleton() {
 }
 
 function InviteTeamMember({ locale }: { locale: Locale }) {
-  const { data: user } = useSWR<User>('/api/user', fetcher);
+  const { data: user } = useSWR<User>('/api/user', fetcher, swrOptions);
   const isOwner = user?.role === 'owner';
   const t = getMessages(locale).dashboard;
   const [inviteState, inviteAction, isInvitePending] = useActionState<

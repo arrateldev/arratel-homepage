@@ -14,6 +14,10 @@ import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const swrOptions = {
+  revalidateOnMount: false,
+  revalidateIfStale: false
+};
 
 type ActionState = {
   name?: string;
@@ -74,7 +78,7 @@ function AccountFormWithData({
   state: ActionState;
   locale: Locale;
 }) {
-  const { data: user } = useSWR<User>('/api/user', fetcher);
+  const { data: user } = useSWR<User>('/api/user', fetcher, swrOptions);
   return (
     <AccountForm
       state={state}

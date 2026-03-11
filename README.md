@@ -24,6 +24,27 @@ This is a starter template for building a SaaS application using **Next.js** wit
 - **Payments**: [Stripe](https://stripe.com/)
 - **UI Library**: [shadcn/ui](https://ui.shadcn.com/)
 
+## Recommended Deployment Stack
+
+For a low-cost SaaS setup, this starter is designed to work well with:
+
+- **Frontend / App Hosting**: Vercel
+- **Database Hosting**: external Postgres provider such as Neon, Supabase, Railway, or a Postgres database from the Vercel Marketplace
+- **Payments**: Stripe
+
+Important:
+
+- Vercel hosts the app, but not your Postgres database
+- You must provide a real `POSTGRES_URL` in every environment
+- For local development, you can use a local Postgres instance (for example via Docker) or a hosted Postgres database
+- For billing flows without a live Stripe setup, use `MOCK_STRIPE=true`
+
+If your goal is to keep fixed costs near zero for new products, a practical default is:
+
+- Vercel Hobby
+- Neon Free or another Postgres free tier
+- Stripe with mock mode locally and live mode only when needed
+
 ## Getting Started
 
 ```bash
@@ -33,6 +54,17 @@ pnpm install
 ```
 
 ## Running Locally
+
+This project needs a running Postgres database before `pnpm db:migrate` or
+`pnpm db:seed` can work.
+
+You have two options:
+
+- use a local Postgres instance, for example with Docker
+- use a hosted Postgres database and set `POSTGRES_URL` manually
+
+The included `pnpm db:setup` script can help generate a `.env`, but you can also
+create `.env` yourself if you want to skip Stripe setup during local development.
 
 [Install](https://docs.stripe.com/stripe-cli) and log in to your Stripe account:
 
@@ -87,6 +119,20 @@ In mock mode:
 This lets you work on gated pages and billing states without creating a Stripe
 account first.
 
+Minimal local `.env` example:
+
+```bash
+POSTGRES_URL=postgres://postgres:postgres@localhost:54322/postgres
+MOCK_STRIPE=true
+BASE_URL=http://localhost:3000
+AUTH_SECRET=replace-with-a-random-secret
+STRIPE_SECRET_KEY=dummy
+STRIPE_WEBHOOK_SECRET=dummy
+```
+
+As long as `MOCK_STRIPE=true`, dummy Stripe values are fine for local
+development.
+
 You can listen for Stripe webhooks locally through their CLI to handle subscription change events:
 
 ```bash
@@ -116,6 +162,7 @@ When you're ready to deploy your SaaS application to production, follow these st
 1. Push your code to a GitHub repository.
 2. Connect your repository to [Vercel](https://vercel.com/) and deploy it.
 3. Follow the Vercel deployment process, which will guide you through setting up your project.
+4. Connect an external Postgres database and add its connection string as `POSTGRES_URL`.
 
 ### Add environment variables
 

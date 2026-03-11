@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { decodeJwt } from 'jose';
 import { signToken, verifyToken } from '@/lib/auth/session';
 import {
   getLocaleFromPathname,
@@ -9,6 +10,7 @@ import {
 } from '@/lib/i18n/config';
 
 const protectedRoutes = '/dashboard';
+const SESSION_REFRESH_WINDOW_MS = 6 * 60 * 60 * 1000;
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -47,20 +49,27 @@ export async function middleware(request: NextRequest) {
 
   if (sessionCookie && request.method === 'GET') {
     try {
-      const parsed = await verifyToken(sessionCookie.value);
-      const expiresInOneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      const decoded = decodeJwt(sessionCookie.value);
+      const expiresAt = typeof decoded.exp === 'number' ? decoded.exp * 1000 : 0;
+      const shouldRefresh =
+        expiresAt > 0 && expiresAt - Date.now() <= SESSION_REFRESH_WINDOW_MS;
 
-      res.cookies.set({
-        name: 'session',
-        value: await signToken({
-          ...parsed,
-          expires: expiresInOneDay.toISOString()
-        }),
-        httpOnly: true,
-        secure: true,
-        sameSite: 'lax',
-        expires: expiresInOneDay
-      });
+      if (shouldRefresh) {
+        const parsed = await verifyToken(sessionCookie.value);
+        const expiresInOneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+        res.cookies.set({
+          name: 'session',
+          value: await signToken({
+            ...parsed,
+            expires: expiresInOneDay.toISOString()
+          }),
+          httpOnly: true,
+          secure: true,
+          sameSite: 'lax',
+          expires: expiresInOneDay
+        });
+      }
     } catch (error) {
       console.error('Error updating session:', error);
       res.cookies.delete('session');
