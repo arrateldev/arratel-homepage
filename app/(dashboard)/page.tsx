@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CreditCard, Database } from "lucide-react";
 import { Terminal } from "./terminal";
 import { defaultLocale, localizePath, type Locale } from "@/lib/i18n/config";
 import { getMessages } from "@/lib/i18n/messages";
+import { PricingSection } from "@/components/pricing-section";
 
 export default function HomePage({
   locale = defaultLocale,
@@ -90,93 +90,40 @@ export default function HomePage({
         </div>
       </section>
 
-      <section className="bg-muted/40 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 text-sm font-medium text-muted-foreground">
-              {t.home.pricingBadge}
-            </span>
-
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              {t.home.pricingTitle}
-            </h2>
-
-            <p className="mt-4 text-lg text-muted-foreground">
-              {t.home.pricingDescription}
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            <PlanCard
-              label={t.home.freeLabel}
-              title={t.home.freeTitle}
-              tag={t.home.freeTag}
-              price="EUR 0"
-              month={t.home.month}
-              description={t.home.freeDescription}
-              features={t.home.freeFeatures}
-              cta={t.home.freeCta}
-              variant="outline"
-            />
-
-            <div className="group relative overflow-hidden rounded-[28px] border border-primary/20 bg-card p-8 shadow-sm ring-1 ring-primary/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-primary/10 to-transparent" />
-              <div className="absolute right-6 top-6 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-sm">
-                {t.home.proTag}
-              </div>
-
-              <div className="relative">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">
-                      {t.home.proLabel}
-                    </p>
-                    <h3 className="mt-2 text-2xl font-semibold text-foreground">
-                      {t.home.proTitle}
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-end gap-2">
-                  <span className="text-5xl font-bold tracking-tight text-foreground">
-                    EUR 9
-                  </span>
-                  <span className="pb-1 text-sm text-muted-foreground">
-                    {t.home.month}
-                  </span>
-                </div>
-
-                <p className="mt-4 text-sm leading-6 text-muted-foreground">
-                  {t.home.proDescription}
-                </p>
-
-                <FeatureList items={t.home.proFeatures} />
-
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Button
-                    size="lg"
-                    className="flex-1 rounded-full text-base transition-transform duration-300 group-hover:scale-[1.01]"
-                  >
-                    {t.home.proCta}
-                  </Button>
-
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="rounded-full text-base"
-                  >
-                    <Link href={localizePath(locale, "/pricing")}>
-                      {t.home.fullPricingCta}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PricingSection
+        locale={locale}
+        cards={[
+          {
+            label: t.home.freeLabel,
+            title: t.home.freeTitle,
+            tag: t.home.freeTag,
+            price: "EUR 0",
+            monthLabel: t.home.month,
+            description: t.home.freeDescription,
+            features: t.home.freeFeatures,
+            cta: {
+              type: "button",
+              label: t.home.freeCta,
+            },
+          },
+          {
+            label: t.home.proLabel,
+            title: t.home.proTitle,
+            tag: t.home.proTag,
+            price: "EUR 9",
+            monthLabel: t.home.month,
+            description: t.home.proDescription,
+            features: t.home.proFeatures,
+            emphasized: true,
+            cta: {
+              type: "split",
+              primaryLabel: t.home.proCta,
+              secondaryLabel: t.home.fullPricingCta,
+              secondaryHref: localizePath(locale, "/pricing"),
+            },
+          },
+        ]}
+      />
 
     </main>
   );
@@ -221,65 +168,5 @@ function FeatureList({ items }: { items: readonly string[] }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-function PlanCard({
-  label,
-  title,
-  tag,
-  price,
-  month,
-  description,
-  features,
-  cta,
-  variant,
-}: {
-  label: string;
-  title: string;
-  tag: string;
-  price: string;
-  month: string;
-  description: string;
-  features: readonly string[];
-  cta: string;
-  variant: "outline" | "default";
-}) {
-  return (
-    <div className="group relative overflow-hidden rounded-[28px] border border-border/70 bg-card p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-muted-foreground">{label}</p>
-          <h3 className="mt-2 text-2xl font-semibold text-foreground">{title}</h3>
-        </div>
-
-        <div className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-          {tag}
-        </div>
-      </div>
-
-      <div className="mt-6 flex items-end gap-2">
-        <span className="text-5xl font-bold tracking-tight text-foreground">
-          {price}
-        </span>
-        <span className="pb-1 text-sm text-muted-foreground">{month}</span>
-      </div>
-
-      <p className="mt-4 text-sm leading-6 text-muted-foreground">{description}</p>
-
-      <FeatureList items={features} />
-
-      <div className="mt-8">
-        <Button
-          variant={variant}
-          size="lg"
-          className="w-full rounded-full text-base transition-transform duration-300 group-hover:scale-[1.01]"
-        >
-          {cta}
-        </Button>
-      </div>
-    </div>
   );
 }

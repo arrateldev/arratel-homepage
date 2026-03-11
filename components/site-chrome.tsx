@@ -34,7 +34,7 @@ export function SiteChrome({
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8">
           <div>
             <div className="flex items-center">
-              <CircleIcon className="h-5 w-5 text-orange-500" />
+              <CircleIcon className="text-primary h-5 w-5" />
               <span className="ml-2 text-base font-semibold text-white">
                 ACME
               </span>
@@ -136,7 +136,7 @@ function Header({ locale }: { locale: Locale }) {
           href={localizePath(locale, '/')}
           className="flex items-center text-gray-900"
         >
-          <CircleIcon className="h-6 w-6 text-orange-500" />
+          <CircleIcon className="text-primary h-6 w-6" />
           <span className="ml-2 text-xl font-semibold">ACME</span>
         </Link>
 
