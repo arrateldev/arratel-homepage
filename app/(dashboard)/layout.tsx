@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, Suspense } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { CircleIcon, Home } from 'lucide-react';
 import {
   DropdownMenu,
@@ -44,7 +44,13 @@ function UserMenu({ locale }: { locale: Locale }) {
 
 function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const alternateLocale = locale === 'de' ? 'en' : 'de';
+  const query = searchParams.toString();
+  const alternateHref = `${replaceLocaleInPathname(
+    pathname,
+    alternateLocale
+  )}${query ? `?${query}` : ''}`;
 
   return (
     <header className="border-b border-gray-200">
@@ -55,8 +61,9 @@ function Header({ locale }: { locale: Locale }) {
         </Link>
         <div className="flex items-center space-x-4">
           <Link
-            href={replaceLocaleInPathname(pathname, alternateLocale)}
+            href={alternateHref}
             className="rounded-full border border-gray-200 px-3 py-1 text-sm font-medium text-gray-700"
+            aria-label={`Switch language to ${alternateLocale.toUpperCase()}`}
           >
             {alternateLocale.toUpperCase()}
           </Link>
