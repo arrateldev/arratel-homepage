@@ -62,7 +62,7 @@ export function Login({
                 defaultValue={state.email}
                 required
                 maxLength={50}
-                className="relative block w-full appearance-none rounded-full border border-input px-3 py-2 text-foreground placeholder:text-muted-foreground focus:z-10 focus:border-ring focus:outline-none focus:ring-ring sm:text-sm"
+                className="relative block w-full appearance-none px-3 py-2 text-foreground placeholder:text-muted-foreground focus:z-10 sm:text-sm"
                 placeholder={t.emailPlaceholder}
               />
             </div>
@@ -87,7 +87,7 @@ export function Login({
                 required
                 minLength={8}
                 maxLength={100}
-                className="relative block w-full appearance-none rounded-full border border-input px-3 py-2 text-foreground placeholder:text-muted-foreground focus:z-10 focus:border-ring focus:outline-none focus:ring-ring sm:text-sm"
+                className="relative block w-full appearance-none px-3 py-2 text-foreground placeholder:text-muted-foreground focus:z-10 sm:text-sm"
                 placeholder={t.passwordPlaceholder}
               />
             </div>
@@ -100,7 +100,7 @@ export function Login({
           <div>
             <Button
               type="submit"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-ring w-full rounded-full border border-transparent px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="w-full"
               disabled={pending}
             >
               {pending ? (
@@ -130,17 +130,18 @@ export function Login({
           </div>
 
           <div className="mt-6">
-            <Link
-              href={`${localizePath(
-                locale,
-                mode === 'signin' ? '/sign-up' : '/sign-in'
-              )}${
-                redirect ? `?redirect=${redirect}` : ''
-              }${priceId ? `&priceId=${priceId}` : ''}`}
-              className="bg-card text-foreground focus:ring-ring w-full rounded-full border border-border px-4 py-2 text-sm font-medium shadow-sm hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2"
-            >
-              {mode === 'signin' ? t.createAccount : t.signInExisting}
-            </Link>
+            <Button asChild variant="outline" className="w-full">
+              <Link
+                href={`${localizePath(
+                  locale,
+                  mode === 'signin' ? '/sign-up' : '/sign-in'
+                )}${redirect ? `?redirect=${redirect}` : ''}${
+                  priceId ? `&priceId=${priceId}` : ''
+                }`}
+              >
+                {mode === 'signin' ? t.createAccount : t.signInExisting}
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

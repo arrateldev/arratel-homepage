@@ -19,7 +19,7 @@ export function SubmitButton({
       type="submit"
       disabled={pending}
       variant="outline"
-      className="w-full rounded-full"
+      className="w-full"
     >
       {pending ? (
         <>

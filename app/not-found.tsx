@@ -3,6 +3,7 @@ import { CircleIcon } from 'lucide-react';
 import { headers } from 'next/headers';
 import { defaultLocale, isLocale, localizePath } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
+import { Button } from '@/components/ui/button';
 
 export default async function NotFound() {
   const localeHeader = (await headers()).get('x-locale');
@@ -22,12 +23,9 @@ export default async function NotFound() {
         <p className="text-base text-gray-500">
           {t.notFound.description}
         </p>
-        <Link
-          href={localizePath(locale, '/')}
-          className="bg-card text-foreground focus:ring-ring max-w-48 mx-auto flex justify-center rounded-full border border-border px-4 py-2 text-sm font-medium shadow-sm hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2"
-        >
-          {t.common.backToHome}
-        </Link>
+        <Button asChild variant="outline" className="mx-auto flex max-w-48">
+          <Link href={localizePath(locale, '/')}>{t.common.backToHome}</Link>
+        </Button>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 import {
   localizePath,
   replaceLocaleInPathname,
@@ -157,19 +158,17 @@ function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href={alternateHref}
-            className="rounded-full border border-gray-200 px-3 py-1 text-sm font-medium text-gray-700"
-            aria-label={`Switch language to ${alternateLocale.toUpperCase()}`}
-          >
-            {alternateLocale.toUpperCase()}
-          </Link>
-          <Link
-            href={localizePath(locale, '/sign-in')}
-            className="rounded-full px-3 py-1.5 text-sm font-medium text-gray-700"
-          >
-            {t.header.signIn}
-          </Link>
+          <Button asChild variant="outline" size="sm">
+            <Link
+              href={alternateHref}
+              aria-label={`Switch language to ${alternateLocale.toUpperCase()}`}
+            >
+              {alternateLocale.toUpperCase()}
+            </Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link href={localizePath(locale, '/sign-in')}>{t.header.signIn}</Link>
+          </Button>
           <Suspense
             fallback={<div className="h-9 w-9 rounded-full border border-gray-200" />}
           >
@@ -177,14 +176,16 @@ function Header({ locale }: { locale: Locale }) {
           </Suspense>
         </div>
 
-        <button
+        <Button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 md:hidden"
+          variant="outline"
+          size="icon"
+          className="md:hidden"
           onClick={() => setMobileOpen((value) => !value)}
           aria-label={mobileOpen ? t.header.closeMenu : t.header.openMenu}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        </Button>
       </div>
 
       {mobileOpen ? (
@@ -201,20 +202,19 @@ function Header({ locale }: { locale: Locale }) {
               </Link>
             ))}
             <div className="mt-2 flex items-center gap-2">
-              <Link
-                href={alternateHref}
-                className="rounded-full border border-gray-200 px-3 py-1 text-sm font-medium text-gray-700"
-                onClick={() => setMobileOpen(false)}
-              >
-                {alternateLocale.toUpperCase()}
-              </Link>
-              <Link
-                href={localizePath(locale, '/sign-in')}
-                className="rounded-full border border-gray-200 px-3 py-1 text-sm font-medium text-gray-700"
-                onClick={() => setMobileOpen(false)}
-              >
-                {t.header.signIn}
-              </Link>
+              <Button asChild variant="outline" size="sm">
+                <Link href={alternateHref} onClick={() => setMobileOpen(false)}>
+                  {alternateLocale.toUpperCase()}
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="sm">
+                <Link
+                  href={localizePath(locale, '/sign-in')}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {t.header.signIn}
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

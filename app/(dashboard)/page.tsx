@@ -38,7 +38,7 @@ export default function HomePage({
                   <Button
                     size="lg"
                     variant="outline"
-                    className="rounded-full text-lg"
+                    className="text-lg"
                   >
                     {t.home.deployCta}
                     <ArrowRight className="ml-2 h-5 w-5" />

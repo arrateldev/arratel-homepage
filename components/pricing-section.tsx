@@ -146,7 +146,7 @@ function renderCta(cta: PricingCardConfig['cta'], locale: Locale) {
       <Button
         variant="outline"
         size="lg"
-        className="w-full rounded-full text-base transition-transform duration-300 group-hover:scale-[1.01]"
+        className="w-full text-base transition-transform duration-300 group-hover:scale-[1.01]"
       >
         {cta.label}
       </Button>
@@ -169,7 +169,7 @@ function renderCta(cta: PricingCardConfig['cta'], locale: Locale) {
         type="button"
         variant="secondary"
         size="lg"
-        className="w-full rounded-full text-base"
+        className="w-full text-base"
         disabled
       >
         {cta.label}
@@ -181,12 +181,12 @@ function renderCta(cta: PricingCardConfig['cta'], locale: Locale) {
     <div className="flex flex-col gap-3 sm:flex-row">
       <Button
         size="lg"
-        className="flex-1 rounded-full text-base transition-transform duration-300 group-hover:scale-[1.01]"
+        className="flex-1 text-base transition-transform duration-300 group-hover:scale-[1.01]"
       >
         {cta.primaryLabel}
       </Button>
 
-      <Button asChild variant="outline" size="lg" className="rounded-full text-base">
+      <Button asChild variant="outline" size="lg" className="text-base">
         <Link href={cta.secondaryHref}>
           {cta.secondaryLabel}
           <ArrowRight className="ml-2 h-4 w-4" />
