@@ -1,4 +1,5 @@
 import type { Locale } from './i18n/config';
+import { siteConfig } from './site-config';
 
 type LegalSectionContent = {
   title: string;
@@ -18,6 +19,15 @@ type LegalContent = {
   terms: LegalPageContent;
 };
 
+function legalAddress(locale: Locale) {
+  return [
+    siteConfig.company.legalName,
+    siteConfig.company.address.street,
+    `${siteConfig.company.address.postalCode} ${siteConfig.company.address.city}`,
+    siteConfig.company.address.country[locale]
+  ];
+}
+
 const legalContent: Record<Locale, LegalContent> = {
   de: {
     impressum: {
@@ -28,34 +38,31 @@ const legalContent: Record<Locale, LegalContent> = {
       sections: [
         {
           title: 'Angaben gemaess § 5 TMG',
-          paragraphs: [
-            'ACME GmbH',
-            'Musterstrasse 1',
-            '10115 Berlin',
-            'Deutschland'
-          ]
+          paragraphs: legalAddress('de')
         },
         {
           title: 'Vertreten durch',
-          paragraphs: ['Max Mustermann, Geschaeftsfuehrer']
+          paragraphs: [siteConfig.company.representative.de]
         },
         {
           title: 'Kontakt',
           paragraphs: [
-            'E-Mail: hello@example.com',
-            'Telefon: +49 30 123456789'
+            `E-Mail: ${siteConfig.company.contact.email}`,
+            `Telefon: ${siteConfig.company.contact.phone}`
           ]
         },
         {
           title: 'Registereintrag',
           paragraphs: [
-            'Handelsregister: Amtsgericht Berlin-Charlottenburg',
-            'Registernummer: HRB 123456'
+            `Handelsregister: ${siteConfig.company.register.court.de}`,
+            `Registernummer: ${siteConfig.company.register.number}`
           ]
         },
         {
           title: 'Umsatzsteuer-ID',
-          paragraphs: ['Umsatzsteuer-Identifikationsnummer: DE123456789']
+          paragraphs: [
+            `Umsatzsteuer-Identifikationsnummer: ${siteConfig.company.vatId}`
+          ]
         }
       ]
     },
@@ -68,8 +75,8 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '1. Verantwortlicher',
           paragraphs: [
-            'Verantwortlich fuer die Datenverarbeitung ist die ACME GmbH, Musterstrasse 1, 10115 Berlin, Deutschland.',
-            'Bei Datenschutzfragen erreichst du uns unter hello@example.com.'
+            `Verantwortlich fuer die Datenverarbeitung ist die ${siteConfig.company.legalName}, ${siteConfig.company.address.street}, ${siteConfig.company.address.postalCode} ${siteConfig.company.address.city}, ${siteConfig.company.address.country.de}.`,
+            `Bei Datenschutzfragen erreichst du uns unter ${siteConfig.company.contact.email}.`
           ]
         },
         {
@@ -109,7 +116,7 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '1. Geltungsbereich',
           paragraphs: [
-            'Diese Bedingungen regeln die Nutzung des von ACME bereitgestellten SaaS-Dienstes durch registrierte Nutzer und Kunden.'
+            `Diese Bedingungen regeln die Nutzung des von ${siteConfig.product.name} bereitgestellten SaaS-Dienstes durch registrierte Nutzer und Kunden.`
           ]
         },
         {
@@ -121,7 +128,7 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '3. Leistungen',
           paragraphs: [
-            'ACME stellt die Software als Online-Dienst bereit. Der konkrete Leistungsumfang ergibt sich aus der jeweils gebuchten Produktvariante.'
+            `${siteConfig.product.name} stellt die Software als Online-Dienst bereit. Der konkrete Leistungsumfang ergibt sich aus der jeweils gebuchten Produktvariante.`
           ]
         },
         {
@@ -148,34 +155,29 @@ const legalContent: Record<Locale, LegalContent> = {
       sections: [
         {
           title: 'Provider Information',
-          paragraphs: [
-            'ACME GmbH',
-            'Musterstrasse 1',
-            '10115 Berlin',
-            'Germany'
-          ]
+          paragraphs: legalAddress('en')
         },
         {
           title: 'Represented by',
-          paragraphs: ['Max Mustermann, Managing Director']
+          paragraphs: [siteConfig.company.representative.en]
         },
         {
           title: 'Contact',
           paragraphs: [
-            'Email: hello@example.com',
-            'Phone: +49 30 123456789'
+            `Email: ${siteConfig.company.contact.email}`,
+            `Phone: ${siteConfig.company.contact.phone}`
           ]
         },
         {
           title: 'Commercial Register',
           paragraphs: [
-            'Register Court: Berlin-Charlottenburg Local Court',
-            'Registration Number: HRB 123456'
+            `Register Court: ${siteConfig.company.register.court.en}`,
+            `Registration Number: ${siteConfig.company.register.number}`
           ]
         },
         {
           title: 'VAT ID',
-          paragraphs: ['VAT identification number: DE123456789']
+          paragraphs: [`VAT identification number: ${siteConfig.company.vatId}`]
         }
       ]
     },
@@ -188,8 +190,8 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '1. Controller',
           paragraphs: [
-            'The controller responsible for data processing is ACME GmbH, Musterstrasse 1, 10115 Berlin, Germany.',
-            'For privacy-related questions, contact hello@example.com.'
+            `The controller responsible for data processing is ${siteConfig.company.legalName}, ${siteConfig.company.address.street}, ${siteConfig.company.address.postalCode} ${siteConfig.company.address.city}, ${siteConfig.company.address.country.en}.`,
+            `For privacy-related questions, contact ${siteConfig.company.contact.email}.`
           ]
         },
         {
@@ -229,7 +231,7 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '1. Scope',
           paragraphs: [
-            'These terms govern the use of the SaaS service provided by ACME for registered users and customers.'
+            `These terms govern the use of the SaaS service provided by ${siteConfig.product.name} for registered users and customers.`
           ]
         },
         {
@@ -241,7 +243,7 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '3. Services',
           paragraphs: [
-            'ACME provides the software as an online service. The specific feature set depends on the selected plan.'
+            `${siteConfig.product.name} provides the software as an online service. The specific feature set depends on the selected plan.`
           ]
         },
         {

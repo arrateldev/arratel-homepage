@@ -3,10 +3,11 @@ import dotenv from 'dotenv';
 import { redirect } from 'next/navigation';
 import type { Team } from '@/lib/db/schema';
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
+import { getBaseUrl, siteConfig } from '@/lib/site-config';
 
 dotenv.config();
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+const BASE_URL = getBaseUrl();
 
 export const MOCK_STRIPE = process.env.MOCK_STRIPE === 'true';
 
@@ -182,7 +183,7 @@ export async function createCustomerPortalSession(
 
     configuration = await stripe.billingPortal.configurations.create({
       business_profile: {
-        headline: 'Manage your subscription'
+        headline: siteConfig.billing.portalHeadline
       },
       features: {
         subscription_update: {

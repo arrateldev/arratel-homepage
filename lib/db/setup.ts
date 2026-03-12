@@ -5,6 +5,7 @@ import readline from 'node:readline';
 import crypto from 'node:crypto';
 import path from 'node:path';
 import os from 'node:os';
+import { siteConfig } from '@/lib/site-config';
 
 const execAsync = promisify(exec);
 
@@ -199,7 +200,7 @@ async function main() {
   const POSTGRES_URL = await getPostgresURL();
   const STRIPE_SECRET_KEY = await getStripeSecretKey();
   const STRIPE_WEBHOOK_SECRET = await createStripeWebhook();
-  const BASE_URL = 'http://localhost:3000';
+  const BASE_URL = siteConfig.urls.defaultBaseUrl;
   const AUTH_SECRET = generateAuthSecret();
 
   await writeEnvFile({

@@ -1,11 +1,11 @@
 import { defaultLocale, type Locale } from './config';
+import { siteConfig } from '../site-config';
 
 const messages = {
   de: {
     metadata: {
-      title: 'SaaS Starter',
-      description:
-        'Mehrsprachiger SaaS Starter mit Next.js, Postgres und Stripe.'
+      title: siteConfig.product.metadata.title.de,
+      description: siteConfig.product.metadata.description.de
     },
     common: {
       home: 'Start',
@@ -15,7 +15,7 @@ const messages = {
       features: 'Features',
       legal: 'Rechtliches',
       builtWith: 'Built with Next.js',
-      company: 'Dein Produkt',
+      company: siteConfig.product.companyDisplayName,
       allRightsReserved: 'Alle Rechte vorbehalten.',
       backToHome: 'Zur Startseite'
     },
@@ -277,9 +277,8 @@ const messages = {
   },
   en: {
     metadata: {
-      title: 'SaaS Starter',
-      description:
-        'Multilingual SaaS starter built with Next.js, Postgres, and Stripe.'
+      title: siteConfig.product.metadata.title.en,
+      description: siteConfig.product.metadata.description.en
     },
     common: {
       home: 'Home',
@@ -289,7 +288,7 @@ const messages = {
       features: 'Features',
       legal: 'Legal',
       builtWith: 'Built with Next.js',
-      company: 'Your Product',
+      company: siteConfig.product.companyDisplayName,
       allRightsReserved: 'All rights reserved.',
       backToHome: 'Back to home'
     },

@@ -1,20 +1,20 @@
 import type { Metadata } from 'next';
 import { defaultLocale, locales, localizePath, type Locale } from './config';
-import { getMessages } from './messages';
+import { getBaseUrl, getSiteMetadata } from '@/lib/site-config';
 
-const metadataBase = process.env.BASE_URL || 'http://localhost:3000';
+const metadataBase = getBaseUrl();
 
 export function buildLocalizedMetadata(
   locale: Locale = defaultLocale,
   pathname = '/'
 ): Metadata {
-  const t = getMessages(locale);
+  const metadata = getSiteMetadata(locale);
   const canonicalPath = localizePath(locale, pathname);
 
   return {
     metadataBase: new URL(metadataBase),
-    title: t.metadata.title,
-    description: t.metadata.description,
+    title: metadata.title,
+    description: metadata.description,
     alternates: {
       canonical: canonicalPath,
       languages: Object.fromEntries(

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { CircleIcon } from 'lucide-react';
 import { headers } from 'next/headers';
 import { defaultLocale, isLocale, localizePath } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { Button } from '@/components/ui/button';
+import { AppLogo } from '@/components/app-logo';
 
 export default async function NotFound() {
   const localeHeader = (await headers()).get('x-locale');
@@ -15,7 +15,7 @@ export default async function NotFound() {
     <div className="flex items-center justify-center min-h-[100dvh]">
       <div className="max-w-md space-y-8 p-4 text-center">
         <div className="flex justify-center">
-          <CircleIcon className="text-primary size-12" />
+          <AppLogo className="size-12" priority />
         </div>
         <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
           {t.notFound.title}

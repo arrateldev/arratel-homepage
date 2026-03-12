@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Suspense, useState, type ReactNode } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { CircleIcon, Home, LogOut, Menu, X } from 'lucide-react';
+import { Home, LogOut, Menu, X } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +18,8 @@ import {
   type Locale
 } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
+import { AppLogo } from '@/components/app-logo';
+import { siteConfig } from '@/lib/site-config';
 
 export function SiteChrome({
   children,
@@ -41,9 +43,9 @@ export function SiteChrome({
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8">
           <div>
             <div className="flex items-center">
-              <CircleIcon className="text-primary h-5 w-5" />
+              <AppLogo className="h-5 w-5" />
               <span className="ml-2 text-base font-semibold text-white">
-                ACME
+                {siteConfig.product.name}
               </span>
             </div>
             <p className="mt-3 max-w-sm text-sm text-neutral-400">
@@ -163,8 +165,10 @@ function Header({
           href={localizePath(locale, '/')}
           className="flex items-center text-gray-900"
         >
-          <CircleIcon className="text-primary h-6 w-6" />
-          <span className="ml-2 text-xl font-semibold">ACME</span>
+          <AppLogo className="h-6 w-6" priority />
+          <span className="ml-2 text-xl font-semibold">
+            {siteConfig.product.name}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

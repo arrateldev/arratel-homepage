@@ -4,10 +4,11 @@ import { Manrope } from 'next/font/google';
 import { SWRConfig } from 'swr';
 import { headers } from 'next/headers';
 import { defaultLocale, isLocale } from '@/lib/i18n/config';
+import { siteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Next.js SaaS Starter',
-  description: 'Get started quickly with Next.js, Postgres, and Stripe.'
+  title: siteConfig.product.metadata.title.en,
+  description: siteConfig.product.metadata.description.en
 };
 
 export const viewport: Viewport = {

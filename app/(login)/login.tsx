@@ -6,11 +6,12 @@ import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CircleIcon, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { signIn, signUp } from './actions';
 import { ActionState } from '@/lib/auth/middleware';
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
+import { AppLogo } from '@/components/app-logo';
 
 export function Login({
   mode = 'signin',
@@ -33,7 +34,7 @@ export function Login({
     <div className="min-h-[100dvh] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-          <CircleIcon className="text-primary h-12 w-12" />
+          <AppLogo className="h-12 w-12" priority />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           {mode === 'signin' ? t.signInTitle : t.signUpTitle}
