@@ -5,18 +5,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[14px] text-sm font-medium transition-[transform,box-shadow,background-color,border-color,color] duration-200 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive active:scale-[0.99]",
+  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[14px] text-sm font-medium transition-[background-color,border-color,color,box-shadow] duration-200 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-[0_12px_30px_-18px_hsl(var(--primary))] hover:-translate-y-0.5 hover:bg-primary/92",
+          "bg-primary text-primary-foreground shadow-[0_12px_30px_-18px_hsl(var(--primary))] hover:bg-primary/92",
         destructive:
-          "bg-destructive text-white shadow-[0_12px_30px_-18px_hsl(var(--destructive))] hover:-translate-y-0.5 hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-destructive text-white shadow-[0_12px_30px_-18px_hsl(var(--destructive))] hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border border-border/80 bg-background/90 shadow-[0_10px_24px_-20px_rgba(15,23,42,0.45)] hover:-translate-y-0.5 hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border border-border/80 bg-background/90 shadow-[0_10px_24px_-20px_rgba(15,23,42,0.45)] hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-[0_10px_24px_-20px_rgba(15,23,42,0.4)] hover:-translate-y-0.5 hover:bg-secondary/85",
+          "bg-secondary text-secondary-foreground shadow-[0_10px_24px_-20px_rgba(15,23,42,0.4)] hover:bg-secondary/85",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline"

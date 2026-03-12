@@ -159,7 +159,7 @@ function Header({
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/95">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background">
       <div className="section-shell flex items-center justify-between py-4">
         <Link
           href={localizePath(locale, '/')}

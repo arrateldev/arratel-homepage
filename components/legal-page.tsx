@@ -14,7 +14,7 @@ export function LegalPage({
   return (
     <div className="page-aura-surface bg-background">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="surface-panel page-aura-card animate-in-soft p-8 sm:p-10">
+        <div className="surface-panel page-aura-card p-8 sm:p-10">
           <p className="text-primary text-sm font-medium uppercase tracking-[0.22em]">
             {eyebrow}
           </p>

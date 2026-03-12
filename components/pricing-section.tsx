@@ -52,15 +52,15 @@ export function PricingSection({
     <section className={className}>
       <div className="section-shell">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="animate-in-soft inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 text-sm font-medium text-muted-foreground">
+          <span className="inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 text-sm font-medium text-muted-foreground">
             {t.home.pricingBadge}
           </span>
 
-          <h2 className="animate-in-soft animate-delay-1 mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             {t.home.pricingTitle}
           </h2>
 
-          <p className="animate-in-soft animate-delay-2 mt-4 text-lg leading-8 text-muted-foreground">
+          <p className="mt-4 text-lg leading-8 text-muted-foreground">
             {t.home.pricingDescription}
           </p>
         </div>
@@ -83,8 +83,8 @@ function PricingCard({
   locale: Locale;
 }) {
   const cardClassName = card.emphasized
-    ? 'surface-panel group relative overflow-hidden p-8 ring-1 ring-primary/15 transition-all duration-300 hover:-translate-y-1'
-    : 'surface-card group relative overflow-hidden p-8 transition-all duration-300 hover:-translate-y-1';
+    ? 'surface-panel group relative overflow-hidden p-8 ring-1 ring-primary/15'
+    : 'surface-card group relative overflow-hidden p-8';
 
   return (
     <div className={cardClassName}>

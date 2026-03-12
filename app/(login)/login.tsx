@@ -35,7 +35,7 @@ export function Login({
       <div className="mx-auto flex min-h-[calc(100dvh-6rem)] max-w-5xl items-center justify-center">
         <div className="grid w-full items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="hidden lg:block">
-            <div className="animate-in-soft max-w-md">
+            <div className="max-w-md">
               <div className="inline-flex items-center gap-3 rounded-full border border-border/70 bg-background px-4 py-2 text-sm text-muted-foreground">
                 <AppLogo className="h-6 w-6" />
                 {mode === 'signin' ? t.signInTitle : t.signUpTitle}
@@ -51,7 +51,7 @@ export function Login({
             </div>
           </div>
 
-          <div className="surface-panel animate-in-soft animate-delay-1 w-full max-w-md justify-self-center p-7 sm:p-8">
+          <div className="surface-panel w-full max-w-md justify-self-center p-7 sm:p-8">
             <div className="flex justify-center">
               <AppLogo className="h-12 w-12" priority />
             </div>

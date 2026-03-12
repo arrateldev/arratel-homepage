@@ -30,15 +30,15 @@ export default async function PricingPage({
   const plusPrice = prices.find((price) => price.productId === plusPlan?.id);
 
   return (
-    <main className="page-aura-surface">
+    <main>
       {mockStripeEnabled ? (
-        <div className="bg-primary/8 border-primary/20 text-foreground mx-auto mt-12 max-w-xl rounded-2xl border px-4 py-3 text-sm backdrop-blur">
+        <div className="bg-primary/8 border-primary/20 text-foreground mx-auto mt-6 max-w-xl rounded-2xl border px-4 py-3 text-sm">
           {t.mockBillingActive}
         </div>
       ) : null}
       <PricingSection
         locale={locale}
-        className="bg-transparent py-20"
+        className="bg-transparent pt-6 pb-20"
         cards={[
           {
             label: messages.home.freeLabel,
