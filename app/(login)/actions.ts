@@ -25,7 +25,11 @@ import {
   validatedAction,
   validatedActionWithUser
 } from '@/lib/auth/middleware';
-import { getLocaleFromFormData, localizePath } from '@/lib/i18n/config';
+import {
+  defaultLocale,
+  getLocaleFromFormData,
+  localizePath
+} from '@/lib/i18n/config';
 
 async function logActivity(
   teamId: number | null | undefined,
@@ -224,11 +228,15 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   redirect(localizePath(locale, '/dashboard'));
 });
 
-export async function signOut() {
+export async function signOut(formData?: FormData) {
   const user = (await getUser()) as User;
-  const userWithTeam = await getUserWithTeam(user.id);
-  await logActivity(userWithTeam?.teamId, user.id, ActivityType.SIGN_OUT);
+  if (user) {
+    const userWithTeam = await getUserWithTeam(user.id);
+    await logActivity(userWithTeam?.teamId, user.id, ActivityType.SIGN_OUT);
+  }
   (await cookies()).delete('session');
+  const locale = formData ? getLocaleFromFormData(formData) : defaultLocale;
+  redirect(localizePath(locale, '/'));
 }
 
 const updatePasswordSchema = z.object({

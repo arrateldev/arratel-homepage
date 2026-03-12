@@ -92,6 +92,7 @@ const messages = {
       localeLabel: 'Sprache',
       navigation: 'Navigation',
       signIn: 'Anmelden',
+      signOut: 'Abmelden',
       signUp: 'Registrieren',
       openMenu: 'Menue oeffnen',
       closeMenu: 'Menue schliessen'
@@ -289,6 +290,7 @@ const messages = {
       localeLabel: 'Language',
       navigation: 'Navigation',
       signIn: 'Sign in',
+      signOut: 'Sign out',
       signUp: 'Sign up',
       openMenu: 'Open menu',
       closeMenu: 'Close menu'

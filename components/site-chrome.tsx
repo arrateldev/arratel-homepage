@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Suspense, useState, type ReactNode } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { CircleIcon, Home, Menu, X } from 'lucide-react';
+import { CircleIcon, Home, LogOut, Menu, X } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { signOut } from '@/app/(login)/actions';
 import {
   localizePath,
   replaceLocaleInPathname,
@@ -20,16 +21,21 @@ import { getMessages } from '@/lib/i18n/messages';
 
 export function SiteChrome({
   children,
-  locale
+  locale,
+  user
 }: {
   children: ReactNode;
   locale: Locale;
+  user: {
+    name: string | null;
+    email: string;
+  } | null;
 }) {
   const t = getMessages(locale);
 
   return (
     <section className="flex min-h-screen flex-col">
-      <Header locale={locale} />
+      <Header locale={locale} user={user} />
       <main className="flex-1">{children}</main>
       <footer className="border-t border-neutral-800 bg-neutral-950 text-neutral-300">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8">
@@ -112,7 +118,16 @@ export function SiteChrome({
   );
 }
 
-function Header({ locale }: { locale: Locale }) {
+function Header({
+  locale,
+  user
+}: {
+  locale: Locale;
+  user: {
+    name: string | null;
+    email: string;
+  } | null;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -127,7 +142,9 @@ function Header({ locale }: { locale: Locale }) {
   const navItems = [
     { href: localizePath(locale, '/'), label: t.common.home },
     { href: localizePath(locale, '/pricing'), label: t.common.pricing },
-    { href: localizePath(locale, '/dashboard'), label: t.common.dashboard }
+    ...(user
+      ? [{ href: localizePath(locale, '/dashboard'), label: t.common.dashboard }]
+      : [])
   ];
 
   return (
@@ -166,14 +183,17 @@ function Header({ locale }: { locale: Locale }) {
               {alternateLocale.toUpperCase()}
             </Link>
           </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href={localizePath(locale, '/sign-in')}>{t.header.signIn}</Link>
-          </Button>
-          <Suspense
-            fallback={<div className="h-9 w-9 rounded-full border border-gray-200" />}
-          >
-            <UserMenu locale={locale} />
-          </Suspense>
+          {user ? (
+            <Suspense
+              fallback={<div className="h-9 w-9 rounded-full border border-gray-200" />}
+            >
+              <UserMenu locale={locale} user={user} />
+            </Suspense>
+          ) : (
+            <Button asChild variant="ghost" size="sm">
+              <Link href={localizePath(locale, '/sign-in')}>{t.header.signIn}</Link>
+            </Button>
+          )}
         </div>
 
         <Button
@@ -207,14 +227,29 @@ function Header({ locale }: { locale: Locale }) {
                   {alternateLocale.toUpperCase()}
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="sm">
-                <Link
-                  href={localizePath(locale, '/sign-in')}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {t.header.signIn}
-                </Link>
-              </Button>
+              {user ? (
+                <form action={signOut}>
+                  <input type="hidden" name="locale" value={locale} />
+                  <Button
+                    type="submit"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    {t.header.signOut}
+                  </Button>
+                </form>
+              ) : (
+                <Button asChild variant="outline" size="sm">
+                  <Link
+                    href={localizePath(locale, '/sign-in')}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {t.header.signIn}
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -223,16 +258,27 @@ function Header({ locale }: { locale: Locale }) {
   );
 }
 
-function UserMenu({ locale }: { locale: Locale }) {
+function UserMenu({
+  locale,
+  user
+}: {
+  locale: Locale;
+  user: {
+    name: string | null;
+    email: string;
+  };
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = getMessages(locale);
+  const label = user.name || user.email;
 
   return (
     <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-      <DropdownMenuTrigger>
-        <div className="flex size-9 items-center justify-center rounded-full border border-gray-200 bg-white">
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" className="max-w-44 justify-between">
+          <span className="truncate">{label}</span>
           <Home className="h-4 w-4 text-gray-600" />
-        </div>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="flex flex-col gap-1">
         <DropdownMenuItem className="cursor-pointer">
@@ -243,6 +289,20 @@ function UserMenu({ locale }: { locale: Locale }) {
             <Home className="mr-2 h-4 w-4" />
             <span>{t.common.dashboard}</span>
           </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="p-0">
+          <form action={signOut}>
+            <input type="hidden" name="locale" value={locale} />
+            <Button
+              type="submit"
+              variant="ghost"
+              size="sm"
+              className="h-auto w-full justify-start px-2 py-1.5"
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>{t.header.signOut}</span>
+            </Button>
+          </form>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
