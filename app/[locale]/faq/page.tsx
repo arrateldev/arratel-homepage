@@ -43,7 +43,7 @@ export default async function FaqPage({
       <div className="page-aura-surface border-b border-border/60">
         <section className="relative overflow-hidden">
           <div className="mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6 sm:pb-12 sm:pt-18 lg:px-8">
-            <div className="max-w-3xl">
+            <div className="animate-enter max-w-3xl">
               <div className="flex flex-wrap gap-3">
                 <span className="inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 text-sm font-medium text-muted-foreground">
                   <CircleHelp className="mr-2 h-4 w-4 text-primary" />
@@ -70,7 +70,7 @@ export default async function FaqPage({
 
         <section className="mx-auto max-w-7xl px-4 pb-16 pt-6 sm:px-6 sm:pt-8 lg:px-8">
           <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-            <div className="space-y-6">
+            <div className="animate-enter-delay-1 space-y-6">
               {t.sections.map((section) => (
                 <div
                   key={section.title}
@@ -105,7 +105,7 @@ export default async function FaqPage({
               ))}
             </div>
 
-            <aside className="xl:self-start">
+            <aside className="animate-enter-delay-2 xl:self-start">
               <div className="surface-card p-6">
                 <div className="inline-flex rounded-[18px] bg-primary/10 p-3 text-primary">
                   <CircleHelp className="h-5 w-5" />

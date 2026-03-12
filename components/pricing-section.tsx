@@ -51,7 +51,7 @@ export function PricingSection({
   return (
     <section className={className}>
       <div className="section-shell">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="animate-enter mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 text-sm font-medium text-muted-foreground">
             {t.home.pricingBadge}
           </span>
@@ -83,8 +83,8 @@ function PricingCard({
   locale: Locale;
 }) {
   const cardClassName = card.emphasized
-    ? 'surface-panel group relative overflow-hidden p-8 ring-1 ring-primary/15'
-    : 'surface-card group relative overflow-hidden p-8';
+    ? 'animate-enter-delay-2 surface-panel group relative overflow-hidden p-8 ring-1 ring-primary/15'
+    : 'animate-enter-delay-1 surface-card group relative overflow-hidden p-8';
 
   return (
     <div className={cardClassName}>

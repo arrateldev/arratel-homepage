@@ -29,7 +29,7 @@ export default function HomePage({
         <section className="overflow-hidden">
           <div className="section-shell pb-3 pt-6 sm:pb-4 sm:pt-8">
             <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
-              <div className="max-w-3xl">
+              <div className="animate-enter max-w-3xl">
                 <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-[2.6rem]">
                   {t.home.heroTitle}
                   <span className="mt-2 block text-primary">{t.home.heroAccent}</span>
@@ -40,7 +40,7 @@ export default function HomePage({
                 </p>
               </div>
 
-              <aside className="mx-auto w-[380px] max-w-full lg:self-center lg:justify-self-center">
+              <aside className="animate-enter-delay-1 mx-auto w-[380px] max-w-full lg:self-center lg:justify-self-center">
                 <div className="surface-card flex h-[172px] w-full items-center overflow-hidden p-3">
                   <div className="flex h-[146px] w-full flex-col rounded-[20px] border border-border/70 bg-background p-2.5">
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -112,7 +112,7 @@ export default function HomePage({
 
         <section id="product" className="pb-8 pt-3 sm:pb-10 sm:pt-4">
           <div className="section-shell">
-            <div className="surface-panel p-0">
+            <div className="animate-enter-delay-2 surface-panel p-0">
               <div className="rounded-[24px] border border-border/70 bg-background p-5 sm:p-6">
                 <div className="flex flex-col gap-4 border-b border-border/70 pb-4 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-sm font-medium text-primary">PDF Merge Tool</p>
