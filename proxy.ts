@@ -12,7 +12,7 @@ import {
 const protectedRoutes = '/dashboard';
 const SESSION_REFRESH_WINDOW_MS = 6 * 60 * 60 * 1000;
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const pathnameLocale = getLocaleFromPathname(pathname);
   const locale =
