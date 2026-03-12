@@ -1,7 +1,10 @@
 import Stripe from 'stripe';
+import dotenv from 'dotenv';
 import { redirect } from 'next/navigation';
 import type { Team } from '@/lib/db/schema';
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
+
+dotenv.config();
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
