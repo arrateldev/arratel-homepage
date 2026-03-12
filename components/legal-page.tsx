@@ -12,9 +12,9 @@ export function LegalPage({
   children: ReactNode;
 }) {
   return (
-    <div className="bg-background">
+    <div className="page-aura-surface bg-background">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="rounded-[32px] border border-border bg-card p-8 shadow-sm sm:p-10">
+        <div className="page-aura-card rounded-[32px] border border-border p-8 shadow-sm sm:p-10">
           <p className="text-primary text-sm font-medium uppercase tracking-[0.22em]">
             {eyebrow}
           </p>

@@ -10,6 +10,7 @@ const messages = {
     common: {
       home: 'Start',
       pricing: 'Preise',
+      faq: 'FAQ',
       dashboard: 'Dashboard',
       features: 'Features',
       legal: 'Rechtliches',
@@ -72,6 +73,81 @@ const messages = {
         privacy: 'Datenschutz',
         terms: 'AGB'
       }
+    },
+    faq: {
+      eyebrow: 'Haeufige Fragen',
+      title: 'Antworten auf die wichtigsten Fragen vor dem Start.',
+      intro:
+        'Kurz, klar und ohne Sales-Floskeln. Hier findest du die Punkte, die vor Signup, Testphase oder Upgrade am haeufigsten offen bleiben.',
+      badgePrimary: 'Schnelle Antworten',
+      badgeSecondary: 'Kein Support-Ticket noetig',
+      sections: [
+        {
+          title: 'Produkt und Zugang',
+          items: [
+            {
+              question: 'Kann ich das Produkt erst testen, bevor ich zahle?',
+              answer:
+                'Ja. Der Einstieg ist bewusst niedrig gehalten, damit du das Produkt erst im echten Kontext ausprobieren kannst, bevor ein Upgrade sinnvoll wird.'
+            },
+            {
+              question: 'Brauche ich direkt ein Team oder mehrere Nutzer?',
+              answer:
+                'Nein. Du kannst allein starten und spaeter weitere Mitglieder einladen, sobald dein Workflow stabil ist oder Zusammenarbeit wichtig wird.'
+            },
+            {
+              question: 'Kann ich spaeter auf einen bezahlten Plan wechseln?',
+              answer:
+                'Ja. Der Upgrade-Pfad ist bewusst einfach gehalten, damit du erst dann zahlst, wenn die Nutzung regelmaessig wird oder du mehr Limits brauchst.'
+            }
+          ]
+        },
+        {
+          title: 'Abrechnung und Datenschutz',
+          items: [
+            {
+              question: 'Was passiert mit meinen Daten, wenn ich kuendige?',
+              answer:
+                'Dein Zugang und deine Daten sollten nachvollziehbar behandelt werden. Die rechtlichen Details findest du in Datenschutz und AGB, die im Footer verlinkt sind.'
+            },
+            {
+              question: 'Fallen Kosten an, wenn ich das Produkt kaum nutze?',
+              answer:
+                'Das Produkt ist darauf ausgelegt, mit einer klaren Free- und Upgrade-Logik zu arbeiten. So entstehen Kosten erst dann, wenn die Nutzung den Mehrwert rechtfertigt.'
+            },
+            {
+              question: 'Ist Stripe fuer Zahlungen verpflichtend?',
+              answer:
+                'Fuer echte Zahlungen ja. In der Entwicklung kann Billing aber im Mock-Modus simuliert werden, damit Produktarbeit ohne fruehe Stripe-Abhaengigkeit moeglich bleibt.'
+            }
+          ]
+        },
+        {
+          title: 'Technik und Betrieb',
+          items: [
+            {
+              question: 'Brauche ich fuer den produktiven Betrieb eine eigene Datenbank?',
+              answer:
+                'Ja. Die App laeuft separat von der Datenbank. In Production wird eine externe Postgres-Datenbank eingebunden, waehrend lokal auch Docker oder eine gehostete Test-DB reicht.'
+            },
+            {
+              question: 'Ist das eher fuer MVPs oder schon fuer echte Kunden gedacht?',
+              answer:
+                'Beides. Das Setup ist schlank genug fuer schnelle Validierung, aber strukturiert genug, um daraus ein produktives SaaS mit echten Nutzern weiterzuentwickeln.'
+            },
+            {
+              question: 'Wie schnell komme ich ins Dashboard?',
+              answer:
+                'Sobald dein Account angelegt ist, kommst du direkt in den geschuetzten Bereich. Navigation und geladene Daten sind darauf ausgelegt, den Einstieg moeglichst reibungsarm zu machen.'
+            }
+          ]
+        }
+      ],
+      supportTitle: 'Noch etwas unklar?',
+      supportBody:
+        'Wenn eine Frage vor Signup oder Upgrade offen bleibt, sollte sie hier auftauchen. Wenn nicht, ist das ein Signal, dass die FAQ erweitert werden sollte.',
+      supportPrimary: 'Preise ansehen',
+      supportSecondary: 'Zum Start'
     },
     auth: {
       signInTitle: 'Melde dich in deinem Konto an',
@@ -208,6 +284,7 @@ const messages = {
     common: {
       home: 'Home',
       pricing: 'Pricing',
+      faq: 'FAQ',
       dashboard: 'Dashboard',
       features: 'Features',
       legal: 'Legal',
@@ -270,6 +347,81 @@ const messages = {
         privacy: 'Privacy Policy',
         terms: 'Terms of Service'
       }
+    },
+    faq: {
+      eyebrow: 'Frequently asked questions',
+      title: 'Answers to the questions that matter before getting started.',
+      intro:
+        'Short, clear, and without filler. This page covers the points people usually want to understand before signing up, testing the product, or upgrading.',
+      badgePrimary: 'Fast answers',
+      badgeSecondary: 'No support ticket needed',
+      sections: [
+        {
+          title: 'Product and access',
+          items: [
+            {
+              question: 'Can I try the product before paying?',
+              answer:
+                'Yes. The onboarding path is intentionally lightweight so you can evaluate the product in a real workflow before an upgrade becomes relevant.'
+            },
+            {
+              question: 'Do I need a team or multiple users right away?',
+              answer:
+                'No. You can start solo and invite more people later once your workflow is stable or collaboration actually matters.'
+            },
+            {
+              question: 'Can I upgrade to a paid plan later?',
+              answer:
+                'Yes. The upgrade path is designed to stay simple so you only pay once usage becomes regular or you need higher limits.'
+            }
+          ]
+        },
+        {
+          title: 'Billing and privacy',
+          items: [
+            {
+              question: 'What happens to my data if I cancel?',
+              answer:
+                'Access and data handling should stay predictable. The legal details are covered in the privacy policy and terms linked in the footer.'
+            },
+            {
+              question: 'Will I be charged if I barely use the product?',
+              answer:
+                'The product is structured around a clear free-to-upgrade path so costs should only appear once the value and usage justify them.'
+            },
+            {
+              question: 'Is Stripe required for payments?',
+              answer:
+                'For real billing, yes. During development, billing can still run in mock mode so product work is not blocked by early Stripe setup.'
+            }
+          ]
+        },
+        {
+          title: 'Technical setup',
+          items: [
+            {
+              question: 'Do I need my own database in production?',
+              answer:
+                'Yes. The app runs separately from the database. In production you connect an external Postgres database, while locally you can use Docker or a hosted test database.'
+            },
+            {
+              question: 'Is this better suited for MVPs or real customers?',
+              answer:
+                'Both. The setup is lean enough for fast validation, but structured enough to keep evolving into a real SaaS used by actual customers.'
+            },
+            {
+              question: 'How quickly can I get into the dashboard?',
+              answer:
+                'As soon as your account exists, you can move straight into the protected area. Navigation and data loading are designed to keep that path smooth.'
+            }
+          ]
+        }
+      ],
+      supportTitle: 'Still missing an answer?',
+      supportBody:
+        'If something important is still unclear before sign-up or upgrade, it should probably live on this page. That is usually a content gap, not a user problem.',
+      supportPrimary: 'View pricing',
+      supportSecondary: 'Back home'
     },
     auth: {
       signInTitle: 'Sign in to your account',

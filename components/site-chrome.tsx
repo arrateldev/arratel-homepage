@@ -69,11 +69,19 @@ export function SiteChrome({
                 {t.common.pricing}
               </Link>
               <Link
-                href={localizePath(locale, '/dashboard')}
+                href={localizePath(locale, '/faq')}
                 className="transition-colors hover:text-white"
               >
-                {t.common.dashboard}
+                {t.common.faq}
               </Link>
+              {user ? (
+                <Link
+                  href={localizePath(locale, '/dashboard')}
+                  className="transition-colors hover:text-white"
+                >
+                  {t.common.dashboard}
+                </Link>
+              ) : null}
             </div>
           </div>
 
@@ -142,6 +150,7 @@ function Header({
   const navItems = [
     { href: localizePath(locale, '/'), label: t.common.home },
     { href: localizePath(locale, '/pricing'), label: t.common.pricing },
+    { href: localizePath(locale, '/faq'), label: t.common.faq },
     ...(user
       ? [{ href: localizePath(locale, '/dashboard'), label: t.common.dashboard }]
       : [])
