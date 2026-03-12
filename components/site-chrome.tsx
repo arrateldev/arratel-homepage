@@ -38,7 +38,7 @@ export function SiteChrome({
   return (
     <section className="flex min-h-screen flex-col">
       <Header locale={locale} user={user} />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-[73px]">{children}</main>
       <footer className="border-t border-border/70 bg-slate-950 text-slate-300">
         <div className="section-shell grid gap-8 py-12 lg:grid-cols-3">
           <div>
@@ -159,7 +159,7 @@ function Header({
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/95">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/95">
       <div className="section-shell flex items-center justify-between py-4">
         <Link
           href={localizePath(locale, '/')}
