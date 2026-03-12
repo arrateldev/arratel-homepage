@@ -1,14 +1,12 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { ArrowRight, CreditCard, Database } from "lucide-react";
-import { Terminal } from "./terminal";
-import { defaultLocale, localizePath, type Locale } from "@/lib/i18n/config";
-import { getMessages } from "@/lib/i18n/messages";
-import { PricingSection } from "@/components/pricing-section";
+import Link from 'next/link';
+import { ArrowRight, Check, CreditCard, Database, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
+import { getMessages } from '@/lib/i18n/messages';
+import { PricingSection } from '@/components/pricing-section';
 
 export default function HomePage({
-  locale = defaultLocale,
+  locale = defaultLocale
 }: {
   locale?: Locale;
 }) {
@@ -16,82 +14,152 @@ export default function HomePage({
 
   return (
     <main className="bg-background text-foreground">
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="items-center lg:grid lg:grid-cols-12 lg:gap-8">
-            <div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
-              <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+      <section className="page-aura-surface overflow-hidden border-b border-border/60">
+        <div className="section-shell py-6 sm:py-8">
+          <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
+            <div className="animate-in-soft max-w-3xl">
+              <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-[2.6rem]">
                 {t.home.heroTitle}
-                <span className="block text-primary">{t.home.heroAccent}</span>
+                <span className="mt-2 block text-primary">{t.home.heroAccent}</span>
               </h1>
 
-              <p className="mt-3 text-base text-muted-foreground sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+              <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
                 {t.home.heroDescription}
               </p>
-
-              <div className="mt-8 sm:mx-auto sm:max-w-lg sm:text-center lg:mx-0 lg:text-left">
-                <a
-                  href="https://vercel.com/templates/next.js/next-js-saas-starter"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="text-lg"
-                  >
-                    {t.home.deployCta}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </a>
-              </div>
             </div>
 
-            <div className="relative mt-12 sm:mx-auto sm:max-w-lg lg:col-span-6 lg:mx-0 lg:mt-0 lg:max-w-none">
-              <div className="relative overflow-hidden rounded-[28px] border border-border/70 bg-gradient-to-br from-card via-card to-muted/40 p-3 shadow-2xl shadow-black/5">
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.7),transparent_70%)]" />
-                <div className="relative rounded-[22px] border border-border/60 bg-background/80 p-2 backdrop-blur">
-                  <Terminal />
+            <aside className="animate-in-soft animate-delay-1 mx-auto w-[380px] max-w-full lg:self-center lg:justify-self-center">
+              <div className="surface-card w-full overflow-hidden p-4">
+                <div className="rounded-[20px] border border-border/70 bg-background p-3">
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <div className="h-2.5 w-20 rounded-full bg-muted-foreground/18" />
+                    <div className="h-5 w-12 rounded-full bg-emerald-100" />
+                  </div>
+
+                  <div className="mt-3 grid gap-3 grid-cols-[1.1fr_0.9fr]">
+                    <div className="relative h-[106px]">
+                      <div className="animate-mock-file-top absolute inset-x-0 top-0 z-10 rounded-xl border border-border/70 bg-muted/40 px-3 py-2 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.35)]">
+                        <div className="flex items-center gap-2">
+                          <div className="h-7 w-7 rounded-lg bg-background/80" />
+                          <div className="min-w-0 flex-1 space-y-1.5">
+                            <div className="h-2.5 w-16 rounded-full bg-foreground/12" />
+                            <div className="h-2 w-24 rounded-full bg-foreground/8" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="animate-mock-file-bottom absolute inset-x-0 top-[42px] rounded-xl border border-border/70 bg-muted/40 px-3 py-2">
+                        <div className="flex items-center gap-2">
+                          <div className="h-7 w-7 rounded-lg bg-background/80" />
+                          <div className="min-w-0 flex-1 space-y-1.5">
+                            <div className="h-2.5 w-14 rounded-full bg-foreground/12" />
+                            <div className="h-2 w-20 rounded-full bg-foreground/8" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="absolute inset-x-0 top-[84px] rounded-xl border border-dashed border-primary/35 bg-primary/5 px-3 py-2">
+                        <div className="flex items-center gap-2">
+                          <div className="h-7 w-7 rounded-lg bg-primary/12" />
+                          <div className="min-w-0 flex-1 space-y-1.5">
+                            <div className="h-2.5 w-18 rounded-full bg-primary/25" />
+                            <div className="h-2 w-24 rounded-full bg-primary/15" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
+                      <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                        <div className="h-2 w-10 rounded-full bg-muted-foreground/18" />
+                        <div className="h-2 w-8 rounded-full bg-muted-foreground/14" />
+                      </div>
+                      <div className="mt-3 space-y-2">
+                        <div className="h-2 rounded-full bg-background">
+                          <div className="animate-mock-progress h-full w-2/3 rounded-full bg-primary" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="rounded-lg bg-background px-2 py-2">
+                            <div className="h-2 w-8 rounded-full bg-foreground/12" />
+                          </div>
+                          <div className="rounded-lg bg-background px-2 py-2">
+                            <div className="h-2 w-9 rounded-full bg-foreground/12" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
 
-      <section className="w-full bg-card py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
-            <FeatureCard
-              title={t.home.featureTitle1}
-              body={t.home.featureBody1}
-              icon={
-                <svg viewBox="0 0 24 24" className="h-6 w-6">
-                  <path
-                    fill="currentColor"
-                    d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"
-                  />
-                </svg>
-              }
-            />
-            <FeatureCard
-              title={t.home.featureTitle2}
-              body={t.home.featureBody2}
-              icon={<Database className="h-6 w-6" />}
-              className="mt-10 lg:mt-0"
-            />
-            <FeatureCard
-              title={t.home.featureTitle3}
-              body={t.home.featureBody3}
-              icon={<CreditCard className="h-6 w-6" />}
-              className="mt-10 lg:mt-0"
-            />
+      <section id="product" className="content-visibility-auto py-8 sm:py-10">
+        <div className="section-shell">
+          <div className="surface-panel grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="rounded-[24px] border border-dashed border-border bg-muted/40 p-6 sm:p-8">
+              <div className="flex h-full min-h-72 flex-col justify-between">
+                <div>
+                  <p className="text-sm font-medium text-primary">
+                    {t.home.productPreviewTitle}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+                    {t.home.productPreviewBody}
+                  </p>
+                </div>
+
+                <div className="mt-8 rounded-[20px] border border-border/70 bg-background p-5">
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {t.home.productPreviewList.map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-2xl border border-border/70 bg-muted/35 px-4 py-4 text-sm text-foreground"
+                      >
+                        <span className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                          <Check className="h-4 w-4" />
+                        </span>
+                        <p>{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-between rounded-[24px] border border-border/70 bg-background p-6">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Free first
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
+                  {t.home.freeTitle}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                  {t.home.freeDescription}
+                </p>
+              </div>
+
+              <div className="mt-8 flex flex-col gap-3">
+                <Button asChild size="lg" className="justify-between">
+                  <Link href={localizePath(locale, '/sign-up')}>
+                    {t.home.freeCta}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href={localizePath(locale, '/pricing')}>
+                    {t.home.productSecondaryCta}
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <PricingSection
         locale={locale}
+        className="content-visibility-auto bg-transparent py-8 sm:py-10"
         cards={[
           {
             label: t.home.freeLabel,
@@ -102,9 +170,9 @@ export default function HomePage({
             description: t.home.freeDescription,
             features: t.home.freeFeatures,
             cta: {
-              type: "current",
-              label: t.pricing.currentPlan,
-            },
+              type: 'current',
+              label: t.pricing.currentPlan
+            }
           },
           {
             label: t.home.proLabel,
@@ -116,15 +184,36 @@ export default function HomePage({
             features: t.home.proFeatures,
             emphasized: true,
             cta: {
-              type: "split",
+              type: 'split',
               primaryLabel: t.home.proCta,
               secondaryLabel: t.home.fullPricingCta,
-              secondaryHref: localizePath(locale, "/pricing"),
-            },
-          },
+              secondaryHref: localizePath(locale, '/pricing')
+            }
+          }
         ]}
       />
 
+      <section className="content-visibility-auto pb-12 pt-2 sm:pb-16">
+        <div className="section-shell">
+          <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
+            <FeatureCard
+              title={t.home.featureTitle1}
+              body={t.home.featureBody1}
+              icon={<Sparkles className="h-5 w-5" />}
+            />
+            <FeatureCard
+              title={t.home.featureTitle2}
+              body={t.home.featureBody2}
+              icon={<Database className="h-5 w-5" />}
+            />
+            <FeatureCard
+              title={t.home.featureTitle3}
+              body={t.home.featureBody3}
+              icon={<CreditCard className="h-5 w-5" />}
+            />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
@@ -132,41 +221,21 @@ export default function HomePage({
 function FeatureCard({
   title,
   body,
-  icon,
-  className = "",
+  icon
 }: {
   title: string;
   body: string;
   icon: React.ReactNode;
-  className?: string;
 }) {
   return (
-    <div className={className}>
-      <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+    <article>
+      <div className="surface-card h-full p-5">
+        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           {icon}
         </div>
-
-        <div className="mt-5">
-          <h2 className="text-lg font-medium text-foreground">{title}</h2>
-          <p className="mt-2 text-base text-muted-foreground">{body}</p>
-        </div>
+        <h2 className="mt-4 text-base font-semibold text-foreground">{title}</h2>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">{body}</p>
       </div>
-    </div>
-  );
-}
-
-function FeatureList({ items }: { items: readonly string[] }) {
-  return (
-    <ul className="mt-8 space-y-3">
-      {items.map((item) => (
-        <li key={item} className="flex items-center gap-3 text-sm text-foreground">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-            ✓
-          </span>
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
+    </article>
   );
 }

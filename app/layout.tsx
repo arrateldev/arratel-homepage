@@ -15,7 +15,11 @@ export const viewport: Viewport = {
   maximumScale: 1
 };
 
-const manrope = Manrope({ subsets: ['latin'] });
+const manrope = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans'
+});
 
 export default async function RootLayout({
   children
@@ -30,11 +34,8 @@ export default async function RootLayout({
       : defaultLocale;
 
   return (
-    <html
-      lang={locale}
-      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
-    >
-      <body className="min-h-[100dvh] bg-gray-50">
+    <html lang={locale} className={`${manrope.variable} bg-white text-black`}>
+      <body className="min-h-[100dvh] bg-background font-sans text-foreground antialiased">
         <SWRConfig
           //value={{
             //fallback: {

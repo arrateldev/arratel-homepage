@@ -24,7 +24,22 @@ const messages = {
       heroAccent: 'schneller als je zuvor',
       heroDescription:
         'Starte dein SaaS in Rekordzeit mit einer produktionsnahen Vorlage inklusive moderner Technologien und zentraler Integrationen.',
+      heroEyebrow: 'Direkt nutzbar',
       deployCta: 'Eigenes Projekt deployen',
+      productEyebrow: 'Produktbereich',
+      productTitle: 'Hier sollte direkt das eigentliche SaaS starten.',
+      productDescription:
+        'Wenn dein Free-Plan sofort nutzbar ist, gehoert das Kernprodukt direkt unter den ersten Marketing-Block. So landet der Nutzer ohne Umweg direkt im Tool.',
+      productPrimaryCta: 'Produkt starten',
+      productSecondaryCta: 'Preise ansehen',
+      productPreviewTitle: 'Platz fuer dein erstes Tool',
+      productPreviewBody:
+        'Zum Beispiel ein PDF-Merger mit Upload, Queue und Ergebnis-Download. Dieser Bereich sollte spaeter die eigentliche App-Oberflaeche enthalten, nicht nur eine Demo.',
+      productPreviewList: [
+        'Kurze Einfuehrung statt langem Hero',
+        'Direkter Einstieg in den Free-Plan',
+        'Upgrade erst nach echter Nutzung'
+      ],
       featureTitle1: 'Next.js und React',
       featureBody1:
         'Moderne Webtechnologien fuer starke Performance und eine schnelle Developer Experience.',
@@ -297,7 +312,22 @@ const messages = {
       heroAccent: 'faster than ever',
       heroDescription:
         'Launch your SaaS quickly with a production-ready template that includes modern tooling and the integrations you actually need.',
+      heroEyebrow: 'Ready to use',
       deployCta: 'Deploy your own',
+      productEyebrow: 'Product area',
+      productTitle: 'The actual SaaS should start here right away.',
+      productDescription:
+        'If the free plan is usable immediately, the core product belongs directly below the first marketing block. That gets users into the tool without friction.',
+      productPrimaryCta: 'Launch product',
+      productSecondaryCta: 'View pricing',
+      productPreviewTitle: 'Space for your first tool',
+      productPreviewBody:
+        'For example a PDF merge tool with upload, queue, and result download. This area should later contain the real app interface, not just a demo.',
+      productPreviewList: [
+        'Short intro instead of a long hero',
+        'Direct entry into the free plan',
+        'Upgrade only after real usage'
+      ],
       featureTitle1: 'Next.js and React',
       featureBody1:
         'Use modern web technologies for performance and a faster developer workflow.',

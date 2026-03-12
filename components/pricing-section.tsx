@@ -40,7 +40,7 @@ type PricingCardConfig = {
 export function PricingSection({
   locale = defaultLocale,
   cards,
-  className = 'bg-muted/40 py-20'
+  className = 'bg-transparent py-20'
 }: {
   locale?: Locale;
   cards: readonly PricingCardConfig[];
@@ -50,17 +50,17 @@ export function PricingSection({
 
   return (
     <section className={className}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="section-shell">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 text-sm font-medium text-muted-foreground">
+          <span className="animate-in-soft inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 text-sm font-medium text-muted-foreground">
             {t.home.pricingBadge}
           </span>
 
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="animate-in-soft animate-delay-1 mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             {t.home.pricingTitle}
           </h2>
 
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="animate-in-soft animate-delay-2 mt-4 text-lg leading-8 text-muted-foreground">
             {t.home.pricingDescription}
           </p>
         </div>
@@ -83,8 +83,8 @@ function PricingCard({
   locale: Locale;
 }) {
   const cardClassName = card.emphasized
-    ? 'group relative overflow-hidden rounded-[28px] border border-primary/20 bg-card p-8 shadow-sm ring-1 ring-primary/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl'
-    : 'group relative overflow-hidden rounded-[28px] border border-border/70 bg-card p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl';
+    ? 'surface-panel group relative overflow-hidden p-8 ring-1 ring-primary/15 transition-all duration-300 hover:-translate-y-1'
+    : 'surface-card group relative overflow-hidden p-8 transition-all duration-300 hover:-translate-y-1';
 
   return (
     <div className={cardClassName}>
@@ -128,7 +128,7 @@ function PricingCard({
           </span>
         </div>
 
-        <p className="mt-4 text-sm leading-6 text-muted-foreground">
+        <p className="mt-4 text-sm leading-7 text-muted-foreground">
           {card.description}
         </p>
 
@@ -146,7 +146,7 @@ function renderCta(cta: PricingCardConfig['cta'], locale: Locale) {
       <Button
         variant="outline"
         size="lg"
-        className="w-full text-base transition-transform duration-300 group-hover:scale-[1.01]"
+        className="w-full text-base"
       >
         {cta.label}
       </Button>
@@ -181,7 +181,7 @@ function renderCta(cta: PricingCardConfig['cta'], locale: Locale) {
     <div className="flex flex-col gap-3 sm:flex-row">
       <Button
         size="lg"
-        className="flex-1 text-base transition-transform duration-300 group-hover:scale-[1.01]"
+        className="flex-1 text-base"
       >
         {cta.primaryLabel}
       </Button>

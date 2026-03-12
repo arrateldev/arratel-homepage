@@ -39,8 +39,8 @@ export function SiteChrome({
     <section className="flex min-h-screen flex-col">
       <Header locale={locale} user={user} />
       <main className="flex-1">{children}</main>
-      <footer className="border-t border-neutral-800 bg-neutral-950 text-neutral-300">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8">
+      <footer className="border-t border-border/70 bg-slate-950 text-slate-300">
+        <div className="section-shell grid gap-8 py-12 lg:grid-cols-3">
           <div>
             <div className="flex items-center">
               <AppLogo className="h-5 w-5" />
@@ -48,7 +48,7 @@ export function SiteChrome({
                 {siteConfig.product.name}
               </span>
             </div>
-            <p className="mt-3 max-w-sm text-sm text-neutral-400">
+            <p className="mt-3 max-w-sm text-sm leading-7 text-slate-400">
               {t.home.footerDescription}
             </p>
           </div>
@@ -57,7 +57,7 @@ export function SiteChrome({
             <h3 className="text-sm font-semibold text-white">
               {t.header.navigation}
             </h3>
-            <div className="mt-3 flex flex-col gap-2 text-sm text-neutral-400">
+            <div className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
               <Link
                 href={localizePath(locale, '/')}
                 className="transition-colors hover:text-white"
@@ -91,7 +91,7 @@ export function SiteChrome({
             <h3 className="text-sm font-semibold text-white">
               {t.common.legal}
             </h3>
-            <div className="mt-3 flex flex-col gap-2 text-sm text-neutral-400">
+            <div className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
               <Link
                 href={localizePath(locale, '/impressum')}
                 className="transition-colors hover:text-white"
@@ -114,8 +114,8 @@ export function SiteChrome({
           </div>
         </div>
 
-        <div className="border-t border-neutral-800">
-          <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-sm text-neutral-500 sm:px-6 md:flex-row md:justify-between lg:px-8">
+        <div className="border-t border-slate-800/80">
+          <div className="section-shell flex flex-col gap-2 py-4 text-sm text-slate-500 md:flex-row md:justify-between">
             <span>
               (c) {new Date().getFullYear()} {t.common.company}.{' '}
               {t.common.allRightsReserved}
@@ -159,11 +159,11 @@ function Header({
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/95">
+      <div className="section-shell flex items-center justify-between py-4">
         <Link
           href={localizePath(locale, '/')}
-          className="flex items-center text-gray-900"
+          className="flex items-center text-foreground"
         >
           <AppLogo className="h-6 w-6" priority />
           <span className="ml-2 text-xl font-semibold">
@@ -171,15 +171,15 @@ function Header({
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-2 rounded-full border border-border/70 bg-background p-1 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-colors ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 pathname === item.href
-                  ? 'text-gray-900'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-secondary text-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               {item.label}
@@ -198,7 +198,7 @@ function Header({
           </Button>
           {user ? (
             <Suspense
-              fallback={<div className="h-9 w-9 rounded-full border border-gray-200" />}
+              fallback={<div className="h-9 w-24 rounded-full border border-border/70" />}
             >
               <UserMenu locale={locale} user={user} />
             </Suspense>
@@ -222,13 +222,13 @@ function Header({
       </div>
 
       {mobileOpen ? (
-        <div className="border-t border-gray-200 bg-white md:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 sm:px-6">
+        <div className="border-t border-border/60 bg-background md:hidden">
+          <div className="section-shell flex flex-col gap-2 py-4">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-xl px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="rounded-2xl px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}
@@ -290,7 +290,7 @@ function UserMenu({
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="max-w-44 justify-between">
           <span className="truncate">{label}</span>
-          <Home className="h-4 w-4 text-gray-600" />
+          <Home className="h-4 w-4 text-muted-foreground" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="flex flex-col gap-1">

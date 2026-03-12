@@ -1,15 +1,14 @@
 'use client';
 
-import { useActionState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+import { Suspense, useActionState } from 'react';
+import useSWR from 'swr';
 import { Loader2 } from 'lucide-react';
 import { updateAccount } from '@/app/(login)/actions';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { User } from '@/lib/db/schema';
-import useSWR from 'swr';
-import { Suspense } from 'react';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 
@@ -79,6 +78,7 @@ function AccountFormWithData({
   locale: Locale;
 }) {
   const { data: user } = useSWR<User>('/api/user', fetcher, swrOptions);
+
   return (
     <AccountForm
       state={state}
@@ -101,12 +101,20 @@ export default function GeneralPage({
   );
 
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        {t.generalSettings}
-      </h1>
+    <section className="space-y-6 px-1 pb-8">
+      <div className="surface-panel p-6 sm:p-8">
+        <p className="text-sm uppercase tracking-[0.2em] text-primary">
+          {t.settings}
+        </p>
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
+          {t.generalSettings}
+        </h1>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
+          {t.accountInformation}
+        </p>
+      </div>
 
-      <Card>
+      <Card className="surface-card">
         <CardHeader>
           <CardTitle>{t.accountInformation}</CardTitle>
         </CardHeader>
@@ -116,17 +124,13 @@ export default function GeneralPage({
             <Suspense fallback={<AccountForm state={state} locale={locale} />}>
               <AccountFormWithData state={state} locale={locale} />
             </Suspense>
-            {state.error && (
-              <p className="text-red-500 text-sm">{state.error}</p>
-            )}
-            {state.success && (
-              <p className="text-green-500 text-sm">{state.success}</p>
-            )}
-            <Button
-              type="submit"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-              disabled={isPending}
-            >
+            {state.error ? (
+              <p className="text-sm text-red-500">{state.error}</p>
+            ) : null}
+            {state.success ? (
+              <p className="text-sm text-green-500">{state.success}</p>
+            ) : null}
+            <Button type="submit" disabled={isPending}>
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

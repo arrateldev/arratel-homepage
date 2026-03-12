@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
+import { updateMockSubscriptionAction } from '@/lib/payments/actions';
+import { isMockStripeEnabled } from '@/lib/payments/stripe';
+import { getTeamForUser } from '@/lib/db/queries';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getTeamForUser } from '@/lib/db/queries';
-import { isMockStripeEnabled } from '@/lib/payments/stripe';
-import { updateMockSubscriptionAction } from '@/lib/payments/actions';
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 
@@ -70,19 +70,24 @@ export default async function BillingMockPage({
   }
 
   return (
-    <section className="flex-1 p-4 lg:p-8 space-y-6">
-      <div>
-        <h1 className="text-lg lg:text-2xl font-medium">{t.billingMockControl}</h1>
-        <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
+    <section className="space-y-6 px-1 pb-8">
+      <div className="surface-panel p-6 sm:p-8">
+        <p className="text-sm uppercase tracking-[0.2em] text-primary">
+          {t.settings}
+        </p>
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
+          {t.billingMockControl}
+        </h1>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
           {t.billingMockDescription}
         </p>
       </div>
 
-      <Card>
+      <Card className="surface-card">
         <CardHeader>
           <CardTitle>{t.currentTeamState}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2 text-sm">
+        <CardContent className="grid gap-3 text-sm sm:grid-cols-2">
           <p>
             <span className="font-medium">{t.plan}:</span> {team.planName || 'Free'}
           </p>
@@ -103,26 +108,16 @@ export default async function BillingMockPage({
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {mockStates.map((state) => (
-          <Card key={state.title}>
+          <Card key={state.title} className="surface-card">
             <CardHeader>
               <CardTitle className="text-base">{state.title}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                {state.description}
-              </p>
+              <p className="text-sm text-muted-foreground">{state.description}</p>
               <form action={updateMockSubscriptionAction}>
                 <input type="hidden" name="locale" value={locale} />
-                <input
-                  type="hidden"
-                  name="planName"
-                  value={state.planName || ''}
-                />
-                <input
-                  type="hidden"
-                  name="productId"
-                  value={state.productId || ''}
-                />
+                <input type="hidden" name="planName" value={state.planName || ''} />
+                <input type="hidden" name="productId" value={state.productId || ''} />
                 <input
                   type="hidden"
                   name="subscriptionStatus"

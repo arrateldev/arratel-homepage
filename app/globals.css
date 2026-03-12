@@ -33,6 +33,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -40,23 +45,23 @@ html {
 }
 
 :root {
-  --background: 220 20% 97%;
-  --foreground: 230 22% 10%;
+  --background: 210 33% 98%;
+  --foreground: 222 30% 12%;
 
   --card: 0 0% 100%;
-  --card-foreground: 230 22% 10%;
+  --card-foreground: 222 30% 12%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 230 22% 10%;
+  --popover-foreground: 222 30% 12%;
 
   --primary: 246 83% 62%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 230 30% 96%;
-  --secondary-foreground: 230 22% 14%;
+  --secondary: 205 38% 95%;
+  --secondary-foreground: 220 27% 18%;
 
-  --muted: 228 20% 95%;
-  --muted-foreground: 226 14% 45%;
+  --muted: 210 28% 95%;
+  --muted-foreground: 220 16% 42%;
 
   --accent: 248 100% 97%;
   --accent-foreground: 246 60% 30%;
@@ -64,11 +69,11 @@ html {
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 228 18% 88%;
-  --input: 228 18% 88%;
+  --border: 214 26% 88%;
+  --input: 214 26% 88%;
   --ring: 246 83% 62%;
 
-  --radius: 1rem;
+  --radius: 1.25rem;
 }
 
 .dark {
@@ -108,10 +113,34 @@ html {
 
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(
+        circle at top center,
+        hsl(var(--primary) / 0.09),
+        transparent 34%
+      ),
+      linear-gradient(180deg, hsl(var(--background)), hsl(0 0% 100%));
   }
 }
 
 @layer utilities {
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .surface-panel {
+    @apply rounded-[32px] border border-border/70 bg-white shadow-[0_16px_36px_-28px_rgba(15,23,42,0.18)];
+  }
+
+  .surface-card {
+    @apply rounded-[28px] border border-border/70 bg-white shadow-[0_12px_28px_-24px_rgba(15,23,42,0.16)];
+  }
+
   .page-aura-surface {
     background-image:
       radial-gradient(
@@ -121,13 +150,13 @@ html {
       ),
       radial-gradient(
         circle at top right,
-        hsl(var(--accent-foreground) / 0.1),
+        hsl(var(--accent-foreground) / 0.08),
         transparent 28%
       ),
       linear-gradient(
         to bottom,
         hsl(var(--background) / 0.98),
-        hsl(var(--muted) / 0.9)
+        hsl(var(--muted) / 0.82)
       );
   }
 
@@ -148,5 +177,114 @@ html {
         hsl(var(--card)),
         hsl(var(--muted) / 0.45)
       );
+  }
+
+  .animate-in-soft {
+    animation: fade-up 0.34s ease-out both;
+  }
+
+  .animate-delay-1 {
+    animation-delay: 0.08s;
+  }
+
+  .animate-delay-2 {
+    animation-delay: 0.16s;
+  }
+
+  .animate-delay-3 {
+    animation-delay: 0.24s;
+  }
+
+  .animate-mock-file-top {
+    animation: mock-file-top 3.2s ease-in-out infinite;
+  }
+
+  .animate-mock-file-bottom {
+    animation: mock-file-bottom 3.2s ease-in-out infinite;
+  }
+
+  .animate-mock-progress {
+    animation: mock-progress 2.8s ease-in-out infinite;
+    transform-origin: left;
+  }
+
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes mock-file-top {
+  0%,
+  18%,
+  100% {
+    transform: translateY(0);
+    z-index: 10;
+  }
+
+  34% {
+    transform: translateY(6px) scale(1.02);
+    z-index: 20;
+  }
+
+  52%,
+  68% {
+    transform: translateY(42px) scale(1.02);
+    z-index: 20;
+  }
+
+  84% {
+    transform: translateY(0);
+    z-index: 10;
+  }
+}
+
+@keyframes mock-file-bottom {
+  0%,
+  18%,
+  100% {
+    transform: translateY(0);
+  }
+
+  34% {
+    transform: translateY(-4px);
+  }
+
+  52%,
+  68% {
+    transform: translateY(-42px);
+  }
+
+  84% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes mock-progress {
+  0%,
+  100% {
+    transform: scaleX(0.42);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in-soft,
+  .animate-mock-file-top,
+  .animate-mock-file-bottom,
+  .animate-mock-progress {
+    animation: none;
   }
 }

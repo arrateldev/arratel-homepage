@@ -1,18 +1,7 @@
+import { AlertCircle, CheckCircle, Lock, LogOut, Mail, Settings, UserCog, UserMinus, UserPlus, type LucideIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Settings,
-  LogOut,
-  UserPlus,
-  Lock,
-  UserCog,
-  AlertCircle,
-  UserMinus,
-  Mail,
-  CheckCircle,
-  type LucideIcon,
-} from 'lucide-react';
-import { ActivityType } from '@/lib/db/schema';
 import { getActivityLogs } from '@/lib/db/queries';
+import { ActivityType } from '@/lib/db/schema';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 
@@ -26,7 +15,7 @@ const iconMap: Record<ActivityType, LucideIcon> = {
   [ActivityType.CREATE_TEAM]: UserPlus,
   [ActivityType.REMOVE_TEAM_MEMBER]: UserMinus,
   [ActivityType.INVITE_TEAM_MEMBER]: Mail,
-  [ActivityType.ACCEPT_INVITATION]: CheckCircle,
+  [ActivityType.ACCEPT_INVITATION]: CheckCircle
 };
 
 function getRelativeTime(date: Date, locale: Locale) {
@@ -35,17 +24,22 @@ function getRelativeTime(date: Date, locale: Locale) {
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
   if (diffInSeconds < 60) return t.justNow;
-  if (diffInSeconds < 3600)
+  if (diffInSeconds < 3600) {
     return t.minutesAgo.replace('{count}', String(Math.floor(diffInSeconds / 60)));
-  if (diffInSeconds < 86400)
+  }
+  if (diffInSeconds < 86400) {
     return t.hoursAgo.replace('{count}', String(Math.floor(diffInSeconds / 3600)));
-  if (diffInSeconds < 604800)
+  }
+  if (diffInSeconds < 604800) {
     return t.daysAgo.replace('{count}', String(Math.floor(diffInSeconds / 86400)));
+  }
+
   return date.toLocaleDateString(locale);
 }
 
 function formatAction(action: ActivityType, locale: Locale): string {
   const t = getMessages(locale).dashboard.actions;
+
   switch (action) {
     case ActivityType.SIGN_UP:
       return t.signUp;
@@ -81,11 +75,20 @@ export default async function ActivityPage({
   const t = getMessages(locale).dashboard;
 
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        {t.activityLog}
-      </h1>
-      <Card>
+    <section className="space-y-6 px-1 pb-8">
+      <div className="surface-panel p-6 sm:p-8">
+        <p className="text-sm uppercase tracking-[0.2em] text-primary">
+          {t.settings}
+        </p>
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
+          {t.activityLog}
+        </h1>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
+          {t.recentActivity}
+        </p>
+      </div>
+
+      <Card className="surface-card">
         <CardHeader>
           <CardTitle>{t.recentActivity}</CardTitle>
         </CardHeader>
@@ -97,16 +100,19 @@ export default async function ActivityPage({
                 const formattedAction = formatAction(log.action as ActivityType, locale);
 
                 return (
-                  <li key={log.id} className="flex items-center space-x-4">
-                    <div className="bg-primary/10 rounded-full p-2">
-                      <Icon className="text-primary h-5 w-5" />
+                  <li
+                    key={log.id}
+                    className="flex items-center gap-4 rounded-3xl border border-border/60 bg-background/70 p-4"
+                  >
+                    <div className="rounded-2xl bg-primary/10 p-2.5">
+                      <Icon className="h-5 w-5 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-sm font-medium text-foreground">
                         {formattedAction}
-                        {log.ipAddress && ` from IP ${log.ipAddress}`}
+                        {log.ipAddress ? ` from IP ${log.ipAddress}` : ''}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         {getRelativeTime(new Date(log.timestamp), locale)}
                       </p>
                     </div>
@@ -115,12 +121,12 @@ export default async function ActivityPage({
               })}
             </ul>
           ) : (
-            <div className="flex flex-col items-center justify-center text-center py-12">
-              <AlertCircle className="text-primary mb-4 h-12 w-12" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <AlertCircle className="mb-4 h-12 w-12 text-primary" />
+              <h3 className="mb-2 text-lg font-semibold text-foreground">
                 {t.noActivityYet}
               </h3>
-              <p className="text-sm text-gray-500 max-w-sm">
+              <p className="max-w-sm text-sm text-muted-foreground">
                 {t.noActivityDescription}
               </p>
             </div>

@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Activity, Menu, Settings, Shield, Users, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Users, Settings, Shield, Activity, Menu } from 'lucide-react';
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 
@@ -43,51 +43,63 @@ export default function DashboardLayout({
   ];
 
   return (
-    <div className="flex flex-col min-h-[calc(100dvh-68px)] max-w-7xl mx-auto w-full">
-      {/* Mobile header */}
-      <div className="lg:hidden flex items-center justify-between bg-white border-b border-gray-200 p-4">
-        <div className="flex items-center">
-          <span className="font-medium">{t.settings}</span>
-        </div>
-        <Button
-          className="-mr-3"
-          variant="ghost"
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        >
-          <Menu className="h-6 w-6" />
-          <span className="sr-only">Toggle sidebar</span>
-        </Button>
-      </div>
+    <div className="section-shell flex min-h-[calc(100dvh-73px)] w-full py-6 lg:py-8">
+      {isSidebarOpen ? (
+        <button
+          type="button"
+          aria-label="Close sidebar"
+          className="fixed inset-0 z-30 bg-slate-950/25 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      ) : null}
 
-      <div className="flex flex-1 overflow-hidden h-full">
-        {/* Sidebar */}
-        <aside
-          className={`w-64 bg-white lg:bg-gray-50 border-r border-gray-200 lg:block ${
-            isSidebarOpen ? 'block' : 'hidden'
-          } lg:relative absolute inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          <nav className="h-full overflow-y-auto p-4">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href} passHref>
-                <Button
-                  variant={pathname === item.href ? 'secondary' : 'ghost'}
-                  className={`shadow-none my-1 w-full justify-start ${
-                    pathname === item.href ? 'bg-gray-100' : ''
+      <aside
+        className={`surface-panel fixed inset-y-24 left-4 z-40 w-[min(19rem,calc(100vw-2rem))] p-4 transition-transform duration-300 lg:sticky lg:top-24 lg:block lg:h-fit lg:w-72 lg:translate-x-0 ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'
+        }`}
+      >
+        <div className="mb-4 flex items-center justify-between lg:hidden">
+          <span className="text-sm font-semibold text-foreground">{t.settings}</span>
+          <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(false)}>
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+
+        <nav className="space-y-2">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <Link key={item.href} href={item.href} onClick={() => setIsSidebarOpen(false)}>
+                <div
+                  className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-secondary text-foreground'
+                      : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground'
                   }`}
-                  onClick={() => setIsSidebarOpen(false)}
                 >
                   <item.icon className="h-4 w-4" />
                   {item.label}
-                </Button>
+                </div>
               </Link>
-            ))}
-          </nav>
-        </aside>
+            );
+          })}
+        </nav>
+      </aside>
 
-        {/* Main content */}
-        <main className="flex-1 overflow-y-auto p-0 lg:p-4">{children}</main>
+      <div className="min-w-0 flex-1 lg:pl-6">
+        <div className="mb-4 flex items-center justify-between lg:hidden">
+          <div>
+            <p className="text-sm text-muted-foreground">{t.settings}</p>
+            <h1 className="text-lg font-semibold text-foreground">{t.nav.team}</h1>
+          </div>
+          <Button variant="outline" onClick={() => setIsSidebarOpen(true)}>
+            <Menu className="h-4 w-4" />
+            {t.settings}
+          </Button>
+        </div>
+
+        <main className="min-w-0">{children}</main>
       </div>
     </div>
   );

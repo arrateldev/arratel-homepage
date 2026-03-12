@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Lock, Trash2, Loader2 } from 'lucide-react';
 import { useActionState } from 'react';
-import { updatePassword, deleteAccount } from '@/app/(login)/actions';
+import { Loader2, Lock, Trash2 } from 'lucide-react';
+import { deleteAccount, updatePassword } from '@/app/(login)/actions';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 
@@ -30,24 +30,33 @@ export default function SecurityPage({
   locale?: Locale;
 }) {
   const t = getMessages(locale).dashboard;
+  const auth = getMessages(locale).auth;
   const [passwordState, passwordAction, isPasswordPending] = useActionState<
     PasswordState,
     FormData
   >(updatePassword, {});
-
   const [deleteState, deleteAction, isDeletePending] = useActionState<
     DeleteState,
     FormData
   >(deleteAccount, {});
 
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium bold text-gray-900 mb-6">
-        {t.securitySettings}
-      </h1>
-      <Card className="mb-8">
+    <section className="space-y-6 px-1 pb-8">
+      <div className="surface-panel p-6 sm:p-8">
+        <p className="text-sm uppercase tracking-[0.2em] text-primary">
+          {t.settings}
+        </p>
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
+          {t.securitySettings}
+        </h1>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
+          {t.deleteWarning}
+        </p>
+      </div>
+
+      <Card className="surface-card">
         <CardHeader>
-          <CardTitle>{getMessages(locale).auth.password}</CardTitle>
+          <CardTitle>{auth.password}</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="space-y-4" action={passwordAction}>
@@ -96,17 +105,13 @@ export default function SecurityPage({
                 defaultValue={passwordState.confirmPassword}
               />
             </div>
-            {passwordState.error && (
-              <p className="text-red-500 text-sm">{passwordState.error}</p>
-            )}
-            {passwordState.success && (
-              <p className="text-green-500 text-sm">{passwordState.success}</p>
-            )}
-            <Button
-              type="submit"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-              disabled={isPasswordPending}
-            >
+            {passwordState.error ? (
+              <p className="text-sm text-red-500">{passwordState.error}</p>
+            ) : null}
+            {passwordState.success ? (
+              <p className="text-sm text-green-500">{passwordState.success}</p>
+            ) : null}
+            <Button type="submit" disabled={isPasswordPending}>
               {isPasswordPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -123,14 +128,12 @@ export default function SecurityPage({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="surface-card">
         <CardHeader>
           <CardTitle>{t.deleteAccount}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-gray-500 mb-4">
-            {t.deleteWarning}
-          </p>
+          <p className="mb-4 text-sm text-muted-foreground">{t.deleteWarning}</p>
           <form action={deleteAction} className="space-y-4">
             <input type="hidden" name="locale" value={locale} />
             <div>
@@ -147,15 +150,10 @@ export default function SecurityPage({
                 defaultValue={deleteState.password}
               />
             </div>
-            {deleteState.error && (
-              <p className="text-red-500 text-sm">{deleteState.error}</p>
-            )}
-            <Button
-              type="submit"
-              variant="destructive"
-              className="bg-red-600 hover:bg-red-700"
-              disabled={isDeletePending}
-            >
+            {deleteState.error ? (
+              <p className="text-sm text-red-500">{deleteState.error}</p>
+            ) : null}
+            <Button type="submit" variant="destructive" disabled={isDeletePending}>
               {isDeletePending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
