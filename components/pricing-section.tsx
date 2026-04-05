@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { SubmitButton } from '@/app/(dashboard)/pricing/submit-button';
+import { features } from '@/lib/config/feature-flags';
 
 type PricingCardConfig = {
   label: string;
@@ -154,6 +155,21 @@ function renderCta(cta: PricingCardConfig['cta'], locale: Locale) {
   }
 
   if (cta.type === 'checkout') {
+    if (!features.stripe) {
+      return (
+        <Button
+          type="button"
+          variant="secondary"
+          size="lg"
+          className="w-full text-base"
+          disabled
+          title="Billing not available in this deployment mode"
+        >
+          Get Started
+        </Button>
+      );
+    }
+
     return (
       <form action="/api/stripe/start-checkout" method="POST">
         <input type="hidden" name="priceId" value={cta.priceId} />

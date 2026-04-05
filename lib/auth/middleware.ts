@@ -3,6 +3,7 @@ import { TeamDataWithMembers, User } from '@/lib/db/schema';
 import { getTeamForUser, getUser } from '@/lib/db/queries';
 import { redirect } from 'next/navigation';
 import { getLocaleFromFormData, localizePath } from '@/lib/i18n/config';
+import { features } from '@/lib/config/feature-flags';
 
 export type ActionState = {
   error?: string;

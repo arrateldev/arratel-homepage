@@ -1,9 +1,10 @@
 import DashboardLayout from '@/app/(dashboard)/dashboard/layout';
-import { isLocale } from '@/lib/i18n/config';
+import { isLocale, localizePath } from '@/lib/i18n/config';
 import { getTeamForUser, getUser } from '@/lib/db/queries';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { SWRConfig } from 'swr';
+import { features } from '@/lib/config/feature-flags';
 
 export default async function LocalizedDashboardLayout({
   children,
@@ -16,6 +17,11 @@ export default async function LocalizedDashboardLayout({
 
   if (!isLocale(locale)) {
     notFound();
+  }
+
+  // Redirect to home in minimal deployment mode
+  if (!features.dashboard) {
+    redirect(localizePath(locale, '/'));
   }
 
   const [user, team] = await Promise.all([getUser(), getTeamForUser()]);

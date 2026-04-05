@@ -53,10 +53,76 @@ cd saas-starter
 pnpm install
 ```
 
+## Deployment Modes
+
+This template supports two deployment modes configured via the `DEPLOYMENT_MODE` environment variable:
+
+### Full Mode (Default)
+Complete SaaS application with authentication, database, and billing.
+
+```bash
+DEPLOYMENT_MODE=full  # or omit this variable
+```
+
+Includes:
+- User authentication & teams management
+- Stripe billing integration
+- Dashboard with user/team settings
+- Database (PostgreSQL)
+
+### Minimal Mode
+Landing page only, perfect for testing ideas quickly without external services.
+
+```bash
+DEPLOYMENT_MODE=minimal
+```
+
+Includes:
+- Landing page, pricing page, and legal pages (fully static)
+- No authentication required
+- No database required
+- No Stripe integration needed
+- Perfect for quick MVP deployments
+
+To deploy in minimal mode:
+
+```bash
+# .env
+DEPLOYMENT_MODE=minimal
+BASE_URL=https://yourdomain.com
+```
+
+Then deploy to Vercel or any static hosting. All auth/dashboard routes will redirect to home.
+
 ## Running Locally
+
+**Starting in Minimal Mode (landing page only)?**
+
+```bash
+# .env
+DEPLOYMENT_MODE=minimal
+BASE_URL=http://localhost:3000
+```
+
+Then just:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser. No database or Stripe setup needed!
+
+**Starting in Full Mode (complete SaaS)?**
 
 This project needs a running Postgres database before `pnpm db:migrate` or
 `pnpm db:seed` can work.
+
+Start the included Docker Postgres service (creates the DB container on first run):
+
+```bash
+pnpm db:create
+```
 
 You have two options:
 

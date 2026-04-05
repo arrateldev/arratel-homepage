@@ -20,6 +20,7 @@ import {
 import { getMessages } from '@/lib/i18n/messages';
 import { AppLogo } from '@/components/app-logo';
 import { siteConfig } from '@/lib/site-config';
+import { features } from '@/lib/config/feature-flags';
 
 export function SiteChrome({
   children,
@@ -153,7 +154,7 @@ function Header({
     { href: localizePath(locale, '/'), label: t.common.home },
     { href: localizePath(locale, '/pricing'), label: t.common.pricing },
     { href: localizePath(locale, '/faq'), label: t.common.faq },
-    ...(user
+    ...(user && features.dashboard
       ? [{ href: localizePath(locale, '/dashboard'), label: t.common.dashboard }]
       : [])
   ];
@@ -202,11 +203,11 @@ function Header({
             >
               <UserMenu locale={locale} user={user} />
             </Suspense>
-          ) : (
+          ) : features.auth ? (
             <Button asChild variant="ghost" size="sm">
               <Link href={localizePath(locale, '/sign-in')}>{t.header.signIn}</Link>
             </Button>
-          )}
+          ) : null}
         </div>
 
         <Button
@@ -253,7 +254,7 @@ function Header({
                     {t.header.signOut}
                   </Button>
                 </form>
-              ) : (
+              ) : features.auth ? (
                 <Button asChild variant="outline" size="sm">
                   <Link
                     href={localizePath(locale, '/sign-in')}
@@ -262,7 +263,7 @@ function Header({
                     {t.header.signIn}
                   </Link>
                 </Button>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
