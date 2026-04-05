@@ -1,7 +1,9 @@
 import PricingPage from '@/app/(dashboard)/pricing/page';
 import { buildLocalizedMetadata } from '@/lib/i18n/metadata';
 import { isLocale } from '@/lib/i18n/config';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
+import { features } from '@/lib/config/feature-flags';
+import { localizePath } from '@/lib/i18n/config';
 
 export async function generateMetadata({
   params
@@ -25,6 +27,10 @@ export default async function LocalizedPricingPage({
 
   if (!isLocale(locale)) {
     notFound();
+  }
+
+  if (!features.pricing) {
+    redirect(localizePath(locale, '/'));
   }
 
   return <PricingPage locale={locale} />;

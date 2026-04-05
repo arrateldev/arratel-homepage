@@ -18,11 +18,11 @@ export const siteConfig = {
   company: {
     legalName: 'ACME GmbH',
     representative: {
-      de: 'Ricardo Valente de Matos, Geschaeftsfuehrer',
+      de: 'Ricardo Valente de Matos, Geschäftsführer',
       en: 'Ricardo Valente de Matos, Managing Director'
     },
     address: {
-      street: 'Musterstrasse 1',
+      street: 'Musterstraße 1',
       postalCode: '10115',
       city: 'Berlin',
       country: {

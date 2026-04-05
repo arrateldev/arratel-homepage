@@ -9,6 +9,7 @@ import {
 import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { PricingSection } from '@/components/pricing-section';
+import { features } from '@/lib/config/feature-flags';
 
 export default function HomePage({
   locale = defaultLocale
@@ -116,12 +117,14 @@ export default function HomePage({
               <div className="rounded-[24px] border border-border/70 bg-background p-5 sm:p-6">
                 <div className="flex flex-col gap-4 border-b border-border/70 pb-4 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-sm font-medium text-primary">PDF Merge Tool</p>
-                  <Link
-                    href="#pricing"
-                    className="rounded-full border border-primary/20 bg-primary/8 px-3 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/12"
-                  >
-                    Go Pro
-                  </Link>
+                  {features.pricing ? (
+                    <Link
+                      href="#pricing"
+                      className="rounded-full border border-primary/20 bg-primary/8 px-3 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/12"
+                    >
+                      Go Pro
+                    </Link>
+                  ) : null}
                 </div>
 
                 <div className="mt-5 grid gap-4 xl:grid-cols-[minmax(0,1.45fr)_320px]">
@@ -240,43 +243,45 @@ export default function HomePage({
         </section>
       </div>
 
-      <section id="pricing">
-        <PricingSection
-          className="bg-transparent py-8 sm:py-10"
-          locale={locale}
-          cards={[
-            {
-              label: t.home.freeLabel,
-              title: t.home.freeTitle,
-              tag: t.home.freeTag,
-              price: t.home.freePrice,
-              monthLabel: t.home.month,
-              description: t.home.freeDescription,
-              features: t.home.freeFeatures,
-              cta: {
-                type: 'current',
-                label: t.pricing.currentPlan
+      {features.pricing ? (
+        <section id="pricing">
+          <PricingSection
+            className="bg-transparent py-8 sm:py-10"
+            locale={locale}
+            cards={[
+              {
+                label: t.home.freeLabel,
+                title: t.home.freeTitle,
+                tag: t.home.freeTag,
+                price: t.home.freePrice,
+                monthLabel: t.home.month,
+                description: t.home.freeDescription,
+                features: t.home.freeFeatures,
+                cta: {
+                  type: 'current',
+                  label: t.pricing.currentPlan
+                }
+              },
+              {
+                label: t.home.proLabel,
+                title: t.home.proTitle,
+                tag: t.home.proTag,
+                price: t.home.proPrice,
+                monthLabel: t.home.month,
+                description: t.home.proDescription,
+                features: t.home.proFeatures,
+                emphasized: true,
+                cta: {
+                  type: 'split',
+                  primaryLabel: t.home.proCta,
+                  secondaryLabel: t.home.fullPricingCta,
+                  secondaryHref: localizePath(locale, '/pricing')
+                }
               }
-            },
-            {
-              label: t.home.proLabel,
-              title: t.home.proTitle,
-              tag: t.home.proTag,
-              price: t.home.proPrice,
-              monthLabel: t.home.month,
-              description: t.home.proDescription,
-              features: t.home.proFeatures,
-              emphasized: true,
-              cta: {
-                type: 'split',
-                primaryLabel: t.home.proCta,
-                secondaryLabel: t.home.fullPricingCta,
-                secondaryHref: localizePath(locale, '/pricing')
-              }
-            }
-          ]}
-        />
-      </section>
+            ]}
+          />
+        </section>
+      ) : null}
     </main>
   );
 }

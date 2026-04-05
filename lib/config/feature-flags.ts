@@ -25,7 +25,11 @@ export const features = {
   teamManagement: !isMinimalMode,
   activityLogging: !isMinimalMode,
 
+  // Legal
+  impressum: !isMinimalMode,
+
   // Payments
+  pricing: !isMinimalMode,
   stripe: !isMinimalMode,
   billing: !isMinimalMode,
   subscriptions: !isMinimalMode,
@@ -43,6 +47,5 @@ export const staticPages = [
   '/[locale]',
   '/[locale]/faq',
   '/[locale]/datenschutz',
-  '/[locale]/impressum',
   '/[locale]/terms',
 ] as const;
