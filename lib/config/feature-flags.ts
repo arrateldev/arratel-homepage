@@ -1,5 +1,5 @@
 /**
- * Feature Flags for SaaS Starter Template
+ * Feature flags for the Arratel SaaS template.
  *
  * Control which features are enabled based on deployment mode
  */
@@ -25,9 +25,6 @@ export const features = {
   teamManagement: !isMinimalMode,
   activityLogging: !isMinimalMode,
 
-  // Legal
-  impressum: !isMinimalMode,
-
   // Payments
   pricing: !isMinimalMode,
   stripe: !isMinimalMode,
@@ -36,7 +33,7 @@ export const features = {
 
   // Database-dependent features
   userProfiles: !isMinimalMode,
-  teamInvitations: !isMinimalMode,
+  teamInvitations: !isMinimalMode
 } as const;
 
 /**
@@ -46,6 +43,7 @@ export const staticPages = [
   '/',
   '/[locale]',
   '/[locale]/faq',
+  '/[locale]/impressum',
   '/[locale]/datenschutz',
-  '/[locale]/terms',
+  '/[locale]/terms'
 ] as const;

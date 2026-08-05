@@ -3,7 +3,20 @@
 import Link from 'next/link';
 import { Suspense, useState, type ReactNode } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Home, LogOut, Menu, X } from 'lucide-react';
+import {
+  Box,
+  Cloud,
+  Github,
+  Home,
+  Linkedin,
+  LogOut,
+  Menu,
+  Package,
+  Rocket,
+  Twitter,
+  X,
+  Youtube
+} from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,10 +34,45 @@ import { getMessages } from '@/lib/i18n/messages';
 import { AppLogo } from '@/components/app-logo';
 import { siteConfig } from '@/lib/site-config';
 
+const socialIcons = {
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  cloud: Cloud,
+  youtube: Youtube,
+  rocket: Rocket,
+  package: Package,
+  box: Box,
+  reddit: RedditIcon
+} as const;
+
+function RedditIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    >
+      <path d="M12 8.5c4 0 7.2 2.1 7.2 4.8S16 18.1 12 18.1s-7.2-2.1-7.2-4.8S8 8.5 12 8.5Z" />
+      <path d="M9.2 13.1h.1" />
+      <path d="M14.7 13.1h.1" />
+      <path d="M9.7 15.3c1.2.8 3.4.8 4.6 0" />
+      <path d="M12 8.5l1-4 3 .7" />
+      <path d="M16 5.2a1 1 0 1 0 2 0 1 1 0 0 0-2 0Z" />
+      <path d="M4.9 12.8a1.6 1.6 0 1 1 1.2-2.7" />
+      <path d="M19.1 12.8a1.6 1.6 0 1 0-1.2-2.7" />
+    </svg>
+  );
+}
+
 type SiteChromeFeatures = {
   auth: boolean;
   dashboard: boolean;
-  impressum: boolean;
   pricing: boolean;
 };
 
@@ -60,6 +108,25 @@ export function SiteChrome({
             <p className="mt-3 max-w-sm text-sm leading-7 text-slate-400">
               {t.home.footerDescription}
             </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {siteConfig.social.map((item) => {
+                const SocialIcon = socialIcons[item.icon];
+
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    aria-label={item.label}
+                    title={item.label}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-800 bg-slate-900/60 text-slate-400 transition-colors hover:border-slate-700 hover:bg-slate-900 hover:text-white"
+                  >
+                    <SocialIcon className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           <div>
@@ -103,14 +170,12 @@ export function SiteChrome({
               {t.common.legal}
             </h3>
             <div className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
-              {features.impressum ? (
-                <Link
-                  href={localizePath(locale, '/impressum')}
-                  className="transition-colors hover:text-white"
-                >
-                  {t.home.legalLinks.imprint}
-                </Link>
-              ) : null}
+              <Link
+                href={localizePath(locale, '/impressum')}
+                className="transition-colors hover:text-white"
+              >
+                {t.home.legalLinks.imprint}
+              </Link>
               <Link
                 href={localizePath(locale, '/datenschutz')}
                 className="transition-colors hover:text-white"
@@ -133,7 +198,6 @@ export function SiteChrome({
               (c) {new Date().getFullYear()} {t.common.company}.{' '}
               {t.common.allRightsReserved}
             </span>
-            <span>{t.common.builtWith}</span>
           </div>
         </div>
       </footer>

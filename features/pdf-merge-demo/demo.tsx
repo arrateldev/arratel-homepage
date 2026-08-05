@@ -17,7 +17,12 @@ export function PdfMergeDemo({ showPricingCta }: { showPricingCta: boolean }) {
     <div className="animate-enter-delay-2 surface-panel p-0">
       <div className="rounded-[24px] border border-border/70 bg-background p-5 sm:p-6">
         <div className="flex flex-col gap-4 border-b border-border/70 pb-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm font-medium text-primary">PDF Merge Tool</p>
+          <div>
+            <p className="text-sm font-medium text-primary">PDF Merge Tool</p>
+            <p className="mt-1 text-xs font-medium text-muted-foreground">
+              by Arratel
+            </p>
+          </div>
           {showPricingCta ? (
             <Link
               href="#pricing"

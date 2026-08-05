@@ -2,10 +2,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { LegalPage, LegalSection } from '@/components/legal-page';
 import { buildLocalizedMetadata } from '@/lib/i18n/metadata';
-import { isLocale, localizePath } from '@/lib/i18n/config';
+import { isLocale } from '@/lib/i18n/config';
 import { getLegalContent } from '@/lib/legal-content';
-import { features } from '@/lib/config/feature-flags';
-import { redirect } from 'next/navigation';
 
 export async function generateMetadata({
   params
@@ -33,10 +31,6 @@ export default async function ImpressumPage({
 
   if (!isLocale(locale)) {
     notFound();
-  }
-
-  if (!features.impressum) {
-    redirect(localizePath(locale, '/'));
   }
 
   const content = getLegalContent(locale).impressum;

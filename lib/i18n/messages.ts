@@ -14,7 +14,6 @@ const messages = {
       dashboard: 'Dashboard',
       features: 'Features',
       legal: 'Rechtliches',
-      builtWith: 'Built with Next.js',
       company: siteConfig.product.companyDisplayName,
       allRightsReserved: 'Alle Rechte vorbehalten.',
       backToHome: 'Zur Startseite'
@@ -302,7 +301,6 @@ const messages = {
       dashboard: 'Dashboard',
       features: 'Features',
       legal: 'Legal',
-      builtWith: 'Built with Next.js',
       company: siteConfig.product.companyDisplayName,
       allRightsReserved: 'All rights reserved.',
       backToHome: 'Back to home'

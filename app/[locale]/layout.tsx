@@ -30,7 +30,6 @@ export default async function LocaleLayout({
       features={{
         auth: features.auth,
         dashboard: features.dashboard,
-        impressum: features.impressum,
         pricing: features.pricing
       }}
       user={

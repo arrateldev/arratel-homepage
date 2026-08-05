@@ -1,5 +1,46 @@
 import type { Locale } from '@/lib/i18n/config';
 
+type LocalizedText = Record<Locale, string>;
+
+type CompanyAddress = {
+  street: string;
+  postalCode: string;
+  city: string;
+  country: LocalizedText;
+};
+
+type PrivacyProvider = {
+  id: 'hosting' | 'database' | 'payments';
+  name: string;
+  purpose: LocalizedText;
+  location: LocalizedText;
+};
+
+type SocialLink = {
+  id:
+    | 'github'
+    | 'linkedin'
+    | 'x'
+    | 'bluesky'
+    | 'youtube'
+    | 'productHunt'
+    | 'npm'
+    | 'dockerHub'
+    | 'reddit';
+  label: string;
+  href: string;
+  icon:
+    | 'github'
+    | 'linkedin'
+    | 'twitter'
+    | 'cloud'
+    | 'youtube'
+    | 'rocket'
+    | 'package'
+    | 'box'
+    | 'reddit';
+};
+
 export const siteConfig = {
   product: {
     name: 'Arratel',
@@ -16,38 +57,125 @@ export const siteConfig = {
     }
   },
   company: {
-    legalName: 'Arratel',
-    representative: {
-      de: 'Ricardo Valente de Matos, Geschäftsführer',
-      en: 'Ricardo Valente de Matos, Managing Director'
-    },
-    address: {
-      street: 'Musterstraße 1',
-      postalCode: '10115',
-      city: 'Berlin',
-      country: {
-        de: 'Deutschland',
-        en: 'Germany'
-      }
-    },
+    legalName: 'Ricardo Valente de Matos',
+    representative: null as LocalizedText | null,
+    address: null as CompanyAddress | null,
     contact: {
       email: 'contact@arratel.dev',
-      phone: '+49 30 123456789'
+      phone: null as string | null
     },
-    register: {
-      court: {
-        de: 'Amtsgericht Berlin-Charlottenburg',
-        en: 'Berlin-Charlottenburg Local Court'
-      },
-      number: 'HRB 123456'
-    },
-    vatId: 'DE123456789'
+    register: null as { court: LocalizedText; number: string } | null,
+    vatId: null as string | null
   },
   urls: {
     defaultBaseUrl: 'https://arratel.dev'
   },
+  social: [
+    {
+      id: 'github',
+      label: 'GitHub',
+      href: 'https://github.com/arrateldev',
+      icon: 'github'
+    },
+    {
+      id: 'linkedin',
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/arrateldev',
+      icon: 'linkedin'
+    },
+    {
+      id: 'x',
+      label: 'X',
+      href: 'https://x.com/arrateldev',
+      icon: 'twitter'
+    },
+    {
+      id: 'bluesky',
+      label: 'Bluesky',
+      href: 'https://bsky.app/profile/arratel.dev',
+      icon: 'cloud'
+    },
+    {
+      id: 'youtube',
+      label: 'YouTube',
+      href: 'https://www.youtube.com/@arrateldev',
+      icon: 'youtube'
+    },
+    {
+      id: 'productHunt',
+      label: 'Product Hunt',
+      href: 'https://www.producthunt.com/@arrateldev',
+      icon: 'rocket'
+    },
+    {
+      id: 'npm',
+      label: 'npm',
+      href: 'https://www.npmjs.com/~arrateldev',
+      icon: 'package'
+    },
+    {
+      id: 'dockerHub',
+      label: 'Docker Hub',
+      href: 'https://hub.docker.com/u/arrateldev',
+      icon: 'box'
+    },
+    {
+      id: 'reddit',
+      label: 'Reddit',
+      href: 'https://www.reddit.com/user/arrateldev',
+      icon: 'reddit'
+    }
+  ] satisfies SocialLink[],
   billing: {
     portalHeadline: 'Manage your subscription'
+  },
+  privacy: {
+    providers: [
+      {
+        id: 'hosting',
+        name: 'Vercel Inc.',
+        purpose: {
+          de: 'Hosting, Auslieferung der Anwendung, Sicherheit und technische Protokolle',
+          en: 'hosting, application delivery, security, and technical logs'
+        },
+        location: {
+          de: 'USA und weitere Standorte, abhängig von der konkreten Bereitstellung',
+          en: 'United States and other locations depending on the deployment'
+        }
+      },
+      {
+        id: 'payments',
+        name: 'Stripe Payments Europe, Ltd. / Stripe, Inc.',
+        purpose: {
+          de: 'Zahlungsabwicklung, Abonnementverwaltung, Betrugsprävention und Rechnungsprozesse',
+          en: 'payment processing, subscription management, fraud prevention, and billing workflows'
+        },
+        location: {
+          de: 'EU, USA und weitere Stripe-Unternehmensstandorte',
+          en: 'EU, United States, and other Stripe group locations'
+        }
+      },
+      {
+        id: 'database',
+        name: 'Externer Postgres-Anbieter',
+        purpose: {
+          de: 'Speicherung von Account-, Team-, Abonnement- und Aktivitätsdaten',
+          en: 'storage of account, team, subscription, and activity data'
+        },
+        location: {
+          de: 'abhängig vom gewählten Datenbankanbieter',
+          en: 'depending on the selected database provider'
+        }
+      }
+    ] satisfies PrivacyProvider[],
+    retention: {
+      accountData:
+        'Account- und Teamdaten werden gespeichert, solange das Konto besteht. Nach einer Kontolöschung wird der Account im System als gelöscht markiert und die E-Mail-Adresse zur Wahrung technischer Eindeutigkeit pseudonymisiert.',
+      activityLogs:
+        'Aktivitätsprotokolle werden für Sicherheits-, Nachweis- und Produktbetriebszwecke gespeichert und regelmäßig überprüft.',
+      billingData:
+        'Abrechnungs- und steuerrelevante Daten werden entsprechend gesetzlicher Aufbewahrungspflichten gespeichert.'
+    }
   }
 } as const;
 

@@ -6,7 +6,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 
 - Next.js SaaS starter using the App Router, React 19, TypeScript, Tailwind CSS 4, shadcn-style UI components, Drizzle ORM, Postgres, and Stripe.
 - Arratel is the umbrella brand for this SaaS portfolio. The primary domain is `arratel.dev`, and the contact email is `contact@arratel.dev`.
-- Main product, company, domain, contact, and legal placeholder configuration lives in `lib/site-config.ts`.
+- Main product, company, domain, contact, social, and legal placeholder configuration lives in `lib/site-config.ts`.
 - Internationalization currently supports `de` and `en` in `lib/i18n/config.ts`; `defaultLocale` is `en`.
 - User-facing copy is centralized in `lib/i18n/messages.ts`.
 - Middleware/proxy behavior is implemented in `proxy.ts`. It redirects non-localized paths to a localized path, sets `x-locale`, persists the `locale` cookie, and protects localized `/dashboard` routes.
@@ -24,6 +24,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 - Legal pages include localized `datenschutz`, `impressum`, and `terms` pages.
 - There are still legacy non-localized route groups under `app/(dashboard)` and `app/(login)`. Be careful when changing shared behavior: confirm whether the localized or legacy route is the active target.
 - API routes live under `app/api`.
+- Feature flags live in `lib/config/feature-flags.ts`. `DEPLOYMENT_MODE=minimal` is for static/landing launches without auth, database, or Stripe; `full` enables the SaaS flows.
 
 ## Auth, Teams, And Data Access
 
@@ -39,6 +40,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 - Start dev server: `npm run dev`.
 - Build: `npm run build`.
 - Database setup helpers:
+  - `npm run db:create`
   - `npm run db:setup`
   - `npm run db:generate`
   - `npm run db:migrate`
@@ -55,7 +57,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 - Keep text additions localized in `lib/i18n/messages.ts` for both `de` and `en`.
 - German user-facing copy must use proper German characters (`ä`, `ö`, `ü`, `Ä`, `Ö`, `Ü`, `ß`) instead of ASCII transliterations such as `ae`, `oe`, `ue`, or `ss`, except inside code identifiers, URLs, slugs, env vars, or other technical values.
 - When adding routes or links, route through the locale helpers in `lib/i18n/config.ts` where applicable.
-- Update `lib/site-config.ts` for product/company/legal metadata rather than scattering constants through pages.
+- Update `lib/site-config.ts` for product/company/social/legal/privacy metadata rather than scattering constants through pages. `product.name` is the public brand/product; `company.legalName` is the legal provider and may be a natural person. Legal fields such as address, phone, representative, register, and VAT ID may intentionally be `null` until real data exists; do not reintroduce fake legal placeholders. Social profile links live under `siteConfig.social`. Privacy service providers and retention copy live under `siteConfig.privacy`.
 - If database tables or relations change, update `lib/db/schema.ts`, generate a migration, and check query helpers in `lib/db/queries.ts`.
 - If billing behavior changes, verify both real Stripe mode and `MOCK_STRIPE=true` mode.
 - Keep redirects locale-aware. Server actions should read `locale` from form data with `getLocaleFromFormData` when the destination is user-facing.
