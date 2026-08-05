@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { isLocale, locales } from '@/lib/i18n/config';
 import { SiteChrome } from '@/components/site-chrome';
 import { getUser } from '@/lib/db/queries';
+import { features } from '@/lib/config/feature-flags';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -26,6 +27,12 @@ export default async function LocaleLayout({
   return (
     <SiteChrome
       locale={locale}
+      features={{
+        auth: features.auth,
+        dashboard: features.dashboard,
+        impressum: features.impressum,
+        pricing: features.pricing
+      }}
       user={
         user
           ? {

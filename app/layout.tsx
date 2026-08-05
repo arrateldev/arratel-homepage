@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Manrope } from 'next/font/google';
-import { SWRConfig } from 'swr';
 import { headers } from 'next/headers';
 import { defaultLocale, isLocale } from '@/lib/i18n/config';
 import { siteConfig } from '@/lib/site-config';
@@ -36,18 +35,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${manrope.variable} bg-white text-black`}>
       <body className="min-h-[100dvh] bg-background font-sans text-foreground antialiased">
-        <SWRConfig
-          //value={{
-            //fallback: {
-              // We do NOT await here
-              // Only components that read this data will suspend
-              //'/api/user': getUser(),
-              //'/api/team': getTeamForUser()
-            //}
-          //}}
-        >
-          {children}
-        </SWRConfig>
+        {children}
       </body>
     </html>
   );

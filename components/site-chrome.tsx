@@ -21,10 +21,18 @@ import { getMessages } from '@/lib/i18n/messages';
 import { AppLogo } from '@/components/app-logo';
 import { siteConfig } from '@/lib/site-config';
 
+type SiteChromeFeatures = {
+  auth: boolean;
+  dashboard: boolean;
+  impressum: boolean;
+  pricing: boolean;
+};
+
 export function SiteChrome({
   children,
   locale,
-  user
+  user,
+  features
 }: {
   children: ReactNode;
   locale: Locale;
@@ -32,12 +40,13 @@ export function SiteChrome({
     name: string | null;
     email: string;
   } | null;
+  features: SiteChromeFeatures;
 }) {
   const t = getMessages(locale);
 
   return (
     <section className="flex min-h-screen flex-col">
-      <Header locale={locale} user={user} />
+      <Header locale={locale} user={user} features={features} />
       <main className="flex-1 pt-[73px]">{children}</main>
       <footer className="border-t border-border/70 bg-slate-950 text-slate-300">
         <div className="section-shell grid gap-8 py-12 lg:grid-cols-3">
@@ -64,19 +73,21 @@ export function SiteChrome({
               >
                 {t.common.home}
               </Link>
-              <Link
-                href={localizePath(locale, '/pricing')}
-                className="transition-colors hover:text-white"
-              >
-                {t.common.pricing}
-              </Link>
+              {features.pricing ? (
+                <Link
+                  href={localizePath(locale, '/pricing')}
+                  className="transition-colors hover:text-white"
+                >
+                  {t.common.pricing}
+                </Link>
+              ) : null}
               <Link
                 href={localizePath(locale, '/faq')}
                 className="transition-colors hover:text-white"
               >
                 {t.common.faq}
               </Link>
-              {user ? (
+              {user && features.dashboard ? (
                 <Link
                   href={localizePath(locale, '/dashboard')}
                   className="transition-colors hover:text-white"
@@ -92,12 +103,14 @@ export function SiteChrome({
               {t.common.legal}
             </h3>
             <div className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
-              <Link
-                href={localizePath(locale, '/impressum')}
-                className="transition-colors hover:text-white"
-              >
-                {t.home.legalLinks.imprint}
-              </Link>
+              {features.impressum ? (
+                <Link
+                  href={localizePath(locale, '/impressum')}
+                  className="transition-colors hover:text-white"
+                >
+                  {t.home.legalLinks.imprint}
+                </Link>
+              ) : null}
               <Link
                 href={localizePath(locale, '/datenschutz')}
                 className="transition-colors hover:text-white"
@@ -130,13 +143,15 @@ export function SiteChrome({
 
 function Header({
   locale,
-  user
+  user,
+  features
 }: {
   locale: Locale;
   user: {
     name: string | null;
     email: string;
   } | null;
+  features: SiteChromeFeatures;
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -151,9 +166,11 @@ function Header({
 
   const navItems = [
     { href: localizePath(locale, '/'), label: t.common.home },
-    { href: localizePath(locale, '/pricing'), label: t.common.pricing },
+    ...(features.pricing
+      ? [{ href: localizePath(locale, '/pricing'), label: t.common.pricing }]
+      : []),
     { href: localizePath(locale, '/faq'), label: t.common.faq },
-    ...(user
+    ...(user && features.dashboard
       ? [{ href: localizePath(locale, '/dashboard'), label: t.common.dashboard }]
       : [])
   ];
@@ -196,17 +213,17 @@ function Header({
               {alternateLocale.toUpperCase()}
             </Link>
           </Button>
-          {user ? (
+          {user && features.dashboard ? (
             <Suspense
               fallback={<div className="h-9 w-24 rounded-full border border-border/70" />}
             >
               <UserMenu locale={locale} user={user} />
             </Suspense>
-          ) : (
+          ) : !user && features.auth ? (
             <Button asChild variant="ghost" size="sm">
               <Link href={localizePath(locale, '/sign-in')}>{t.header.signIn}</Link>
             </Button>
-          )}
+          ) : null}
         </div>
 
         <Button
@@ -240,7 +257,7 @@ function Header({
                   {alternateLocale.toUpperCase()}
                 </Link>
               </Button>
-              {user ? (
+              {user && features.dashboard ? (
                 <form action={signOut}>
                   <input type="hidden" name="locale" value={locale} />
                   <Button
@@ -253,7 +270,7 @@ function Header({
                     {t.header.signOut}
                   </Button>
                 </form>
-              ) : (
+              ) : !user && features.auth ? (
                 <Button asChild variant="outline" size="sm">
                   <Link
                     href={localizePath(locale, '/sign-in')}
@@ -262,7 +279,7 @@ function Header({
                     {t.header.signIn}
                   </Link>
                 </Button>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
