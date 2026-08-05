@@ -2,27 +2,27 @@ import type { Locale } from '@/lib/i18n/config';
 
 export const siteConfig = {
   product: {
-    name: 'ACME',
-    companyDisplayName: 'Test Produkt',
+    name: 'Arratel',
+    companyDisplayName: 'Arratel',
     metadata: {
       title: {
-        de: 'SaaS Starter',
-        en: 'SaaS Starter'
+        de: 'Arratel',
+        en: 'Arratel'
       },
       description: {
-        de: 'Mehrsprachiger SaaS Starter mit Next.js, Postgres und Stripe.',
-        en: 'Multilingual SaaS starter built with Next.js, Postgres, and Stripe.'
+        de: 'Arratel entwickelt schlanke SaaS-Produkte für nützliche digitale Workflows.',
+        en: 'Arratel builds focused SaaS products for useful digital workflows.'
       }
     }
   },
   company: {
-    legalName: 'ACME GmbH',
+    legalName: 'Arratel',
     representative: {
-      de: 'Ricardo Valente de Matos, Geschaeftsfuehrer',
+      de: 'Ricardo Valente de Matos, Geschäftsführer',
       en: 'Ricardo Valente de Matos, Managing Director'
     },
     address: {
-      street: 'Musterstrasse 1',
+      street: 'Musterstraße 1',
       postalCode: '10115',
       city: 'Berlin',
       country: {
@@ -31,7 +31,7 @@ export const siteConfig = {
       }
     },
     contact: {
-      email: 'hello@example.com',
+      email: 'contact@arratel.dev',
       phone: '+49 30 123456789'
     },
     register: {
@@ -44,7 +44,7 @@ export const siteConfig = {
     vatId: 'DE123456789'
   },
   urls: {
-    defaultBaseUrl: 'http://localhost:3000'
+    defaultBaseUrl: 'https://arratel.dev'
   },
   billing: {
     portalHeadline: 'Manage your subscription'

@@ -29,60 +29,60 @@ const messages = {
       productEyebrow: 'Produktbereich',
       productTitle: 'Hier sollte direkt das eigentliche SaaS starten.',
       productDescription:
-        'Wenn dein Free-Plan sofort nutzbar ist, gehoert das Kernprodukt direkt unter den ersten Marketing-Block. So landet der Nutzer ohne Umweg direkt im Tool.',
+        'Wenn dein Free-Plan sofort nutzbar ist, gehört das Kernprodukt direkt unter den ersten Marketing-Block. So landet der Nutzer ohne Umweg direkt im Tool.',
       productPrimaryCta: 'Produkt starten',
       productSecondaryCta: 'Preise ansehen',
-      productPreviewTitle: 'Platz fuer dein erstes Tool',
+      productPreviewTitle: 'Platz für dein erstes Tool',
       productPreviewBody:
-        'Zum Beispiel ein PDF-Merger mit Upload, Queue und Ergebnis-Download. Dieser Bereich sollte spaeter die eigentliche App-Oberflaeche enthalten, nicht nur eine Demo.',
+        'Zum Beispiel ein PDF-Merger mit Upload, Queue und Ergebnis-Download. Dieser Bereich sollte später die eigentliche App-Oberfläche enthalten, nicht nur eine Demo.',
       productPreviewList: [
-        'Kurze Einfuehrung statt langem Hero',
+        'Kurze Einführung statt langem Hero',
         'Direkter Einstieg in den Free-Plan',
         'Upgrade erst nach echter Nutzung'
       ],
       featureTitle1: 'Next.js und React',
       featureBody1:
-        'Moderne Webtechnologien fuer starke Performance und eine schnelle Developer Experience.',
+        'Moderne Webtechnologien für starke Performance und eine schnelle Developer Experience.',
       featureTitle2: 'Postgres und Drizzle ORM',
       featureBody2:
-        'Robuste Datenhaltung mit schlankem ORM fuer klare Datenmodelle und saubere Skalierung.',
+        'Robuste Datenhaltung mit schlankem ORM für klare Datenmodelle und saubere Skalierung.',
       featureTitle3: 'Stripe Integration',
       featureBody3:
         'Zahlungen und Subscriptions ohne Sonderwege, direkt mit Stripe eingebunden.',
       pricingBadge: 'Einfache Preise',
       pricingTitle: 'Kostenlos starten. Erst upgraden, wenn es Sinn ergibt.',
       pricingDescription:
-        'Keine ueberladenen Pakete. Ein sauberer Free-Plan und ein Pro-Upgrade fuer regelmaessige Nutzung.',
+        'Keine überladenen Pakete. Ein sauberer Free-Plan und ein Pro-Upgrade für regelmäßige Nutzung.',
       freeLabel: 'Free',
       freeTitle: 'Direkt loslegen',
       freeTag: 'Kein Risiko',
       freePrice: 'EUR 0',
       month: '/ Monat',
       freeDescription:
-        'Ideal zum Testen, fuer kleine Workloads und fuer den ersten produktiven Eindruck ohne Zahlung.',
+        'Ideal zum Testen, für kleine Workloads und für den ersten produktiven Eindruck ohne Zahlung.',
       freeFeatures: [
         'Basisnutzung inklusive',
         'Kernfunktionen freigeschaltet',
         'Klare und einfache UX',
-        'Upgrade jederzeit moeglich'
+        'Upgrade jederzeit möglich'
       ],
       freeCta: 'Kostenlos starten',
       proLabel: 'Pro',
-      proTitle: 'Fuer regelmaessige Nutzung',
+      proTitle: 'Für regelmäßige Nutzung',
       proTag: 'Beliebteste Wahl',
       proPrice: 'EUR 9',
       proDescription:
-        'Fuer Nutzer, die weniger Limits, schnellere Workflows und einen verlaesslichen Daily-Use-Pfad wollen.',
+        'Für Nutzer, die weniger Limits, schnellere Workflows und einen verlässlichen Daily-Use-Pfad wollen.',
       proFeatures: [
         'Alles aus Free',
-        'Hoehere Nutzungslimits',
+        'Höhere Nutzungslimits',
         'Vorrang bei erweiterten Features',
-        'Beste Wahl fuer wiederkehrende Workflows'
+        'Beste Wahl für wiederkehrende Workflows'
       ],
       proCta: 'Zu Pro wechseln',
       fullPricingCta: 'Alle Preise',
       footerDescription:
-        'Einfache Werkzeuge fuer taegliche Workflows, gebaut mit Fokus auf Privatsphaere, Performance und klarer Nutzerfuehrung.',
+        'Einfache Werkzeuge für tägliche Workflows, gebaut mit Fokus auf Privatsphäre, Performance und klarer Nutzerführung.',
       legalLinks: {
         imprint: 'Impressum',
         privacy: 'Datenschutz',
@@ -90,12 +90,12 @@ const messages = {
       }
     },
     faq: {
-      eyebrow: 'Haeufige Fragen',
+      eyebrow: 'Häufige Fragen',
       title: 'Antworten auf die wichtigsten Fragen vor dem Start.',
       intro:
-        'Kurz, klar und ohne Sales-Floskeln. Hier findest du die Punkte, die vor Signup, Testphase oder Upgrade am haeufigsten offen bleiben.',
+        'Kurz, klar und ohne Sales-Floskeln. Hier findest du die Punkte, die vor Signup, Testphase oder Upgrade am häufigsten offen bleiben.',
       badgePrimary: 'Schnelle Antworten',
-      badgeSecondary: 'Kein Support-Ticket noetig',
+      badgeSecondary: 'Kein Support-Ticket nötig',
       sections: [
         {
           title: 'Produkt und Zugang',
@@ -108,12 +108,12 @@ const messages = {
             {
               question: 'Brauche ich direkt ein Team oder mehrere Nutzer?',
               answer:
-                'Nein. Du kannst allein starten und spaeter weitere Mitglieder einladen, sobald dein Workflow stabil ist oder Zusammenarbeit wichtig wird.'
+                'Nein. Du kannst allein starten und später weitere Mitglieder einladen, sobald dein Workflow stabil ist oder Zusammenarbeit wichtig wird.'
             },
             {
-              question: 'Kann ich spaeter auf einen bezahlten Plan wechseln?',
+              question: 'Kann ich später auf einen bezahlten Plan wechseln?',
               answer:
-                'Ja. Der Upgrade-Pfad ist bewusst einfach gehalten, damit du erst dann zahlst, wenn die Nutzung regelmaessig wird oder du mehr Limits brauchst.'
+                'Ja. Der Upgrade-Pfad ist bewusst einfach gehalten, damit du erst dann zahlst, wenn die Nutzung regelmäßig wird oder du mehr Limits brauchst.'
             }
           ]
         },
@@ -121,7 +121,7 @@ const messages = {
           title: 'Abrechnung und Datenschutz',
           items: [
             {
-              question: 'Was passiert mit meinen Daten, wenn ich kuendige?',
+              question: 'Was passiert mit meinen Daten, wenn ich kündige?',
               answer:
                 'Dein Zugang und deine Daten sollten nachvollziehbar behandelt werden. Die rechtlichen Details findest du in Datenschutz und AGB, die im Footer verlinkt sind.'
             },
@@ -131,9 +131,9 @@ const messages = {
                 'Das Produkt ist darauf ausgelegt, mit einer klaren Free- und Upgrade-Logik zu arbeiten. So entstehen Kosten erst dann, wenn die Nutzung den Mehrwert rechtfertigt.'
             },
             {
-              question: 'Ist Stripe fuer Zahlungen verpflichtend?',
+              question: 'Ist Stripe für Zahlungen verpflichtend?',
               answer:
-                'Fuer echte Zahlungen ja. In der Entwicklung kann Billing aber im Mock-Modus simuliert werden, damit Produktarbeit ohne fruehe Stripe-Abhaengigkeit moeglich bleibt.'
+                'Für echte Zahlungen ja. In der Entwicklung kann Billing aber im Mock-Modus simuliert werden, damit Produktarbeit ohne frühe Stripe-Abhängigkeit möglich bleibt.'
             }
           ]
         },
@@ -141,19 +141,19 @@ const messages = {
           title: 'Technik und Betrieb',
           items: [
             {
-              question: 'Brauche ich fuer den produktiven Betrieb eine eigene Datenbank?',
+              question: 'Brauche ich für den produktiven Betrieb eine eigene Datenbank?',
               answer:
-                'Ja. Die App laeuft separat von der Datenbank. In Production wird eine externe Postgres-Datenbank eingebunden, waehrend lokal auch Docker oder eine gehostete Test-DB reicht.'
+                'Ja. Die App läuft separat von der Datenbank. In Production wird eine externe Postgres-Datenbank eingebunden, während lokal auch Docker oder eine gehostete Test-DB reicht.'
             },
             {
-              question: 'Ist das eher fuer MVPs oder schon fuer echte Kunden gedacht?',
+              question: 'Ist das eher für MVPs oder schon für echte Kunden gedacht?',
               answer:
-                'Beides. Das Setup ist schlank genug fuer schnelle Validierung, aber strukturiert genug, um daraus ein produktives SaaS mit echten Nutzern weiterzuentwickeln.'
+                'Beides. Das Setup ist schlank genug für schnelle Validierung, aber strukturiert genug, um daraus ein produktives SaaS mit echten Nutzern weiterzuentwickeln.'
             },
             {
               question: 'Wie schnell komme ich ins Dashboard?',
               answer:
-                'Sobald dein Account angelegt ist, kommst du direkt in den geschuetzten Bereich. Navigation und geladene Daten sind darauf ausgelegt, den Einstieg moeglichst reibungsarm zu machen.'
+                'Sobald dein Account angelegt ist, kommst du direkt in den geschützten Bereich. Navigation und geladene Daten sind darauf ausgelegt, den Einstieg möglichst reibungsarm zu machen.'
             }
           ]
         }
@@ -171,7 +171,7 @@ const messages = {
       emailPlaceholder: 'E-Mail eingeben',
       password: 'Passwort',
       passwordPlaceholder: 'Passwort eingeben',
-      loading: 'Laedt...',
+      loading: 'Lädt...',
       signIn: 'Anmelden',
       signUp: 'Registrieren',
       newHere: 'Neu auf der Plattform?',
@@ -185,8 +185,8 @@ const messages = {
       signIn: 'Anmelden',
       signOut: 'Abmelden',
       signUp: 'Registrieren',
-      openMenu: 'Menue oeffnen',
-      closeMenu: 'Menue schliessen'
+      openMenu: 'Menü öffnen',
+      closeMenu: 'Menü schließen'
     },
     pricing: {
       mockBillingActive:
@@ -202,7 +202,7 @@ const messages = {
       ],
       featuresPlus: [
         'Alles aus Base',
-        'Frueher Zugriff auf neue Features',
+        'Früher Zugriff auf neue Features',
         '24/7 Support plus Slack-Zugang'
       ]
     },
@@ -211,7 +211,7 @@ const messages = {
       nav: {
         team: 'Team',
         general: 'Allgemein',
-        activity: 'Aktivitaet',
+        activity: 'Aktivität',
         security: 'Sicherheit'
       },
       teamSettings: 'Team-Einstellungen',
@@ -237,13 +237,13 @@ const messages = {
       accountInformation: 'Kontoinformationen',
       name: 'Name',
       namePlaceholder: 'Deinen Namen eingeben',
-      saveChanges: 'Aenderungen speichern',
+      saveChanges: 'Änderungen speichern',
       saving: 'Speichert...',
-      activityLog: 'Aktivitaetsprotokoll',
-      recentActivity: 'Letzte Aktivitaet',
-      noActivityYet: 'Noch keine Aktivitaet',
+      activityLog: 'Aktivitätsprotokoll',
+      recentActivity: 'Letzte Aktivität',
+      noActivityYet: 'Noch keine Aktivität',
       noActivityDescription:
-        'Aktionen wie Login oder Kontoaenderungen erscheinen spaeter hier.',
+        'Aktionen wie Login oder Kontoänderungen erscheinen später hier.',
       relativeTime: {
         justNow: 'gerade eben',
         minutesAgo: 'vor {count} Minuten',
@@ -254,8 +254,8 @@ const messages = {
         signUp: 'Du hast dich registriert',
         signIn: 'Du hast dich angemeldet',
         signOut: 'Du hast dich abgemeldet',
-        updatePassword: 'Du hast dein Passwort geaendert',
-        deleteAccount: 'Du hast dein Konto geloescht',
+        updatePassword: 'Du hast dein Passwort geändert',
+        deleteAccount: 'Du hast dein Konto gelöscht',
         updateAccount: 'Du hast dein Konto aktualisiert',
         createTeam: 'Du hast ein neues Team erstellt',
         removeTeamMember: 'Du hast ein Team-Mitglied entfernt',
@@ -266,14 +266,14 @@ const messages = {
       securitySettings: 'Sicherheitseinstellungen',
       currentPassword: 'Aktuelles Passwort',
       newPassword: 'Neues Passwort',
-      confirmNewPassword: 'Neues Passwort bestaetigen',
+      confirmNewPassword: 'Neues Passwort bestätigen',
       updatePassword: 'Passwort aktualisieren',
       updating: 'Aktualisiert...',
-      deleteAccount: 'Konto loeschen',
+      deleteAccount: 'Konto löschen',
       deleteWarning:
-        'Das Loeschen des Kontos kann nicht rueckgaengig gemacht werden. Bitte vorsichtig fortfahren.',
-      confirmPassword: 'Passwort bestaetigen',
-      deleting: 'Loescht...',
+        'Das Löschen des Kontos kann nicht rückgängig gemacht werden. Bitte vorsichtig fortfahren.',
+      confirmPassword: 'Passwort bestätigen',
+      deleting: 'Löscht...',
       billingMockControl: 'Billing Mock Control',
       billingMockDescription:
         'Diese Seite ersetzt im Dev-Modus das Stripe Customer Portal. Hier steuerst du Plan und Status direkt.',
@@ -287,7 +287,7 @@ const messages = {
     notFound: {
       title: 'Seite nicht gefunden',
       description:
-        'Die gesuchte Seite wurde entfernt, umbenannt oder ist temporaer nicht verfuegbar.'
+        'Die gesuchte Seite wurde entfernt, umbenannt oder ist temporär nicht verfügbar.'
     }
   },
   en: {

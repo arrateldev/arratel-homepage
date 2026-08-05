@@ -31,14 +31,14 @@ const mockStates = [
   },
   {
     title: 'Unpaid',
-    description: 'Laesst das Abo als offen oder fehlgeschlagen erscheinen.',
+    description: 'Lässt das Abo als offen oder fehlgeschlagen erscheinen.',
     planName: 'Plus',
     productId: 'mock_prod_plus',
     subscriptionStatus: 'unpaid'
   },
   {
     title: 'Canceled',
-    description: 'Simuliert ein gekuendigtes Abo.',
+    description: 'Simuliert ein gekündigtes Abo.',
     planName: null,
     productId: null,
     subscriptionStatus: 'canceled'

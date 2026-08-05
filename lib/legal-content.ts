@@ -34,10 +34,10 @@ const legalContent: Record<Locale, LegalContent> = {
       eyebrow: 'Rechtliches',
       title: 'Impressum',
       intro:
-        'Diese Vorlage enthaelt Platzhalter, die du vor der produktiven Nutzung mit deinen echten Unternehmensdaten ersetzen solltest.',
+        'Diese Vorlage enthält Platzhalter, die du vor der produktiven Nutzung mit deinen echten Unternehmensdaten ersetzen solltest.',
       sections: [
         {
-          title: 'Angaben gemaess § 5 TMG',
+          title: 'Angaben gemäß § 5 TMG',
           paragraphs: legalAddress('de')
         },
         {
@@ -68,14 +68,14 @@ const legalContent: Record<Locale, LegalContent> = {
     },
     privacy: {
       eyebrow: 'Rechtliches',
-      title: 'Datenschutzerklaerung',
+      title: 'Datenschutzerklärung',
       intro:
-        'Diese Kurzfassung ist eine saubere Ausgangsbasis, ersetzt aber keine rechtliche Pruefung fuer dein konkretes Produkt.',
+        'Diese Kurzfassung ist eine saubere Ausgangsbasis, ersetzt aber keine rechtliche Prüfung für dein konkretes Produkt.',
       sections: [
         {
           title: '1. Verantwortlicher',
           paragraphs: [
-            `Verantwortlich fuer die Datenverarbeitung ist die ${siteConfig.company.legalName}, ${siteConfig.company.address.street}, ${siteConfig.company.address.postalCode} ${siteConfig.company.address.city}, ${siteConfig.company.address.country.de}.`,
+            `Verantwortlich für die Datenverarbeitung ist die ${siteConfig.company.legalName}, ${siteConfig.company.address.street}, ${siteConfig.company.address.postalCode} ${siteConfig.company.address.city}, ${siteConfig.company.address.country.de}.`,
             `Bei Datenschutzfragen erreichst du uns unter ${siteConfig.company.contact.email}.`
           ]
         },
@@ -83,7 +83,7 @@ const legalContent: Record<Locale, LegalContent> = {
           title: '2. Welche Daten wir verarbeiten',
           paragraphs: [
             'Wir verarbeiten Bestandsdaten wie Name, E-Mail-Adresse und Account-Informationen.',
-            'Zusaetzlich koennen Nutzungsdaten, Logdaten und abrechnungsbezogene Daten verarbeitet werden, soweit dies fuer den Betrieb des Dienstes erforderlich ist.'
+            'Zusätzlich können Nutzungsdaten, Logdaten und abrechnungsbezogene Daten verarbeitet werden, soweit dies für den Betrieb des Dienstes erforderlich ist.'
           ]
         },
         {
@@ -95,23 +95,23 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '4. Speicherdauer',
           paragraphs: [
-            'Wir speichern personenbezogene Daten nur so lange, wie dies fuer die genannten Zwecke oder gesetzliche Aufbewahrungspflichten notwendig ist.'
+            'Wir speichern personenbezogene Daten nur so lange, wie dies für die genannten Zwecke oder gesetzliche Aufbewahrungspflichten notwendig ist.'
           ]
         },
         {
           title: '5. Deine Rechte',
           paragraphs: [
-            'Du hast das Recht auf Auskunft, Berichtigung, Loeschung, Einschraenkung der Verarbeitung, Datenuebertragbarkeit und Widerspruch.',
-            'Ausserdem besteht ein Beschwerderecht bei einer zustaendigen Datenschutzaufsichtsbehoerde.'
+            'Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch.',
+            'Außerdem besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.'
           ]
         }
       ]
     },
     terms: {
       eyebrow: 'Rechtliches',
-      title: 'Allgemeine Geschaeftsbedingungen',
+      title: 'Allgemeine Geschäftsbedingungen',
       intro:
-        'Auch diese AGB sind eine Vorlage. Fuer den Live-Betrieb solltest du sie mit echten Produktdetails und juristischer Pruefung finalisieren.',
+        'Auch diese AGB sind eine Vorlage. Für den Live-Betrieb solltest du sie mit echten Produktdetails und juristischer Prüfung finalisieren.',
       sections: [
         {
           title: '1. Geltungsbereich',
@@ -134,13 +134,13 @@ const legalContent: Record<Locale, LegalContent> = {
         {
           title: '4. Preise und Zahlung',
           paragraphs: [
-            'Kostenpflichtige Plaene werden nach den zum Zeitpunkt der Buchung angegebenen Preisen abgerechnet. Zahlungen koennen ueber externe Zahlungsdienstleister abgewickelt werden.'
+            'Kostenpflichtige Pläne werden nach den zum Zeitpunkt der Buchung angegebenen Preisen abgerechnet. Zahlungen können über externe Zahlungsdienstleister abgewickelt werden.'
           ]
         },
         {
-          title: '5. Kuendigung',
+          title: '5. Kündigung',
           paragraphs: [
-            'Nutzer koennen ihr Abonnement zum Ende der laufenden Abrechnungsperiode kuendigen, sofern keine abweichenden Vereinbarungen bestehen.'
+            'Nutzer können ihr Abonnement zum Ende der laufenden Abrechnungsperiode kündigen, sofern keine abweichenden Vereinbarungen bestehen.'
           ]
         }
       ]
