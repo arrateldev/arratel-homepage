@@ -40,6 +40,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 - Install dependencies with `pnpm install` or `npm install`; both lockfiles currently exist.
 - Start dev server: `npm run dev`.
 - Build: `npm run build`.
+- Vercel is configured via `vercel.json` to install with `npm install` and build with `npm run build`; keep `package-lock.json` current when dependencies change.
 - Database setup helpers:
   - `npm run db:create`
   - `npm run db:setup`
