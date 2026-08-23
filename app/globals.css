@@ -11,6 +11,7 @@
   --color-popover-foreground: hsl(var(--popover-foreground));
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-brand-secondary: hsl(var(--brand-secondary));
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
   --color-muted: hsl(var(--muted));
@@ -54,8 +55,9 @@ body {
   --popover: 0 0% 100%;
   --popover-foreground: 222 30% 12%;
 
-  --primary: 246 83% 62%;
-  --primary-foreground: 0 0% 100%;
+  --primary: 237 88% 72%;
+  --primary-foreground: 238 35% 13%;
+  --brand-secondary: 203 100% 71%;
 
   --secondary: 205 38% 95%;
   --secondary-foreground: 220 27% 18%;
@@ -63,15 +65,15 @@ body {
   --muted: 210 28% 95%;
   --muted-foreground: 220 16% 42%;
 
-  --accent: 248 100% 97%;
-  --accent-foreground: 246 60% 30%;
+  --accent: 238 100% 97%;
+  --accent-foreground: 237 60% 32%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
   --border: 214 26% 88%;
   --input: 214 26% 88%;
-  --ring: 246 83% 62%;
+  --ring: 237 88% 72%;
 
   --radius: 1.25rem;
 }
@@ -86,8 +88,9 @@ body {
   --popover: 232 24% 10%;
   --popover-foreground: 220 20% 96%;
 
-  --primary: 246 83% 68%;
-  --primary-foreground: 0 0% 100%;
+  --primary: 237 88% 74%;
+  --primary-foreground: 232 30% 8%;
+  --brand-secondary: 203 100% 74%;
 
   --secondary: 230 18% 16%;
   --secondary-foreground: 220 20% 96%;
@@ -103,7 +106,7 @@ body {
 
   --border: 230 16% 18%;
   --input: 230 16% 18%;
-  --ring: 246 83% 68%;
+  --ring: 237 88% 74%;
 }
 
 @layer base {
@@ -113,13 +116,7 @@ body {
 
   body {
     @apply bg-background text-foreground;
-      background-image:
-        radial-gradient(
-          circle at top center,
-          hsl(var(--primary) / 0.07),
-          transparent 34%
-        ),
-        linear-gradient(180deg, hsl(var(--background)), hsl(0 0% 100%));
+    background: hsl(var(--background));
   }
 }
 
@@ -136,41 +133,38 @@ body {
     @apply rounded-[28px] border border-border/70 bg-white shadow-[0_12px_28px_-24px_rgba(15,23,42,0.16)];
   }
 
-    .page-aura-surface {
-      background-image:
-        radial-gradient(
-          circle at top left,
-          hsl(var(--primary) / 0.11),
-          transparent 32%
-        ),
-        radial-gradient(
-          circle at top right,
-          hsl(var(--accent-foreground) / 0.06),
-          transparent 28%
-        ),
-        linear-gradient(
-          to bottom,
-          hsl(var(--background) / 0.98),
-          hsl(var(--muted) / 0.76)
-        );
-    }
+  .brand-gradient {
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--brand-secondary))
+    );
+  }
+
+  .brand-gradient-text {
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--brand-secondary))
+    );
+    background-clip: text;
+    color: transparent;
+  }
+
+  .font-title {
+    font-family: var(--font-title), var(--font-sans), sans-serif;
+  }
+
+  .page-aura-surface {
+    background: hsl(var(--background));
+  }
 
   .page-aura-card {
-    background-image:
-      radial-gradient(
-        circle at top,
-        hsl(var(--primary) / 0.08),
-        transparent 58%
-      ),
-      linear-gradient(
-        to bottom right,
-        hsl(var(--card)),
-        hsl(var(--muted) / 0.45)
-      );
+    background: hsl(var(--card));
   }
 
   .animate-mock-file-top {
-    animation: mock-file-top 4.2s ease-in-out infinite;
+    animation: none;
   }
 
   .animate-enter {
@@ -186,11 +180,11 @@ body {
   }
 
   .animate-mock-file-bottom {
-    animation: mock-file-bottom 4.2s ease-in-out infinite;
+    animation: none;
   }
 
   .animate-mock-progress {
-    animation: mock-progress 4.2s ease-in-out infinite;
+    animation: none;
     transform-origin: left;
   }
 

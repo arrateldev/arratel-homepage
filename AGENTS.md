@@ -6,6 +6,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 
 - Next.js SaaS starter using the App Router, React 19, TypeScript, Tailwind CSS 4, shadcn-style UI components, Drizzle ORM, Postgres, and Stripe.
 - Arratel is the umbrella brand for this SaaS portfolio. The primary domain is `arratel.dev`, and the contact email is `contact@arratel.dev`.
+- Arratel brand colors are `#787ff6` as primary and `#69c4ff` as secondary/cyan. Theme variables live in `app/globals.css`; use the secondary color for subtle aura, glow, and brand-gradient accents rather than making every component blue.
 - Main product, company, domain, contact, social, and legal placeholder configuration lives in `lib/site-config.ts`.
 - Internationalization currently supports `de` and `en` in `lib/i18n/config.ts`; `defaultLocale` is `en`.
 - User-facing copy is centralized in `lib/i18n/messages.ts`.

@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Manrope } from 'next/font/google';
+import localFont from 'next/font/local';
 import { headers } from 'next/headers';
 import { defaultLocale, isLocale } from '@/lib/i18n/config';
 import { siteConfig } from '@/lib/site-config';
@@ -20,6 +21,12 @@ const manrope = Manrope({
   variable: '--font-sans'
 });
 
+const titleFont = localFont({
+  src: './fonts/LexendExa_400Regular.ttf',
+  display: 'swap',
+  variable: '--font-title'
+});
+
 export default async function RootLayout({
   children
 }: {
@@ -33,7 +40,10 @@ export default async function RootLayout({
       : defaultLocale;
 
   return (
-    <html lang={locale} className={`${manrope.variable} bg-white text-black`}>
+    <html
+      lang={locale}
+      className={`${manrope.variable} ${titleFont.variable} bg-white text-black`}
+    >
       <body className="min-h-[100dvh] bg-background font-sans text-foreground antialiased">
         {children}
       </body>

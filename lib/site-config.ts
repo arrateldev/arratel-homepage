@@ -32,12 +32,12 @@ type SocialLink = {
   icon:
     | 'github'
     | 'linkedin'
-    | 'twitter'
-    | 'cloud'
+    | 'x'
+    | 'bluesky'
     | 'youtube'
-    | 'rocket'
-    | 'package'
-    | 'box'
+    | 'productHunt'
+    | 'npm'
+    | 'dockerHub'
     | 'reddit';
 };
 
@@ -87,13 +87,13 @@ export const siteConfig = {
       id: 'x',
       label: 'X',
       href: 'https://x.com/arrateldev',
-      icon: 'twitter'
+      icon: 'x'
     },
     {
       id: 'bluesky',
       label: 'Bluesky',
       href: 'https://bsky.app/profile/arratel.dev',
-      icon: 'cloud'
+      icon: 'bluesky'
     },
     {
       id: 'youtube',
@@ -105,19 +105,19 @@ export const siteConfig = {
       id: 'productHunt',
       label: 'Product Hunt',
       href: 'https://www.producthunt.com/@arrateldev',
-      icon: 'rocket'
+      icon: 'productHunt'
     },
     {
       id: 'npm',
       label: 'npm',
       href: 'https://www.npmjs.com/~arrateldev',
-      icon: 'package'
+      icon: 'npm'
     },
     {
       id: 'dockerHub',
       label: 'Docker Hub',
       href: 'https://hub.docker.com/u/arrateldev',
-      icon: 'box'
+      icon: 'dockerHub'
     },
     {
       id: 'reddit',

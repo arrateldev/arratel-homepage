@@ -3,20 +3,18 @@
 import Link from 'next/link';
 import { Suspense, useState, type ReactNode } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { Home, LogOut, Menu, X } from 'lucide-react';
 import {
-  Box,
-  Cloud,
-  Github,
-  Home,
-  Linkedin,
-  LogOut,
-  Menu,
-  Package,
-  Rocket,
-  Twitter,
-  X,
-  Youtube
-} from 'lucide-react';
+  FaBluesky,
+  FaDocker,
+  FaGithub,
+  FaLinkedin,
+  FaNpm,
+  FaProductHunt,
+  FaRedditAlien,
+  FaXTwitter,
+  FaYoutube
+} from 'react-icons/fa6';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,40 +33,16 @@ import { AppLogo } from '@/components/app-logo';
 import { siteConfig } from '@/lib/site-config';
 
 const socialIcons = {
-  github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  cloud: Cloud,
-  youtube: Youtube,
-  rocket: Rocket,
-  package: Package,
-  box: Box,
-  reddit: RedditIcon
+  github: FaGithub,
+  linkedin: FaLinkedin,
+  x: FaXTwitter,
+  bluesky: FaBluesky,
+  youtube: FaYoutube,
+  productHunt: FaProductHunt,
+  npm: FaNpm,
+  dockerHub: FaDocker,
+  reddit: FaRedditAlien
 } as const;
-
-function RedditIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    >
-      <path d="M12 8.5c4 0 7.2 2.1 7.2 4.8S16 18.1 12 18.1s-7.2-2.1-7.2-4.8S8 8.5 12 8.5Z" />
-      <path d="M9.2 13.1h.1" />
-      <path d="M14.7 13.1h.1" />
-      <path d="M9.7 15.3c1.2.8 3.4.8 4.6 0" />
-      <path d="M12 8.5l1-4 3 .7" />
-      <path d="M16 5.2a1 1 0 1 0 2 0 1 1 0 0 0-2 0Z" />
-      <path d="M4.9 12.8a1.6 1.6 0 1 1 1.2-2.7" />
-      <path d="M19.1 12.8a1.6 1.6 0 1 0-1.2-2.7" />
-    </svg>
-  );
-}
 
 type SiteChromeFeatures = {
   auth: boolean;
@@ -247,7 +221,7 @@ function Header({
           className="flex items-center text-foreground"
         >
           <AppLogo className="h-6 w-6" priority />
-          <span className="ml-2 text-xl font-semibold">
+          <span className="font-title ml-2 text-xl font-semibold tracking-normal">
             {siteConfig.product.name}
           </span>
         </Link>
