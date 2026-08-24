@@ -16,7 +16,7 @@ export function AppLogo({
       width={64}
       height={64}
       priority={priority}
-      className={cn('rounded-[12px]', className)}
+      className={cn('object-contain', className)}
     />
   );
 }

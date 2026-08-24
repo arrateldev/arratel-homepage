@@ -8,6 +8,7 @@ import {
   FaBluesky,
   FaDocker,
   FaGithub,
+  FaInstagram,
   FaLinkedin,
   FaNpm,
   FaProductHunt,
@@ -34,6 +35,7 @@ import { siteConfig } from '@/lib/site-config';
 
 const socialIcons = {
   github: FaGithub,
+  instagram: FaInstagram,
   linkedin: FaLinkedin,
   x: FaXTwitter,
   bluesky: FaBluesky,

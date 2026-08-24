@@ -95,6 +95,7 @@ Default seeded account:
 npm run dev
 npm run build
 npm run start
+npm run icons -- path/to/source.png
 npm run db:create
 npm run db:setup
 npm run db:generate
@@ -102,6 +103,26 @@ npm run db:migrate
 npm run db:seed
 npm run db:studio
 ```
+
+## Icons
+
+Export the logo as a square transparent PNG, ideally 512x512 or larger, and save it as:
+
+```txt
+assets/icons/source.png
+```
+
+Then run:
+
+```bash
+npm run icons
+```
+
+The script generates:
+
+- `app/favicon.ico`
+- `app/icon.png`
+- `app/apple-icon.png`
 
 ## Environment Variables
 

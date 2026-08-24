@@ -19,6 +19,7 @@ type PrivacyProvider = {
 type SocialLink = {
   id:
     | 'github'
+    | 'instagram'
     | 'linkedin'
     | 'x'
     | 'bluesky'
@@ -31,6 +32,7 @@ type SocialLink = {
   href: string;
   icon:
     | 'github'
+    | 'instagram'
     | 'linkedin'
     | 'x'
     | 'bluesky'
@@ -78,6 +80,12 @@ export const siteConfig = {
       icon: 'github'
     },
     {
+      id: 'instagram',
+      label: 'Instagram',
+      href: 'https://www.instagram.com/arrateldev',
+      icon: 'instagram'
+    },
+    {
       id: 'linkedin',
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/company/arrateldev',
@@ -92,7 +100,7 @@ export const siteConfig = {
     {
       id: 'bluesky',
       label: 'Bluesky',
-      href: 'https://bsky.app/profile/arratel.dev',
+      href: 'https://bsky.app/profile/arrateldev.bsky.social',
       icon: 'bluesky'
     },
     {
