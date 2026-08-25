@@ -11,7 +11,7 @@ export function AppLogo({
 }) {
   return (
     <Image
-      src="/favicon.ico"
+      src="/arratel-logo.svg"
       alt={`${siteConfig.product.name} logo`}
       width={64}
       height={64}

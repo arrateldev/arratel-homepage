@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1080 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Ebene9" transform="matrix(1.3858,0,0,1.3858,-208.333,-208.333)">
+        <g transform="matrix(0.721604,0,0,0.721604,150.334,150.334)">
+            <rect x="0" y="0" width="1080" height="1080" style="fill:none;"/>
+        </g>
+        <path d="M454.436,258.128L456.966,258.128L462.232,268.263L532.724,364.579L524.77,377.391L548.911,401.532L540,418.138C540,418.138 458.133,539.186 422.025,606.476C386.987,671.771 323.351,821.872 323.351,821.872L152.223,821.872C152.223,821.872 271.241,627.569 318.186,540C368.555,446.043 454.436,258.128 454.436,258.128Z" style="fill:white;"/>
+        <path d="M540,418.138L454.436,258.685L454.478,258.607L455.249,258.128L625.265,258.128C699.349,433.548 800.36,621.055 927.777,821.872L756.649,821.872C756.649,821.872 699.168,690.296 663.242,623.347C627.134,556.058 540,418.138 540,418.138Z" style="fill:white;"/>
+        <g transform="matrix(0.891033,0,0,1.12588,71.1381,-70.3245)">
+            <path d="M317.295,792.441L379.776,684.22C480.123,699.449 577.75,699.509 672.625,684.22L735.106,792.441C596.753,784.664 457.472,784.958 317.295,792.441Z" style="fill:white;"/>
+        </g>
+    </g>
+</svg>

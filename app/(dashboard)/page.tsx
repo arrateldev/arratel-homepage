@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowRight,
   Compass,
@@ -72,6 +73,14 @@ export default function HomePage({
                 aria-label={t.home.radarItems.core.name}
                 className="group absolute inset-[34%] flex items-center justify-center rounded-full brand-gradient text-white shadow-[0_0_70px_hsl(var(--brand-secondary)/0.4)] outline-none ring-offset-4 ring-offset-background transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-primary"
               >
+                <Image
+                  src="/arratel-logo-white.svg"
+                  alt=""
+                  width={88}
+                  height={88}
+                  className="h-14 w-14 object-contain sm:h-18 sm:w-18"
+                  aria-hidden="true"
+                />
                 <div className="pointer-events-none absolute left-1/2 top-full mt-4 w-[156px] -translate-x-1/2 rounded-md border border-border/70 bg-background/90 p-3 text-left opacity-0 shadow-[0_18px_38px_-28px_rgba(15,23,42,0.32)] backdrop-blur transition-all group-hover:translate-y-1 group-hover:opacity-100 group-focus-visible:translate-y-1 group-focus-visible:opacity-100">
                   <p className="text-sm font-semibold text-foreground">
                     {t.home.radarItems.core.name}
@@ -153,12 +162,36 @@ export default function HomePage({
             {t.home.projects.map((project, index) => {
               const ProjectIcon = projectIcons[index % projectIcons.length];
               const isEven = index % 2 === 0;
+              const isArratelCore = projectAnchors[index] === 'arratel-core';
+              const isClavisPass =
+                projectAnchors[index] === 'clavispass' ||
+                projectAnchors[index] === 'clavispass-hub';
               const cardContent = (
                 <>
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3">
                       <span className="flex h-11 w-11 items-center justify-center rounded-md bg-primary/12 text-primary">
-                        <ProjectIcon className="h-5 w-5" />
+                        {isArratelCore ? (
+                          <Image
+                            src="/arratel-logo.svg"
+                            alt=""
+                            width={28}
+                            height={28}
+                            className="h-7 w-7 object-contain"
+                            aria-hidden="true"
+                          />
+                        ) : isClavisPass ? (
+                          <Image
+                            src="/clavispass-logo.svg"
+                            alt=""
+                            width={28}
+                            height={28}
+                            className="h-7 w-7 object-contain"
+                            aria-hidden="true"
+                          />
+                        ) : (
+                          <ProjectIcon className="h-5 w-5" />
+                        )}
                       </span>
                       <div>
                         <h3 className="text-lg font-semibold text-foreground">
