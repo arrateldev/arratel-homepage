@@ -189,7 +189,7 @@ export default function HomePage({
                 <article
                   key={project.name}
                   id={`project-${projectAnchors[index]}`}
-                  className={`relative grid scroll-mt-18 gap-4 md:grid-cols-2 md:gap-10 ${
+                  className={`relative grid scroll-mt-18 gap-4 pl-10 md:grid-cols-2 md:gap-10 md:pl-0 ${
                     isEven ? '' : 'md:[&>*:first-child]:col-start-2'
                   }`}
                 >
