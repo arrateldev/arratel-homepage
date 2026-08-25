@@ -27,6 +27,25 @@ const messages = {
       primaryCta: 'Projekte ansehen',
       secondaryCta: 'Kontakt aufnehmen',
       signalCaption: 'A software lab for useful digital work.',
+      radarLabel: 'Arratel Projekt-Radar',
+      radarItems: {
+        core: {
+          name: 'Arratel Core',
+          status: 'active'
+        },
+        clavispass: {
+          name: 'ClavisPass',
+          status: 'building'
+        },
+        clavispassHub: {
+          name: 'ClavisPass Hub',
+          status: 'planned'
+        },
+        pdfMerge: {
+          name: 'PDF Merge',
+          status: 'next'
+        }
+      },
       projectsEyebrow: 'Projektübersicht',
       projectsTitle: 'Eine wachsende Karte aus Produkten, Prototypen und Ideen.',
       projectsDescription:
@@ -47,6 +66,13 @@ const messages = {
           href: 'https://clavispass.arratel.dev',
           description:
             'Ein fokussiertes Werkzeug für Passwörter, Recovery-Daten und private Notizen mit ruhiger Oberfläche und klarer Kontrolle.'
+        },
+        {
+          name: 'ClavisPass Hub',
+          type: 'Self-hosted vault storage',
+          status: 'Planned',
+          description:
+            'Ein selbst gehosteter Vault-Speicher für ClavisPass, gedacht für Nutzer, die ihre verschlüsselten Daten auf eigener Infrastruktur halten möchten.'
         },
         {
           name: 'PDF Merge',
@@ -353,6 +379,25 @@ const messages = {
       primaryCta: 'View projects',
       secondaryCta: 'Get in touch',
       signalCaption: 'A software lab for useful digital work.',
+      radarLabel: 'Arratel project radar',
+      radarItems: {
+        core: {
+          name: 'Arratel Core',
+          status: 'active'
+        },
+        clavispass: {
+          name: 'ClavisPass',
+          status: 'building'
+        },
+        clavispassHub: {
+          name: 'ClavisPass Hub',
+          status: 'planned'
+        },
+        pdfMerge: {
+          name: 'PDF Merge',
+          status: 'next'
+        }
+      },
       projectsEyebrow: 'Project overview',
       projectsTitle: 'A growing map of products, prototypes, and ideas.',
       projectsDescription:
@@ -373,6 +418,13 @@ const messages = {
           href: 'https://clavispass.arratel.dev',
           description:
             'A focused tool for passwords, recovery data, and private notes with a quiet interface and clear control.'
+        },
+        {
+          name: 'ClavisPass Hub',
+          type: 'Self-hosted vault storage',
+          status: 'Planned',
+          description:
+            'A self-hosted vault storage layer for ClavisPass, built for users who want to keep encrypted data on their own infrastructure.'
         },
         {
           name: 'PDF Merge',
