@@ -11,6 +11,7 @@ const messages = {
       home: 'Start',
       pricing: 'Preise',
       faq: 'FAQ',
+      links: 'Links',
       dashboard: 'Dashboard',
       features: 'Features',
       legal: 'Rechtliches',
@@ -87,6 +88,13 @@ const messages = {
         privacy: 'Datenschutz',
         terms: 'AGB'
       }
+    },
+    links: {
+      title: 'Alle Links',
+      description:
+        'Die offiziellen Profile, Projekte und Kontaktwege von Arratel an einem Ort.',
+      website: 'Website',
+      contact: 'Kontakt'
     },
     faq: {
       eyebrow: 'Häufige Fragen',
@@ -298,6 +306,7 @@ const messages = {
       home: 'Home',
       pricing: 'Pricing',
       faq: 'FAQ',
+      links: 'Links',
       dashboard: 'Dashboard',
       features: 'Features',
       legal: 'Legal',
@@ -374,6 +383,13 @@ const messages = {
         privacy: 'Privacy Policy',
         terms: 'Terms of Service'
       }
+    },
+    links: {
+      title: 'All links',
+      description:
+        'The official profiles, projects, and contact paths for Arratel in one place.',
+      website: 'Website',
+      contact: 'Contact'
     },
     faq: {
       eyebrow: 'Frequently asked questions',

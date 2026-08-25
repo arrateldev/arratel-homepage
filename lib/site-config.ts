@@ -16,37 +16,33 @@ type PrivacyProvider = {
   location: LocalizedText;
 };
 
+export type SocialIconName =
+  | 'github'
+  | 'instagram'
+  | 'linkedin'
+  | 'x'
+  | 'bluesky'
+  | 'youtube'
+  | 'productHunt'
+  | 'npm'
+  | 'dockerHub'
+  | 'reddit';
+
 type SocialLink = {
-  id:
-    | 'github'
-    | 'instagram'
-    | 'linkedin'
-    | 'x'
-    | 'bluesky'
-    | 'youtube'
-    | 'productHunt'
-    | 'npm'
-    | 'dockerHub'
-    | 'reddit';
+  id: SocialIconName;
   label: string;
   href: string;
-  icon:
-    | 'github'
-    | 'instagram'
-    | 'linkedin'
-    | 'x'
-    | 'bluesky'
-    | 'youtube'
-    | 'productHunt'
-    | 'npm'
-    | 'dockerHub'
-    | 'reddit';
+  icon: SocialIconName;
 };
 
 export const siteConfig = {
   product: {
     name: 'Arratel',
     companyDisplayName: 'Arratel',
+    claim: {
+      de: 'Precision software.',
+      en: 'Precision software.'
+    },
     metadata: {
       title: {
         de: 'Arratel',

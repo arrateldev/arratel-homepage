@@ -5,18 +5,6 @@ import { Suspense, useState, type ReactNode } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Home, LogOut, Menu, X } from 'lucide-react';
 import {
-  FaBluesky,
-  FaDocker,
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaNpm,
-  FaProductHunt,
-  FaRedditAlien,
-  FaXTwitter,
-  FaYoutube
-} from 'react-icons/fa6';
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -31,20 +19,8 @@ import {
 } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { AppLogo } from '@/components/app-logo';
+import { socialIcons } from '@/components/social-icons';
 import { siteConfig } from '@/lib/site-config';
-
-const socialIcons = {
-  github: FaGithub,
-  instagram: FaInstagram,
-  linkedin: FaLinkedin,
-  x: FaXTwitter,
-  bluesky: FaBluesky,
-  youtube: FaYoutube,
-  productHunt: FaProductHunt,
-  npm: FaNpm,
-  dockerHub: FaDocker,
-  reddit: FaRedditAlien
-} as const;
 
 type SiteChromeFeatures = {
   auth: boolean;
@@ -130,6 +106,12 @@ export function SiteChrome({
               >
                 {t.common.faq}
               </Link>
+              <Link
+                href={localizePath(locale, '/links')}
+                className="transition-colors hover:text-white"
+              >
+                {t.common.links}
+              </Link>
               {user && features.dashboard ? (
                 <Link
                   href={localizePath(locale, '/dashboard')}
@@ -210,6 +192,7 @@ function Header({
       ? [{ href: localizePath(locale, '/pricing'), label: t.common.pricing }]
       : []),
     { href: localizePath(locale, '/faq'), label: t.common.faq },
+    { href: localizePath(locale, '/links'), label: t.common.links },
     ...(user && features.dashboard
       ? [{ href: localizePath(locale, '/dashboard'), label: t.common.dashboard }]
       : [])

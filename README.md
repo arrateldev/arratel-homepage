@@ -4,7 +4,7 @@ Personal starter template for Arratel SaaS products. It is built with Next.js Ap
 
 ## What Is Included
 
-- Localized marketing homepage, FAQ, imprint, privacy, and terms pages
+- Localized marketing homepage, social links page, FAQ, imprint, privacy, and terms pages
 - Product demo area that can be replaced by the real first-use experience
 - Email/password authentication with JWT session cookies
 - Team dashboard with account, security, billing, members, and activity pages
@@ -19,6 +19,8 @@ Personal starter template for Arratel SaaS products. It is built with Next.js Ap
 3. Replace the demo product components in `features/pdf-merge-demo` with the real product experience.
 4. Copy `.env.example` to `.env` and fill the values for your mode.
 5. Run `npm run build` before deploying.
+
+The social links page is available at `/links` for link-in-bio use. It reads website, contact email, claim, and social profiles from `lib/site-config.ts`.
 
 ## Deployment Modes
 
