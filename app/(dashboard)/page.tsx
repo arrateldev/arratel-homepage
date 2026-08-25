@@ -1,11 +1,18 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { defaultLocale, localizePath, type Locale } from '@/lib/i18n/config';
+import {
+  ArrowRight,
+  Code2,
+  Compass,
+  ExternalLink,
+  Layers3,
+  Radio,
+  ShieldCheck
+} from 'lucide-react';
+import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
-import { PricingSection } from '@/components/pricing-section';
-import { features } from '@/lib/config/feature-flags';
-import { PdfMergeDemo } from '@/features/pdf-merge-demo/demo';
-import { PdfMergeHeroMock } from '@/features/pdf-merge-demo/hero-mock';
+import { siteConfig } from '@/lib/site-config';
+
+const projectIcons = [Compass, Layers3, ShieldCheck, Radio] as const;
 
 export default function HomePage({
   locale = defaultLocale
@@ -13,81 +20,206 @@ export default function HomePage({
   locale?: Locale;
 }) {
   const t = getMessages(locale);
+  const mailHref = `mailto:${siteConfig.company.contact.email}`;
 
   return (
     <main className="bg-background text-foreground">
-      <div className="page-aura-surface border-b border-border/60">
-        <section className="overflow-hidden">
-          <div className="section-shell pb-3 pt-6 sm:pb-4 sm:pt-8">
-            <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
-              <div className="animate-enter max-w-3xl">
-                <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-[2.6rem]">
-                  {t.home.heroTitle}
-                  <span className="mt-2 block text-primary">{t.home.heroAccent}</span>
-                </h1>
-
-                <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-                  {t.home.heroDescription}
-                </p>
-              </div>
-
-              <aside className="animate-enter-delay-1 mx-auto w-[380px] max-w-full lg:self-center lg:justify-self-center">
-                <PdfMergeHeroMock />
-              </aside>
+      <section className="relative overflow-hidden border-b border-border/60 bg-[radial-gradient(circle_at_top_right,hsl(var(--brand-secondary)/0.22),transparent_34%),radial-gradient(circle_at_top_left,hsl(var(--primary)/0.18),transparent_30%),hsl(var(--background))]">
+        <div className="section-shell grid min-h-[calc(100svh-73px)] items-center gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:py-14">
+          <div className="animate-enter max-w-4xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+              {t.home.heroEyebrow}
+            </p>
+            <h1 className="brand-gradient-text mt-5 max-w-4xl text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+              {t.home.heroTitle}
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+              {t.home.heroDescription}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="#projects"
+                className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+              >
+                {t.home.primaryCta}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+              <Link
+                href={mailHref}
+                className="inline-flex items-center justify-center rounded-md border border-border bg-background/70 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:bg-background"
+              >
+                {t.home.secondaryCta}
+              </Link>
             </div>
           </div>
-        </section>
 
-        <div className="section-shell py-3 sm:py-4">
-          <div className="mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-border to-transparent" />
+          <aside className="animate-enter-delay-1">
+            <div className="relative mx-auto aspect-square w-full max-w-[420px]">
+              <div className="absolute inset-8 rounded-full border border-primary/20" />
+              <div className="absolute inset-16 rounded-full border border-brand-secondary/25" />
+              <div className="absolute inset-0 animate-signal-spin rounded-full border border-dashed border-primary/25" />
+              <div className="absolute inset-[34%] rounded-full brand-gradient shadow-[0_0_70px_hsl(var(--brand-secondary)/0.4)]" />
+              <div className="absolute left-[12%] top-[22%] h-3 w-3 rounded-full bg-primary shadow-[0_0_24px_hsl(var(--primary)/0.65)]" />
+              <div className="absolute right-[16%] top-[34%] h-2.5 w-2.5 rounded-full bg-brand-secondary shadow-[0_0_24px_hsl(var(--brand-secondary)/0.7)]" />
+              <div className="absolute bottom-[20%] left-[25%] h-2.5 w-2.5 rounded-full bg-foreground/70" />
+              <div className="absolute inset-x-10 bottom-8 rounded-md border border-border/70 bg-background/80 p-4 shadow-[0_18px_38px_-28px_rgba(15,23,42,0.32)] backdrop-blur">
+                <div className="flex items-center gap-3">
+                  <Code2 className="h-5 w-5 text-primary" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      {siteConfig.product.claim[locale]}
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {t.home.signalCaption}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section
+        id="projects"
+        className="section-shell scroll-mt-24 py-14 sm:py-18"
+      >
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            {t.home.projectsEyebrow}
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            {t.home.projectsTitle}
+          </h2>
+          <p className="mt-4 text-base leading-8 text-muted-foreground">
+            {t.home.projectsDescription}
+          </p>
         </div>
 
-        <section id="product" className="pb-8 pt-3 sm:pb-10 sm:pt-4">
-          <div className="section-shell">
-            <PdfMergeDemo showPricingCta={features.pricing} />
-          </div>
-        </section>
-      </div>
+        <div className="relative mt-10">
+          <div className="absolute bottom-8 left-4 top-8 w-px bg-gradient-to-b from-primary via-brand-secondary to-transparent md:left-1/2" />
+          <div className="space-y-7">
+            {t.home.projects.map((project, index) => {
+              const ProjectIcon = projectIcons[index % projectIcons.length];
+              const isEven = index % 2 === 0;
+              const cardContent = (
+                <>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-md bg-primary/12 text-primary">
+                        <ProjectIcon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <h3 className="text-lg font-semibold text-foreground">
+                          {project.name}
+                        </h3>
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                          {project.type}
+                        </p>
+                      </div>
+                    </div>
+                    <span className="rounded-md border border-primary/20 bg-primary/8 px-2.5 py-1 text-xs font-semibold text-primary">
+                      {project.status}
+                    </span>
+                  </div>
+                  <p className="mt-5 text-sm leading-7 text-muted-foreground">
+                    {project.description}
+                  </p>
+                  {'href' in project ? (
+                    <div className="mt-5 inline-flex items-center text-sm font-semibold text-primary">
+                      {t.home.projectLinkLabel}
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </div>
+                  ) : null}
+                </>
+              );
 
-      {features.pricing ? (
-        <section id="pricing">
-          <PricingSection
-            className="bg-transparent py-8 sm:py-10"
-            locale={locale}
-            cards={[
-              {
-                label: t.home.freeLabel,
-                title: t.home.freeTitle,
-                tag: t.home.freeTag,
-                price: t.home.freePrice,
-                monthLabel: t.home.month,
-                description: t.home.freeDescription,
-                features: t.home.freeFeatures,
-                cta: {
-                  type: 'current',
-                  label: t.pricing.currentPlan
-                }
-              },
-              {
-                label: t.home.proLabel,
-                title: t.home.proTitle,
-                tag: t.home.proTag,
-                price: t.home.proPrice,
-                monthLabel: t.home.month,
-                description: t.home.proDescription,
-                features: t.home.proFeatures,
-                emphasized: true,
-                cta: {
-                  type: 'split',
-                  primaryLabel: t.home.proCta,
-                  secondaryLabel: t.home.fullPricingCta,
-                  secondaryHref: localizePath(locale, '/pricing')
-                }
-              }
-            ]}
-          />
-        </section>
-      ) : null}
+              return (
+                <article
+                  key={project.name}
+                  className={`relative grid gap-4 md:grid-cols-2 md:gap-10 ${
+                    isEven ? '' : 'md:[&>*:first-child]:col-start-2'
+                  }`}
+                >
+                  {'href' in project ? (
+                    <Link
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`surface-card animate-enter block p-5 transition-transform hover:-translate-y-0.5 hover:border-primary/30 sm:p-6 ${
+                        isEven ? 'md:mr-8' : 'md:ml-8'
+                      }`}
+                    >
+                      {cardContent}
+                    </Link>
+                  ) : (
+                    <div
+                      className={`surface-card animate-enter p-5 sm:p-6 ${
+                        isEven ? 'md:mr-8' : 'md:ml-8'
+                      }`}
+                    >
+                      {cardContent}
+                    </div>
+                  )}
+
+                  <div className="pointer-events-none absolute left-4 top-8 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-background bg-primary shadow-[0_0_0_6px_hsl(var(--primary)/0.12)] md:left-1/2" />
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border/60 bg-white">
+        <div className="section-shell grid gap-8 py-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+              {t.home.principlesEyebrow}
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
+              {t.home.principlesTitle}
+            </h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {t.home.principles.map((principle) => (
+              <div
+                key={principle.title}
+                className="rounded-md border border-border/70 bg-background p-5"
+              >
+                <h3 className="text-sm font-semibold text-foreground">
+                  {principle.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                  {principle.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell py-14 sm:py-18">
+        <div className="grid gap-6 rounded-md border border-border/70 bg-foreground p-6 text-background sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-secondary">
+              {t.home.contactEyebrow}
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+              {t.home.contactTitle}
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-background/70">
+              {t.home.contactDescription}
+            </p>
+          </div>
+          <Link
+            href={mailHref}
+            className="inline-flex items-center justify-center rounded-md bg-background px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-background/90"
+          >
+            {siteConfig.company.contact.email}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }

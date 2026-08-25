@@ -6,7 +6,7 @@ import { isLocale, localizePath } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { features } from '@/lib/config/feature-flags';
+import { siteConfig } from '@/lib/site-config';
 
 export async function generateMetadata({
   params
@@ -38,6 +38,7 @@ export default async function FaqPage({
   }
 
   const t = getMessages(locale).faq;
+  const mailHref = `mailto:${siteConfig.company.contact.email}`;
 
   return (
     <div className="bg-background">
@@ -119,14 +120,12 @@ export default async function FaqPage({
                 </p>
 
                 <div className="mt-8 flex flex-col gap-3">
-                  {features.pricing ? (
-                    <Button asChild size="lg" className="justify-between">
-                      <Link href={localizePath(locale, '/pricing')}>
-                        {t.supportPrimary}
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </Button>
-                  ) : null}
+                  <Button asChild size="lg" className="justify-between text-white">
+                    <Link href={mailHref}>
+                      {t.supportPrimary}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
                   <Button asChild variant="outline" size="lg">
                     <Link href={localizePath(locale, '/')}>{t.supportSecondary}</Link>
                   </Button>

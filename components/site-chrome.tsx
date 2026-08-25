@@ -101,12 +101,6 @@ export function SiteChrome({
                 </Link>
               ) : null}
               <Link
-                href={localizePath(locale, '/faq')}
-                className="transition-colors hover:text-white"
-              >
-                {t.common.faq}
-              </Link>
-              <Link
                 href={localizePath(locale, '/links')}
                 className="transition-colors hover:text-white"
               >
@@ -191,7 +185,6 @@ function Header({
     ...(features.pricing
       ? [{ href: localizePath(locale, '/pricing'), label: t.common.pricing }]
       : []),
-    { href: localizePath(locale, '/faq'), label: t.common.faq },
     { href: localizePath(locale, '/links'), label: t.common.links },
     ...(user && features.dashboard
       ? [{ href: localizePath(locale, '/dashboard'), label: t.common.dashboard }]

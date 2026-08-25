@@ -1,4 +1,4 @@
-import { defaultLocale, type Locale } from './config';
+﻿import { defaultLocale, type Locale } from './config';
 import { siteConfig } from '../site-config';
 
 const messages = {
@@ -20,35 +20,64 @@ const messages = {
       backToHome: 'Zur Startseite'
     },
     home: {
-      heroTitle: 'Baue dein SaaS',
-      heroAccent: 'schneller als je zuvor',
+      heroTitle: 'Precision software.',
       heroDescription:
-        'Starte dein SaaS in Rekordzeit mit einer produktionsnahen Vorlage inklusive moderner Technologien und zentraler Integrationen.',
-      heroEyebrow: 'Direkt nutzbar',
-      deployCta: 'Eigenes Projekt deployen',
-      productEyebrow: 'Produktbereich',
-      productTitle: 'Hier sollte direkt das eigentliche SaaS starten.',
-      productDescription:
-        'Wenn dein Free-Plan sofort nutzbar ist, gehört das Kernprodukt direkt unter den ersten Marketing-Block. So landet der Nutzer ohne Umweg direkt im Tool.',
-      productPrimaryCta: 'Produkt starten',
-      productSecondaryCta: 'Preise ansehen',
-      productPreviewTitle: 'Platz für dein erstes Tool',
-      productPreviewBody:
-        'Zum Beispiel ein PDF-Merger mit Upload, Queue und Ergebnis-Download. Dieser Bereich sollte später die eigentliche App-Oberfläche enthalten, nicht nur eine Demo.',
-      productPreviewList: [
-        'Kurze Einführung statt langem Hero',
-        'Direkter Einstieg in den Free-Plan',
-        'Upgrade erst nach echter Nutzung'
+        'Arratel ist das Zuhause für kleine, präzise Softwareprodukte: schlanke Tools, klare Workflows und Experimente, die aus echten Alltagsproblemen entstehen.',
+      heroEyebrow: 'Arratel',
+      primaryCta: 'Projekte ansehen',
+      secondaryCta: 'Kontakt aufnehmen',
+      signalCaption: 'A software lab for useful digital work.',
+      projectsEyebrow: 'Projektübersicht',
+      projectsTitle: 'Eine wachsende Karte aus Produkten, Prototypen und Ideen.',
+      projectsDescription:
+        'Die Timeline zeigt, woran Arratel arbeitet: von stabilen Bausteinen bis zu frühen Experimenten. Jedes Projekt soll klein genug bleiben, um klar zu sein, und stark genug, um regelmäßig nützlich zu werden.',
+      projectLinkLabel: 'Projekt öffnen',
+      projects: [
+        {
+          name: 'Arratel Core',
+          type: 'Platform foundation',
+          status: 'Active',
+          description:
+            'Die gemeinsame Basis für künftige Produkte: Auth, Billing, Lokalisierung, rechtliche Seiten und saubere Deployment-Pfade.'
+        },
+        {
+          name: 'ClavisPass',
+          type: 'Security utility',
+          status: 'In progress',
+          href: 'https://clavispass.arratel.dev',
+          description:
+            'Ein fokussiertes Werkzeug für Passwörter, Recovery-Daten und private Notizen mit ruhiger Oberfläche und klarer Kontrolle.'
+        },
+        {
+          name: 'PDF Merge',
+          type: 'SaaS product',
+          status: 'Next',
+          description:
+            'Das erste SaaS nach ClavisPass: ein schlankes Werkzeug zum Zusammenführen, Sortieren und Exportieren von PDF-Dateien.'
+        }
       ],
-      featureTitle1: 'Next.js und React',
-      featureBody1:
-        'Moderne Webtechnologien für starke Performance und eine schnelle Developer Experience.',
-      featureTitle2: 'Postgres und Drizzle ORM',
-      featureBody2:
-        'Robuste Datenhaltung mit schlankem ORM für klare Datenmodelle und saubere Skalierung.',
-      featureTitle3: 'Stripe Integration',
-      featureBody3:
-        'Zahlungen und Subscriptions ohne Sonderwege, direkt mit Stripe eingebunden.',
+      principlesEyebrow: 'Prinzipien',
+      principlesTitle: 'Software mit scharfen Kanten, aber ohne Lärm.',
+      principles: [
+        {
+          title: 'Fokus',
+          body: 'Jedes Produkt beginnt mit einem engen Problem und einer Oberfläche, die sofort verständlich bleibt.'
+        },
+        {
+          title: 'Sorgfalt',
+          body: 'Performance, Datenschutz und Wartbarkeit sind Produktmerkmale, nicht spätere Aufräumarbeiten.'
+        },
+        {
+          title: 'Nützlichkeit',
+          body: 'Ein Tool verdient seinen Platz erst, wenn es wiederholt Zeit spart oder Entscheidungen leichter macht.'
+        }
+      ],
+      contactEyebrow: 'Kontakt',
+      contactTitle: 'Ein Projekt, eine Idee oder einfach ein guter Grund zu schreiben?',
+      contactDescription:
+        'Arratel wächst produktweise. Wenn ein Tool interessant ist, eine Kooperation passt oder du früh Feedback geben möchtest, ist E-Mail der beste Einstieg.',
+      footerDescription:
+        'Precision software. Kleine, nützliche Softwareprodukte mit Fokus auf Klarheit, Datenschutz und langlebige Workflows.',
       pricingBadge: 'Einfache Preise',
       pricingTitle: 'Kostenlos starten. Erst upgraden, wenn es Sinn ergibt.',
       pricingDescription:
@@ -66,7 +95,6 @@ const messages = {
         'Klare und einfache UX',
         'Upgrade jederzeit möglich'
       ],
-      freeCta: 'Kostenlos starten',
       proLabel: 'Pro',
       proTitle: 'Für regelmäßige Nutzung',
       proTag: 'Beliebteste Wahl',
@@ -81,8 +109,6 @@ const messages = {
       ],
       proCta: 'Zu Pro wechseln',
       fullPricingCta: 'Alle Preise',
-      footerDescription:
-        'Einfache Werkzeuge für tägliche Workflows, gebaut mit Fokus auf Privatsphäre, Performance und klarer Nutzerführung.',
       legalLinks: {
         imprint: 'Impressum',
         privacy: 'Datenschutz',
@@ -98,77 +124,82 @@ const messages = {
     },
     faq: {
       eyebrow: 'Häufige Fragen',
-      title: 'Antworten auf die wichtigsten Fragen vor dem Start.',
+      title: 'Kurzantworten zu Arratel und den Projekten dahinter.',
       intro:
-        'Kurz, klar und ohne Sales-Floskeln. Hier findest du die Punkte, die vor Signup, Testphase oder Upgrade am häufigsten offen bleiben.',
-      badgePrimary: 'Schnelle Antworten',
-      badgeSecondary: 'Kein Support-Ticket nötig',
+        'Arratel ist keine einzelne App, sondern ein wachsender Ort für fokussierte Softwareprodukte. Diese Seite klärt die wichtigsten Fragen, ohne die Startseite unnötig schwer zu machen.',
+      badgePrimary: 'Arratel erklärt',
+      badgeSecondary: 'Direkt und knapp',
       sections: [
         {
-          title: 'Produkt und Zugang',
+          title: 'Arratel',
           items: [
             {
-              question: 'Kann ich das Produkt erst testen, bevor ich zahle?',
+              question: 'Was ist Arratel?',
               answer:
-                'Ja. Der Einstieg ist bewusst niedrig gehalten, damit du das Produkt erst im echten Kontext ausprobieren kannst, bevor ein Upgrade sinnvoll wird.'
+                'Arratel ist die Dachmarke für kleine, präzise Softwareprodukte. Der Fokus liegt auf nützlichen Workflows, ruhigen Oberflächen und Tools, die ein konkretes Problem sauber lösen.'
             },
             {
-              question: 'Brauche ich direkt ein Team oder mehrere Nutzer?',
+              question: 'Was bedeutet der Name Arratel?',
               answer:
-                'Nein. Du kannst allein starten und später weitere Mitglieder einladen, sobald dein Workflow stabil ist oder Zusammenarbeit wichtig wird.'
+                'Der Name geht auf arrátel zurück, eine historische portugiesische Gewichtseinheit von etwa 459 Gramm. Das passt gut zur Idee hinter der Marke: messen, abwägen und präzise bauen.'
             },
             {
-              question: 'Kann ich später auf einen bezahlten Plan wechseln?',
+              question: 'Warum heißt der Slogan Precision software.?',
               answer:
-                'Ja. Der Upgrade-Pfad ist bewusst einfach gehalten, damit du erst dann zahlst, wenn die Nutzung regelmäßig wird oder du mehr Limits brauchst.'
+                'Weil jedes Projekt bewusst eng gedacht wird: lieber ein klares Werkzeug mit guter Ausführung als eine große Plattform voller unfertiger Versprechen.'
+            },
+            {
+              question: 'Ist Arratel eine Agentur?',
+              answer:
+                'Nein. Arratel ist primär ein Produkt-Lab für eigene Softwareprojekte. Kooperationen oder Feedback sind willkommen, aber die Seite ist nicht als klassische Agentur-Website gedacht.'
             }
           ]
         },
         {
-          title: 'Abrechnung und Datenschutz',
+          title: 'Projekte',
           items: [
             {
-              question: 'Was passiert mit meinen Daten, wenn ich kündige?',
+              question: 'Sind alle Projekte schon öffentlich nutzbar?',
               answer:
-                'Dein Zugang und deine Daten sollten nachvollziehbar behandelt werden. Die rechtlichen Details findest du in Datenschutz und AGB, die im Footer verlinkt sind.'
+                'Nicht zwingend. Die Übersicht zeigt auch Prototypen, technische Grundlagen und frühe Ideen. Der Status macht sichtbar, wie reif ein Projekt gerade ist.'
             },
             {
-              question: 'Fallen Kosten an, wenn ich das Produkt kaum nutze?',
+              question: 'Warum stehen unfertige Projekte auf der Website?',
               answer:
-                'Das Produkt ist darauf ausgelegt, mit einer klaren Free- und Upgrade-Logik zu arbeiten. So entstehen Kosten erst dann, wenn die Nutzung den Mehrwert rechtfertigt.'
+                'Weil Arratel transparent als wachsendes Produkt-Portfolio funktioniert. Manche Ideen starten klein, werden getestet und bleiben nur dann, wenn sie echten Nutzen zeigen.'
             },
             {
-              question: 'Ist Stripe für Zahlungen verpflichtend?',
+              question: 'Kann ich Feedback zu einem Projekt geben?',
               answer:
-                'Für echte Zahlungen ja. In der Entwicklung kann Billing aber im Mock-Modus simuliert werden, damit Produktarbeit ohne frühe Stripe-Abhängigkeit möglich bleibt.'
+                'Ja. Frühes Feedback ist besonders wertvoll, solange ein Produkt noch formbar ist. Am besten schreibst du direkt per E-Mail mit dem Projektnamen im Betreff.'
             }
           ]
         },
         {
-          title: 'Technik und Betrieb',
+          title: 'Kontakt und Betrieb',
           items: [
             {
-              question: 'Brauche ich für den produktiven Betrieb eine eigene Datenbank?',
+              question: 'Wie erreiche ich Arratel?',
               answer:
-                'Ja. Die App läuft separat von der Datenbank. In Production wird eine externe Postgres-Datenbank eingebunden, während lokal auch Docker oder eine gehostete Test-DB reicht.'
+                'Der direkteste Weg ist E-Mail an contact@arratel.dev. Offizielle Social-Profile und weitere Links stehen gesammelt auf der Links-Seite.'
             },
             {
-              question: 'Ist das eher für MVPs oder schon für echte Kunden gedacht?',
+              question: 'Wo finde ich rechtliche Informationen?',
               answer:
-                'Beides. Das Setup ist schlank genug für schnelle Validierung, aber strukturiert genug, um daraus ein produktives SaaS mit echten Nutzern weiterzuentwickeln.'
+                'Impressum, Datenschutz und AGB sind im Footer verlinkt. Diese Seiten bleiben sichtbar, auch wenn einzelne Produkte noch in Arbeit sind.'
             },
             {
-              question: 'Wie schnell komme ich ins Dashboard?',
+              question: 'Wird es später eigene Produktseiten geben?',
               answer:
-                'Sobald dein Account angelegt ist, kommst du direkt in den geschützten Bereich. Navigation und geladene Daten sind darauf ausgelegt, den Einstieg möglichst reibungsarm zu machen.'
+                'Ja, sobald ein Projekt genug Substanz hat, kann es eine eigene Seite oder Domain bekommen. Die Arratel-Homepage bleibt dann die zentrale Übersicht.'
             }
           ]
         }
       ],
-      supportTitle: 'Noch etwas unklar?',
+      supportTitle: 'Noch etwas offen?',
       supportBody:
-        'Wenn eine Frage vor Signup oder Upgrade offen bleibt, sollte sie hier auftauchen. Wenn nicht, ist das ein Signal, dass die FAQ erweitert werden sollte.',
-      supportPrimary: 'Preise ansehen',
+        'Wenn eine Frage zu Arratel, einem Projekt oder einer möglichen Zusammenarbeit fehlt, ist E-Mail der beste nächste Schritt.',
+      supportPrimary: 'Kontakt aufnehmen',
       supportSecondary: 'Zum Start'
     },
     auth: {
@@ -315,35 +346,64 @@ const messages = {
       backToHome: 'Back to home'
     },
     home: {
-      heroTitle: 'Build your SaaS',
-      heroAccent: 'faster than ever',
+      heroTitle: 'Precision software.',
       heroDescription:
-        'Launch your SaaS quickly with a production-ready template that includes modern tooling and the integrations you actually need.',
-      heroEyebrow: 'Ready to use',
-      deployCta: 'Deploy your own',
-      productEyebrow: 'Product area',
-      productTitle: 'The actual SaaS should start here right away.',
-      productDescription:
-        'If the free plan is usable immediately, the core product belongs directly below the first marketing block. That gets users into the tool without friction.',
-      productPrimaryCta: 'Launch product',
-      productSecondaryCta: 'View pricing',
-      productPreviewTitle: 'Space for your first tool',
-      productPreviewBody:
-        'For example a PDF merge tool with upload, queue, and result download. This area should later contain the real app interface, not just a demo.',
-      productPreviewList: [
-        'Short intro instead of a long hero',
-        'Direct entry into the free plan',
-        'Upgrade only after real usage'
+        'Arratel is home to small, precise software products: lean tools, clear workflows, and experiments shaped by real everyday problems.',
+      heroEyebrow: 'Arratel',
+      primaryCta: 'View projects',
+      secondaryCta: 'Get in touch',
+      signalCaption: 'A software lab for useful digital work.',
+      projectsEyebrow: 'Project overview',
+      projectsTitle: 'A growing map of products, prototypes, and ideas.',
+      projectsDescription:
+        'The timeline shows what Arratel is shaping: from stable foundations to early experiments. Every project should stay small enough to understand and strong enough to become useful again and again.',
+      projectLinkLabel: 'Open project',
+      projects: [
+        {
+          name: 'Arratel Core',
+          type: 'Platform foundation',
+          status: 'Active',
+          description:
+            'The shared base for future products: auth, billing, localization, legal pages, and clean deployment paths.'
+        },
+        {
+          name: 'ClavisPass',
+          type: 'Security utility',
+          status: 'In progress',
+          href: 'https://clavispass.arratel.dev',
+          description:
+            'A focused tool for passwords, recovery data, and private notes with a quiet interface and clear control.'
+        },
+        {
+          name: 'PDF Merge',
+          type: 'SaaS product',
+          status: 'Next',
+          description:
+            'The first SaaS after ClavisPass: a lean tool for merging, sorting, and exporting PDF files.'
+        }
       ],
-      featureTitle1: 'Next.js and React',
-      featureBody1:
-        'Use modern web technologies for performance and a faster developer workflow.',
-      featureTitle2: 'Postgres and Drizzle ORM',
-      featureBody2:
-        'A solid database stack with a clean ORM for maintainable data access and growth.',
-      featureTitle3: 'Stripe Integration',
-      featureBody3:
-        'Payments and subscriptions handled cleanly through Stripe without extra plumbing.',
+      principlesEyebrow: 'Principles',
+      principlesTitle: 'Software with sharp edges, but no noise.',
+      principles: [
+        {
+          title: 'Focus',
+          body: 'Every product starts with a narrow problem and an interface that stays immediately understandable.'
+        },
+        {
+          title: 'Care',
+          body: 'Performance, privacy, and maintainability are product qualities, not cleanup chores for later.'
+        },
+        {
+          title: 'Usefulness',
+          body: 'A tool earns its place only when it repeatedly saves time or makes decisions easier.'
+        }
+      ],
+      contactEyebrow: 'Contact',
+      contactTitle: 'A project, an idea, or simply a good reason to write?',
+      contactDescription:
+        'Arratel grows one product at a time. If a tool is interesting, a collaboration fits, or you want to give early feedback, email is the best place to start.',
+      footerDescription:
+        'Precision software. Small, useful software products focused on clarity, privacy, and durable workflows.',
       pricingBadge: 'Simple pricing',
       pricingTitle: 'Start free. Upgrade when it actually makes sense.',
       pricingDescription:
@@ -361,7 +421,6 @@ const messages = {
         'Clean and simple experience',
         'Upgrade anytime'
       ],
-      freeCta: 'Start for free',
       proLabel: 'Pro',
       proTitle: 'Built for regular use',
       proTag: 'Most popular',
@@ -376,8 +435,6 @@ const messages = {
       ],
       proCta: 'Go Pro',
       fullPricingCta: 'Full pricing',
-      footerDescription:
-        'Simple tools for everyday workflows, built with a focus on privacy, performance, and a clean user experience.',
       legalLinks: {
         imprint: 'Imprint',
         privacy: 'Privacy Policy',
@@ -393,77 +450,82 @@ const messages = {
     },
     faq: {
       eyebrow: 'Frequently asked questions',
-      title: 'Answers to the questions that matter before getting started.',
+      title: 'Short answers about Arratel and the projects behind it.',
       intro:
-        'Short, clear, and without filler. This page covers the points people usually want to understand before signing up, testing the product, or upgrading.',
-      badgePrimary: 'Fast answers',
-      badgeSecondary: 'No support ticket needed',
+        'Arratel is not a single app. It is a growing home for focused software products. This page answers the essentials without making the homepage heavier than it needs to be.',
+      badgePrimary: 'Arratel explained',
+      badgeSecondary: 'Direct and concise',
       sections: [
         {
-          title: 'Product and access',
+          title: 'Arratel',
           items: [
             {
-              question: 'Can I try the product before paying?',
+              question: 'What is Arratel?',
               answer:
-                'Yes. The onboarding path is intentionally lightweight so you can evaluate the product in a real workflow before an upgrade becomes relevant.'
+                'Arratel is the umbrella brand for small, precise software products. The focus is useful workflows, quiet interfaces, and tools that solve one concrete problem well.'
             },
             {
-              question: 'Do I need a team or multiple users right away?',
+              question: 'What does the name Arratel mean?',
               answer:
-                'No. You can start solo and invite more people later once your workflow is stable or collaboration actually matters.'
+                'The name comes from arrátel, a historical Portuguese unit of weight of about 459 grams. It fits the idea behind the brand: measure carefully, weigh decisions, and build precisely.'
             },
             {
-              question: 'Can I upgrade to a paid plan later?',
+              question: 'Why the slogan Precision software.?',
               answer:
-                'Yes. The upgrade path is designed to stay simple so you only pay once usage becomes regular or you need higher limits.'
+                'Because every project is intentionally narrow: a clear tool with careful execution beats a large platform full of unfinished promises.'
+            },
+            {
+              question: 'Is Arratel an agency?',
+              answer:
+                'No. Arratel is primarily a product lab for its own software projects. Collaboration and feedback are welcome, but this is not meant to be a classic agency website.'
             }
           ]
         },
         {
-          title: 'Billing and privacy',
+          title: 'Projects',
           items: [
             {
-              question: 'What happens to my data if I cancel?',
+              question: 'Are all projects publicly usable already?',
               answer:
-                'Access and data handling should stay predictable. The legal details are covered in the privacy policy and terms linked in the footer.'
+                'Not necessarily. The overview can include prototypes, technical foundations, and early ideas. The status shows how mature each project currently is.'
             },
             {
-              question: 'Will I be charged if I barely use the product?',
+              question: 'Why show unfinished projects on the site?',
               answer:
-                'The product is structured around a clear free-to-upgrade path so costs should only appear once the value and usage justify them.'
+                'Because Arratel works as a growing product portfolio. Some ideas start small, get tested, and only stay if they prove useful.'
             },
             {
-              question: 'Is Stripe required for payments?',
+              question: 'Can I give feedback on a project?',
               answer:
-                'For real billing, yes. During development, billing can still run in mock mode so product work is not blocked by early Stripe setup.'
+                'Yes. Early feedback is especially valuable while a product is still shapeable. The best route is an email with the project name in the subject.'
             }
           ]
         },
         {
-          title: 'Technical setup',
+          title: 'Contact and operations',
           items: [
             {
-              question: 'Do I need my own database in production?',
+              question: 'How can I reach Arratel?',
               answer:
-                'Yes. The app runs separately from the database. In production you connect an external Postgres database, while locally you can use Docker or a hosted test database.'
+                'The most direct path is email at contact@arratel.dev. Official social profiles and other links are collected on the links page.'
             },
             {
-              question: 'Is this better suited for MVPs or real customers?',
+              question: 'Where can I find legal information?',
               answer:
-                'Both. The setup is lean enough for fast validation, but structured enough to keep evolving into a real SaaS used by actual customers.'
+                'The imprint, privacy policy, and terms are linked in the footer. They stay visible even while individual products are still in progress.'
             },
             {
-              question: 'How quickly can I get into the dashboard?',
+              question: 'Will projects get their own pages later?',
               answer:
-                'As soon as your account exists, you can move straight into the protected area. Navigation and data loading are designed to keep that path smooth.'
+                'Yes. Once a project has enough substance, it can get its own page or domain. The Arratel homepage remains the central overview.'
             }
           ]
         }
       ],
-      supportTitle: 'Still missing an answer?',
+      supportTitle: 'Still missing something?',
       supportBody:
-        'If something important is still unclear before sign-up or upgrade, it should probably live on this page. That is usually a content gap, not a user problem.',
-      supportPrimary: 'View pricing',
+        'If a question about Arratel, a project, or a possible collaboration is missing, email is the best next step.',
+      supportPrimary: 'Get in touch',
       supportSecondary: 'Back home'
     },
     auth: {
@@ -596,3 +658,5 @@ const messages = {
 export function getMessages(locale: Locale = defaultLocale) {
   return messages[locale] ?? messages[defaultLocale];
 }
+
+

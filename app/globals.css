@@ -179,6 +179,10 @@ body {
     animation: enter-soft 0.55s ease-out 0.16s both;
   }
 
+  .animate-signal-spin {
+    animation: signal-spin 28s linear infinite;
+  }
+
   .animate-mock-file-bottom {
     animation: none;
   }
@@ -227,6 +231,16 @@ body {
   }
 }
 
+@keyframes signal-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes mock-file-bottom {
   0%,
   18%,
@@ -264,6 +278,7 @@ body {
   .animate-enter,
   .animate-enter-delay-1,
   .animate-enter-delay-2,
+  .animate-signal-spin,
   .animate-mock-file-top,
   .animate-mock-file-bottom,
   .animate-mock-progress {
