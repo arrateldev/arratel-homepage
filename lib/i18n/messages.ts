@@ -82,20 +82,20 @@ const messages = {
             'Das erste SaaS nach ClavisPass: ein schlankes Werkzeug zum Zusammenführen, Sortieren und Exportieren von PDF-Dateien.'
         }
       ],
-      principlesEyebrow: 'Prinzipien',
-      principlesTitle: 'Software mit scharfen Kanten, aber ohne Lärm.',
+      principlesEyebrow: 'Product Loop',
+      principlesTitle: 'Wie aus einer Idee ein Arratel-Projekt wird.',
       principles: [
         {
-          title: 'Fokus',
-          body: 'Jedes Produkt beginnt mit einem engen Problem und einer Oberfläche, die sofort verständlich bleibt.'
+          title: 'Problem',
+          body: 'Ein Projekt beginnt erst, wenn ein wiederkehrender Workflow klar genug ist, dass ein kleines Tool ihn wirklich leichter machen kann.'
         },
         {
-          title: 'Sorgfalt',
-          body: 'Performance, Datenschutz und Wartbarkeit sind Produktmerkmale, nicht spätere Aufräumarbeiten.'
+          title: 'Prototype',
+          body: 'Die erste Version bleibt bewusst eng: Kernfunktion, saubere Oberfläche, technische Basis und schnelles Feedback statt Feature-Liste.'
         },
         {
-          title: 'Nützlichkeit',
-          body: 'Ein Tool verdient seinen Platz erst, wenn es wiederholt Zeit spart oder Entscheidungen leichter macht.'
+          title: 'Product',
+          body: 'Ein Prototyp wird erst zum Produkt, wenn er wiederholt Nutzen zeigt und zuverlässig genug ist, um eine eigene Seite oder Domain zu verdienen.'
         }
       ],
       contactEyebrow: 'Kontakt',
@@ -434,20 +434,20 @@ const messages = {
             'The first SaaS after ClavisPass: a lean tool for merging, sorting, and exporting PDF files.'
         }
       ],
-      principlesEyebrow: 'Principles',
-      principlesTitle: 'Software with sharp edges, but no noise.',
+      principlesEyebrow: 'Product loop',
+      principlesTitle: 'How an idea becomes an Arratel project.',
       principles: [
         {
-          title: 'Focus',
-          body: 'Every product starts with a narrow problem and an interface that stays immediately understandable.'
+          title: 'Problem',
+          body: 'A project starts only when a recurring workflow is clear enough for a small tool to genuinely make it easier.'
         },
         {
-          title: 'Care',
-          body: 'Performance, privacy, and maintainability are product qualities, not cleanup chores for later.'
+          title: 'Prototype',
+          body: 'The first version stays deliberately narrow: core function, clean interface, technical base, and fast feedback instead of a feature list.'
         },
         {
-          title: 'Usefulness',
-          body: 'A tool earns its place only when it repeatedly saves time or makes decisions easier.'
+          title: 'Product',
+          body: 'A prototype becomes a product only when it proves useful repeatedly and reliable enough to deserve its own page or domain.'
         }
       ],
       contactEyebrow: 'Contact',
