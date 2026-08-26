@@ -22,6 +22,7 @@ export type SocialIconName =
   | 'linkedin'
   | 'x'
   | 'bluesky'
+  | 'tiktok'
   | 'youtube'
   | 'productHunt'
   | 'npm'
@@ -76,12 +77,6 @@ export const siteConfig = {
       icon: 'github'
     },
     {
-      id: 'instagram',
-      label: 'Instagram',
-      href: 'https://www.instagram.com/arrateldev',
-      icon: 'instagram'
-    },
-    {
       id: 'linkedin',
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/company/arrateldev',
@@ -98,6 +93,18 @@ export const siteConfig = {
       label: 'Bluesky',
       href: 'https://bsky.app/profile/arrateldev.bsky.social',
       icon: 'bluesky'
+    },
+    {
+      id: 'instagram',
+      label: 'Instagram',
+      href: 'https://www.instagram.com/arrateldev',
+      icon: 'instagram'
+    },
+    {
+      id: 'tiktok',
+      label: 'TikTok',
+      href: 'https://www.tiktok.com/@arrateldev',
+      icon: 'tiktok'
     },
     {
       id: 'youtube',

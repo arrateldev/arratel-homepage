@@ -8,6 +8,7 @@ import {
   FaNpm,
   FaProductHunt,
   FaRedditAlien,
+  FaTiktok,
   FaXTwitter,
   FaYoutube
 } from 'react-icons/fa6';
@@ -19,6 +20,7 @@ export const socialIcons: Record<SocialIconName, IconType> = {
   linkedin: FaLinkedin,
   x: FaXTwitter,
   bluesky: FaBluesky,
+  tiktok: FaTiktok,
   youtube: FaYoutube,
   productHunt: FaProductHunt,
   npm: FaNpm,
