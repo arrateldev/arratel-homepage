@@ -15,6 +15,7 @@ import { signOut } from '@/app/(login)/actions';
 import {
   localizePath,
   replaceLocaleInPathname,
+  legalRoutes,
   type Locale
 } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
@@ -123,19 +124,19 @@ export function SiteChrome({
             </h3>
             <div className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
               <Link
-                href={localizePath(locale, '/impressum')}
+                href={localizePath(locale, legalRoutes.imprint)}
                 className="transition-colors hover:text-white"
               >
                 {t.home.legalLinks.imprint}
               </Link>
               <Link
-                href={localizePath(locale, '/datenschutz')}
+                href={localizePath(locale, legalRoutes.privacy)}
                 className="transition-colors hover:text-white"
               >
                 {t.home.legalLinks.privacy}
               </Link>
               <Link
-                href={localizePath(locale, '/terms')}
+                href={localizePath(locale, legalRoutes.terms)}
                 className="transition-colors hover:text-white"
               >
                 {t.home.legalLinks.terms}

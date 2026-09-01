@@ -4,6 +4,18 @@ export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'en';
 
+export const legalRoutes = {
+  imprint: '/imprint',
+  privacy: '/privacy-policy',
+  terms: '/terms-of-use'
+} as const;
+
+export const legacyLegalRoutes = {
+  imprint: '/impressum',
+  privacy: '/datenschutz',
+  terms: '/terms'
+} as const;
+
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
 }

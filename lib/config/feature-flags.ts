@@ -43,7 +43,7 @@ export const staticPages = [
   '/',
   '/[locale]',
   '/[locale]/faq',
-  '/[locale]/impressum',
-  '/[locale]/datenschutz',
-  '/[locale]/terms'
+  '/[locale]/imprint',
+  '/[locale]/privacy-policy',
+  '/[locale]/terms-of-use'
 ] as const;

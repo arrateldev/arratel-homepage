@@ -25,7 +25,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 - `components/site-chrome.tsx` owns the public header, mobile navigation, language switcher, auth menu, and footer.
 - Dashboard routes live under `app/[locale]/(dashboard)`.
 - `app/[locale]/(dashboard)/dashboard/layout.tsx` reuses the legacy dashboard layout from `app/(dashboard)/dashboard/layout.tsx` and provides SWR fallback data for `/api/user` and `/api/team`.
-- Legal pages include localized `datenschutz`, `impressum`, and `terms` pages.
+- Legal pages use language-neutral English slugs for every locale: `/[locale]/imprint`, `/[locale]/privacy-policy`, and `/[locale]/terms-of-use`. If locale prefixes are removed later, use `/imprint`, `/privacy-policy`, and `/terms-of-use`. Legacy localized slugs redirect: `/[locale]/impressum` -> `/[locale]/imprint`, `/[locale]/datenschutz` -> `/[locale]/privacy-policy`, and `/[locale]/terms` -> `/[locale]/terms-of-use`.
 - The localized `/links` page is a reusable link-in-bio/social links page. It should stay generic and read website, contact email, claim, and social profiles from `lib/site-config.ts`.
 - There are still legacy non-localized route groups under `app/(dashboard)` and `app/(login)`. Be careful when changing shared behavior: confirm whether the localized or legacy route is the active target.
 - API routes live under `app/api`.
