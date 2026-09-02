@@ -9,6 +9,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 - `arratel.dev` is reserved for the Arratel homepage. This starter template can be tested on `saas.arratel.dev` when deployed.
 - Arratel brand colors are `#787ff6` as primary and `#69c4ff` as secondary/cyan. Theme variables live in `app/globals.css`; use the secondary color for subtle aura, glow, and brand-gradient accents rather than making every component blue.
 - Main product, company, domain, contact, social, and legal placeholder configuration lives in `lib/site-config.ts`.
+- Public project uptime checks are configured in `lib/project-health.ts`. Add future product health endpoints there and reference the project health ID from UI metadata instead of fetching arbitrary URLs from the client.
 - Internationalization currently supports `de` and `en` in `lib/i18n/config.ts`; `defaultLocale` is `en`.
 - User-facing copy is centralized in `lib/i18n/messages.ts`.
 - The public product name in the header uses the local title font from `app/fonts/LexendExa_400Regular.ttf`, loaded in `app/layout.tsx` as `--font-title` and exposed through the `.font-title` utility in `app/globals.css`.
@@ -66,6 +67,7 @@ This file is the working memory for Codex in this repository. Keep it updated wh
 - Keep text additions localized in `lib/i18n/messages.ts` for both `de` and `en`.
 - German user-facing copy must use proper German characters (`ä`, `ö`, `ü`, `Ä`, `Ö`, `Ü`, `ß`) instead of ASCII transliterations such as `ae`, `oe`, `ue`, or `ss`, except inside code identifiers, URLs, slugs, env vars, or other technical values.
 - When adding routes or links, route through the locale helpers in `lib/i18n/config.ts` where applicable.
+- Project status labels should stay as localized fallbacks in `lib/i18n/messages.ts`, while live availability comes from the central healthcheck map and `/api/project-health`.
 - Update `lib/site-config.ts` for product/company/social/legal/privacy metadata rather than scattering constants through pages. `product.name` is the public brand/product; `product.claim` is the short social/link-in-bio claim; `company.legalName` is the legal provider and may be a natural person. Legal fields such as address, phone, representative, register, and VAT ID may intentionally be `null` until real data exists; do not reintroduce fake legal placeholders. Social profile links live under `siteConfig.social`. Privacy service providers and retention copy live under `siteConfig.privacy`.
 - Current Arratel social handles are `arrateldev` on GitHub, X, Instagram, TikTok, YouTube, Product Hunt, npm, Docker Hub, and Reddit; LinkedIn uses `https://www.linkedin.com/company/arrateldev`; Bluesky uses `https://bsky.app/profile/arrateldev.bsky.social`.
 - Keep the brand claim concise and consistent across social profiles; the current preferred line is `Precision software.`.

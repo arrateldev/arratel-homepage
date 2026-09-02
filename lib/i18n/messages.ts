@@ -28,6 +28,11 @@ const messages = {
       secondaryCta: 'Kontakt aufnehmen',
       signalCaption: 'A software lab for useful digital work.',
       radarLabel: 'Arratel Projekt-Radar',
+      liveStatus: {
+        checking: 'Prüfen',
+        online: 'Online',
+        offline: 'Offline'
+      },
       radarItems: {
         core: {
           name: 'Arratel Core',
@@ -380,6 +385,11 @@ const messages = {
       secondaryCta: 'Get in touch',
       signalCaption: 'A software lab for useful digital work.',
       radarLabel: 'Arratel project radar',
+      liveStatus: {
+        checking: 'Checking',
+        online: 'Online',
+        offline: 'Offline'
+      },
       radarItems: {
         core: {
           name: 'Arratel Core',

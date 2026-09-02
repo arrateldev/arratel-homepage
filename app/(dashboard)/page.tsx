@@ -12,13 +12,14 @@ import { defaultLocale, type Locale } from '@/lib/i18n/config';
 import { getMessages } from '@/lib/i18n/messages';
 import { siteConfig } from '@/lib/site-config';
 import { ProjectRadar } from '@/components/project-radar';
+import { ProjectLiveStatus } from '@/components/project-live-status';
 
 const projectIcons = [Compass, Layers3, ShieldCheck, Radio] as const;
-const projectAnchors = [
-  'arratel-core',
-  'clavispass',
-  'clavispass-hub',
-  'pdf-merge'
+const projectMeta = [
+  { anchor: 'arratel-core' },
+  { anchor: 'clavispass', healthId: 'clavispass' },
+  { anchor: 'clavispass-hub' },
+  { anchor: 'pdf-merge' }
 ] as const;
 
 export default function HomePage({
@@ -58,7 +59,11 @@ export default function HomePage({
           </div>
 
           <aside className="animate-enter-delay-1">
-            <ProjectRadar label={t.home.radarLabel} items={t.home.radarItems} />
+            <ProjectRadar
+              label={t.home.radarLabel}
+              items={t.home.radarItems}
+              liveStatusLabels={t.home.liveStatus}
+            />
           </aside>
         </div>
       </section>
@@ -85,10 +90,10 @@ export default function HomePage({
             {t.home.projects.map((project, index) => {
               const ProjectIcon = projectIcons[index % projectIcons.length];
               const isEven = index % 2 === 0;
-              const isArratelCore = projectAnchors[index] === 'arratel-core';
+              const meta = projectMeta[index];
+              const isArratelCore = meta.anchor === 'arratel-core';
               const isClavisPass =
-                projectAnchors[index] === 'clavispass' ||
-                projectAnchors[index] === 'clavispass-hub';
+                meta.anchor === 'clavispass' || meta.anchor === 'clavispass-hub';
               const cardContent = (
                 <>
                   <div className="flex items-start justify-between gap-4">
@@ -125,9 +130,11 @@ export default function HomePage({
                         </p>
                       </div>
                     </div>
-                    <span className="rounded-md border border-primary/20 bg-primary/8 px-2.5 py-1 text-xs font-semibold text-primary">
-                      {project.status}
-                    </span>
+                    <ProjectLiveStatus
+                      fallback={project.status}
+                      healthId={'healthId' in meta ? meta.healthId : undefined}
+                      labels={t.home.liveStatus}
+                    />
                   </div>
                   <p className="mt-5 text-sm leading-7 text-muted-foreground">
                     {project.description}
@@ -144,7 +151,7 @@ export default function HomePage({
               return (
                 <article
                   key={project.name}
-                  id={`project-${projectAnchors[index]}`}
+                  id={`project-${meta.anchor}`}
                   className={`relative grid scroll-mt-18 gap-4 pl-10 md:grid-cols-2 md:gap-10 md:pl-0 ${
                     isEven ? '' : 'md:[&>*:first-child]:col-start-2'
                   }`}
